@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\ArquivoConfig.cs" />
     <Compile Include="Model\Programa.cs" />
     <Compile Include="Service\CriarArquivoConfig.cs" />
     <Compile Include="UI\Atualizador.cs">

@@ -30,14 +30,14 @@ namespace Updater
         public Atualizador()
         {
             _httpClient = new HttpClient();
-            _programa = new Programa();
+            _programa = new Programa("Sistema Comercial", "d78s56f8876dt", "0", "https://rhuan.uk/updater", "App.exe"); // todas as variaveis só precisam ser definidas aqui
             InitializeComponent();
-            CarregaInformacoes();
+            //CarregaInformacoes();
             notificarUI("Consultando Servidor", "Verificando Atualização");
         }
 
 
-        public void CarregaInformacoes()
+        /*public void CarregaInformacoes()
         {
             try
             {
@@ -59,7 +59,7 @@ namespace Updater
                 MessageBox.Show("Ocorreu um erro", ex.Message);
                 Application.Exit();
             }
-        }
+        }*/
 
 
         public void notificarUI(string logMessage, string infoMessage)
@@ -83,7 +83,7 @@ namespace Updater
             if (versaoRecebida != _programa.AppVersion)
             {
                 novaVersao = versaoRecebida;
-                var choice = MessageBox.Show("Atualizar agora?", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OKCancel);
+                var choice = MessageBox.Show("Atualizar agora?", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 if (choice == DialogResult.OK)
                 {
                     notificarUI("", "Baixando Atualização");
@@ -204,14 +204,13 @@ namespace Updater
 
             if (File.Exists(arquivoExecutavel))
             {
-                Process.Start(new ProcessStartInfo{ FileName = arquivoExecutavel, UseShellExecute = true});
+                Process.Start(new ProcessStartInfo { FileName = arquivoExecutavel, UseShellExecute = true });
             }
-
-            Application.Exit();
+            else {
+                MessageBox.Show("Ocorreu um erro ao iniciar a aplicação.\nContate o administrador.", $"{_programa.AppName} - Atualizador", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            } 
         }
-
-
-
 
 
 

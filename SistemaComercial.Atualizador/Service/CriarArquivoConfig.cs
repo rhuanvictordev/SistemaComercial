@@ -15,8 +15,10 @@ namespace Updater.Service
                 string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.json");
                 if (!File.Exists(path))
                 {
-                    var programa = new Programa("nenhum", "nenhum", "nenhum", "nenhum", "nenhum");
-                    string programaJson = JsonSerializer.Serialize(programa, new JsonSerializerOptions { WriteIndented = true });
+                    //var programa = new Programa("nenhum", "nenhum", "nenhum", "nenhum", "nenhum");
+                    //string programaJson = JsonSerializer.Serialize(programa, new JsonSerializerOptions { WriteIndented = true });
+                    ArquivoConfig arquivo = new ArquivoConfig("1.0");
+                    string programaJson = JsonSerializer.Serialize(arquivo, new JsonSerializerOptions { WriteIndented = true });
                     File.WriteAllText(path, programaJson);
                 }
                 return true;
@@ -32,9 +34,10 @@ namespace Updater.Service
         {
             try
             {
-                string arquivoConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.json");
-                string programaJson = JsonSerializer.Serialize(programa, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(arquivoConfig, programaJson);
+                ArquivoConfig arquivo = new ArquivoConfig(programa.AppVersion);
+                string arquivoLocal = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.json");
+                string json = JsonSerializer.Serialize(arquivo, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(arquivoLocal, json);
                 return true;
             }
             catch (Exception ex)
