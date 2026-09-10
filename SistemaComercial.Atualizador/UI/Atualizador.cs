@@ -30,28 +30,30 @@ namespace Updater
         public Atualizador()
         {
             _httpClient = new HttpClient();
-            _programa = new Programa("Sistema Comercial", "d78s56f8876dt", "0", "https://rhuan.uk/updater", "App.exe"); // todas as variaveis só precisam ser definidas aqui
+            _programa = new Programa("Sistema Comercial", "d78s56f8876dt", "0", "https://rhuan.uk/updater", "Sistema.exe"); // todas as variaveis só precisam ser definidas aqui
             InitializeComponent();
-            //CarregaInformacoes();
+            CarregaVersao();
             notificarUI("Consultando Servidor", "Verificando Atualização");
         }
 
 
-        /*public void CarregaInformacoes()
+        public void CarregaVersao()
         {
             try
             {
                 string arquivoConfigJson = Path.Combine(_raizAplicacao, "config.json");
-
                 if (!File.Exists(arquivoConfigJson))
                 {
-                    throw new Exception("Arquivo de configuração não encontrado");
+                    MessageBox.Show("Ocorreu um erro ao iniciar a aplicação.\nContate o administrador.", $"{_programa.AppName} - Atualizador", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                    Application.Exit();
+                    return;
                 }
                 var conteudo = File.ReadAllText(arquivoConfigJson);
-                var programa = JsonConvert.DeserializeObject<Programa>(conteudo);
-                if (programa != null)
+                var config = JsonConvert.DeserializeObject<ArquivoConfig>(conteudo);
+                if (config != null)
                 {
-                    _programa = programa;
+                    _programa.AppVersion = config.AppVersion;
                 }
             }
             catch (Exception ex)
@@ -59,7 +61,7 @@ namespace Updater
                 MessageBox.Show("Ocorreu um erro", ex.Message);
                 Application.Exit();
             }
-        }*/
+        }
 
 
         public void notificarUI(string logMessage, string infoMessage)
@@ -74,7 +76,7 @@ namespace Updater
             lblNomeSistema.Text = $"{_programa.AppName}   [ Atualizador ]";
             string versaoRecebida = await VerificarVersaoAtual(_programa.BaseApiURL, _programa.AppKeyName);
 
-            if (versaoRecebida == null) 
+            if (versaoRecebida == null)
             {
                 IniciarAplicacao();
                 return;
@@ -83,8 +85,9 @@ namespace Updater
             if (versaoRecebida != _programa.AppVersion)
             {
                 novaVersao = versaoRecebida;
-                var choice = MessageBox.Show("Atualizar agora?", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (choice == DialogResult.OK)
+                //var choice = MessageBox.Show("Atualizar agora?", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                var choice = MessageBox.Show("O sistema será atualizado.", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (choice == DialogResult.OK || true)
                 {
                     notificarUI("", "Baixando Atualização");
                     progressBar1.Visible = true;
@@ -208,8 +211,8 @@ namespace Updater
             }
             else {
                 MessageBox.Show("Ocorreu um erro ao iniciar a aplicação.\nContate o administrador.", $"{_programa.AppName} - Atualizador", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-            } 
+            }
+            Application.Exit();
         }
 
 
