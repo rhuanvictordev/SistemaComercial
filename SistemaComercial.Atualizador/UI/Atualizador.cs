@@ -84,6 +84,9 @@ namespace Updater
 
             if (versaoRecebida != _programa.AppVersion)
             {
+
+                MatarAplicacao();
+
                 novaVersao = versaoRecebida;
                 //var choice = MessageBox.Show("Atualizar agora?", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 var choice = MessageBox.Show("O sistema será atualizado.", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -105,6 +108,22 @@ namespace Updater
         }
 
 
+        public void MatarAplicacao()
+        {
+            foreach (Process processo in Process.GetProcessesByName("Sistema"))
+            {
+                try
+                {
+                    processo.Kill();
+                    processo.WaitForExit();
+                }
+                catch (Exception ex){}
+                finally
+                {
+                    processo.Dispose();
+                }
+            }
+        }
 
         private async Task BaixarArquivo()
         {
@@ -175,10 +194,7 @@ namespace Updater
 
                             if (!string.IsNullOrEmpty(entry.Name))
                             {
-                                if (File.Exists(destino))
-                                    File.Delete(destino);
-
-                                entry.ExtractToFile(destino);
+                                entry.ExtractToFile(destino, true);
                             }
                         }
                     }
