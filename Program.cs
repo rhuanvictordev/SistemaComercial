@@ -27,8 +27,10 @@ namespace SistemaComercial
             Application.SetCompatibleTextRenderingDefault(false);
 
 
+#if !DEBUG  // se tiver em producao vai verificar o updater se existe na raiz e etc e se ta em dev, pula  ( DEBUG / RELEASE ) do visual studio
+
             #region verifica se o updater esta na raiz
-            string updaterPath = Path.Combine(PathRaiz, "updater","UPDATER.EXE");
+            string updaterPath = Path.Combine(PathRaiz, "updater", "UPDATER.EXE");
             if (!File.Exists(updaterPath))
             {
                 MessageBox.Show("Aplicação corrompida, contate o administrador.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -37,7 +39,7 @@ namespace SistemaComercial
             #endregion
 
             #region verifica se tem arquivo config na raiz
-            string arqConfig = Path.Combine(PathRaiz, "updater","config.json");
+            string arqConfig = Path.Combine(PathRaiz, "updater", "config.json");
             string CURRENT_APP_VERSION = "";
             if (!File.Exists(arqConfig))
             {
@@ -45,13 +47,14 @@ namespace SistemaComercial
                 Application.Exit();
                 return;
             }
-            else 
+            else
             {
                 string conteudo = File.ReadAllText(arqConfig);
                 ArquivoConfig config = JsonConvert.DeserializeObject<ArquivoConfig>(conteudo);
                 CURRENT_APP_VERSION = config.AppVersion;
             }
             #endregion
+
 
             #region verifica se temn atualização disponivel
             var versaoServidor = await VerificarVersaoAtual(BASE_URL_UPDATER, APP_KEY_NAME);
@@ -62,7 +65,7 @@ namespace SistemaComercial
                     Process.Start(updaterPath);
                     return;
                 }
-                else 
+                else
                 {
                     if (ClienteEmDia())
                     {
@@ -75,14 +78,17 @@ namespace SistemaComercial
                     }
 
                 }
-                    
+
             }
             else // servidor pode estar inacessivel entao chama a aplicacao
             {
                 Application.Run(new FormBase());
             }
+
             #endregion
-        
+#else
+            Application.Run(new FormBase());
+#endif
         }
 
         private static bool ClienteEmDia() // seria pra verificar no banco a ultima data que o cliente esteve online
