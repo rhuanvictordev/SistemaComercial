@@ -16,12 +16,14 @@ namespace SistemaComercial
     public partial class FormBase : Form
     {
         public string Versao { get; set; }
+        public bool CLIENTE_DESATUALIZADO { get; set; }
 
-        public FormBase()
+        public FormBase(bool clienteDesatualizado)
         {
             InitializeComponent();
             this.Text = "Sistema Comercial";
             DefineTituloJanela();
+            CLIENTE_DESATUALIZADO = clienteDesatualizado;
         }
 
         public void DefineTituloJanela()
@@ -33,6 +35,12 @@ namespace SistemaComercial
                 string conteudo = File.ReadAllText(arqConfig);
                 ArquivoConfig config = JsonConvert.DeserializeObject<ArquivoConfig>(conteudo);
                 this.Text += " v" + config.AppVersion;
+                
+                if (CLIENTE_DESATUALIZADO)
+                {
+                    this.Text += "  -  [ CLIENTE DESATUALIZADO! ]";
+                }
+
             }
         }
     }

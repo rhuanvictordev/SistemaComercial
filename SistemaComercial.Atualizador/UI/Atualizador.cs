@@ -76,9 +76,9 @@ namespace Updater
             lblNomeSistema.Text = $"{_programa.AppName}   [ Atualizador ]";
             string versaoRecebida = await VerificarVersaoAtual(_programa.BaseApiURL, _programa.AppKeyName);
 
-            if (versaoRecebida == null)
+            if (versaoRecebida == "")
             {
-                IniciarAplicacao();
+                IniciarAplicacao(true); // finge que ta atualizado porque o servidor de att esta inacessivel
                 return;
             }
 
@@ -86,9 +86,9 @@ namespace Updater
             {
                 MatarAplicacao();
                 novaVersao = versaoRecebida;
-                //var choice = MessageBox.Show("Atualizar agora?", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                var choice = MessageBox.Show("O sistema será atualizado.", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                if (choice == DialogResult.OK || true)
+                var choice = MessageBox.Show("Atualizar agora?", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                //var choice = MessageBox.Show("O sistema será atualizado.", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (choice == DialogResult.OK)
                 {
                     notificarUI("", "Baixando Atualização");
                     progressBar1.Visible = true;
@@ -97,11 +97,11 @@ namespace Updater
                 }
                 else
                 {
-                    IniciarAplicacao();
+                    IniciarAplicacao(true); // finge que ta atualizado porque o cliente negou a atualizacao
                 }
             }
             else {
-                IniciarAplicacao();
+                IniciarAplicacao(true);  // aqui é porque ta atualizado mesmo
             }
         }
 
@@ -210,7 +210,7 @@ namespace Updater
                     {
                         MessageBox.Show("Ocorreu um erro ao escrever a nova versão", "Informação");
                     }
-                    IniciarAplicacao();
+                    IniciarAplicacao(true);  // o programa acabou de ser atualizado, entao esta atualizado sim
                 }
             }
             catch (Exception ex)
@@ -221,7 +221,7 @@ namespace Updater
         }
 
 
-        private void IniciarAplicacao()
+        private void IniciarAplicacao(bool atualizado)
         {
             MatarAplicacao();  // mata caso esteja aberta
 
@@ -231,7 +231,12 @@ namespace Updater
 
             if (File.Exists(arquivoExecutavel))
             {
-                Process.Start(new ProcessStartInfo { FileName = arquivoExecutavel, UseShellExecute = true });
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = arquivoExecutavel,
+                    Arguments = atualizado ? "--updated" : "--update",
+                    UseShellExecute = true
+                });
             }
             else {
                 MessageBox.Show("Ocorreu um erro ao iniciar a aplicação.\nContate o administrador.", $"{_programa.AppName} - Atualizador", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -254,7 +259,7 @@ namespace Updater
             }
             catch (Exception ex)
             {
-                return null;
+                return "";
             }
         }
 

@@ -21,7 +21,7 @@ namespace SistemaComercial
         private static string BASE_URL_UPDATER = "https://rhuan.uk/updater";
 
         [STAThread]
-        static async Task Main()
+        static async Task Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -56,33 +56,31 @@ namespace SistemaComercial
             #endregion
 
 
-            #region verifica se temn atualização disponivel
+            #region verifica se tem atualização disponivel
+
             var versaoServidor = await VerificarVersaoAtual(BASE_URL_UPDATER, APP_KEY_NAME);
             if (versaoServidor != "")
             {
-                if (versaoServidor != CURRENT_APP_VERSION)
+                if (versaoServidor != CURRENT_APP_VERSION)  // tem atualizacao
                 {
-                    Process.Start(updaterPath);
-                    return;
-                }
-                else
-                {
-                    if (ClienteEmDia())
+                    if (args.Contains("--updated"))  // veio do atualizador, atualizacao foi negada entao só abre o sistema
                     {
-                        Application.Run(new FormBase());
+                        Application.Run(new FormBase(true));
                     }
                     else
                     {
-                        MessageBox.Show("Sistema indisponível no momento.\nContate o administrador.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Process.Start(updaterPath);
                         return;
                     }
-
                 }
-
+                else  // nao tem att (abre a aplicacao)
+                {
+                    Application.Run(new FormBase(false));
+                }
             }
             else // servidor pode estar inacessivel entao chama a aplicacao
             {
-                Application.Run(new FormBase());
+                Application.Run(new FormBase(false));
             }
 
             #endregion
@@ -91,12 +89,7 @@ namespace SistemaComercial
 #endif
         }
 
-        private static bool ClienteEmDia() // seria pra verificar no banco a ultima data que o cliente esteve online
-        {
-            return true;
-        }
-
-
+        
         private async static Task<string> VerificarVersaoAtual(string baseUrl, string appKeyName)
         {
             try
