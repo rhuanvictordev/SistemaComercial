@@ -30,7 +30,7 @@ ChangesAssociations=yes
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
 ;PrivilegesRequired=lowest
-OutputDir=C:\Users\Usuario\Desktop\Nova pasta
+OutputDir=C:\Users\Usuario\Desktop
 OutputBaseFilename=mysetup
 SetupIconFile=C:\Users\Usuario\Desktop\SistemaComercial\icon.ico
 SolidCompression=yes
@@ -44,12 +44,12 @@ Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortugue
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\Usuario\Desktop\Raiz Sistema funcionando perfeito\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Usuario\Desktop\Raiz Sistema funcionando perfeito\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Usuario\Desktop\Raiz Sistema funcionando perfeito\Newtonsoft.Json.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Usuario\Desktop\Raiz Sistema funcionando perfeito\Sistema.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Usuario\Desktop\Raiz Sistema funcionando perfeito\Sistema.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Usuario\Desktop\Raiz Sistema funcionando perfeito\updater\*"; DestDir: "{app}\updater"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Usuario\Desktop\setup\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Usuario\Desktop\setup\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Usuario\Desktop\setup\Newtonsoft.Json.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Usuario\Desktop\setup\Sistema.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Usuario\Desktop\setup\Sistema.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Usuario\Desktop\setup\updater\*"; DestDir: "{app}\updater"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files.
 
 [Registry]
