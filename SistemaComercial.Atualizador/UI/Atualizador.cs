@@ -44,7 +44,7 @@ namespace Updater
                 string arquivoConfigJson = Path.Combine(_raizUpdater, "config.json");
                 if (!File.Exists(arquivoConfigJson))
                 {
-                    MessageBox.Show("Ocorreeu um erro ao iniciar a aplicação.\nContate o administrador.", $"{_programa.AppName} - Atualizador", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ocorreu um erro ao iniciar a aplicação.\nContate o administrador.", $"{_programa.AppName} - Atualizador", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
                     Application.Exit();
                     return;
