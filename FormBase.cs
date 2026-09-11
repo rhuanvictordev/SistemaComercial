@@ -26,7 +26,7 @@ namespace SistemaComercial
 
         public void DefineTituloJanela()
         {
-            string arqConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.json");
+            string arqConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "updater", "config.json");
 
             if (File.Exists(arqConfig))
             {

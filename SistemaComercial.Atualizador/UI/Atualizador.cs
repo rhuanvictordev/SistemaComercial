@@ -24,7 +24,7 @@ namespace Updater
     {
         private readonly HttpClient _httpClient;
         private Programa _programa;
-        private string _raizAplicacao = AppDomain.CurrentDomain.BaseDirectory;
+        private string _raizUpdater = AppDomain.CurrentDomain.BaseDirectory;
         private string novaVersao = "";
 
         public Atualizador()
@@ -41,10 +41,10 @@ namespace Updater
         {
             try
             {
-                string arquivoConfigJson = Path.Combine(_raizAplicacao, "config.json");
+                string arquivoConfigJson = Path.Combine(_raizUpdater, "config.json");
                 if (!File.Exists(arquivoConfigJson))
                 {
-                    MessageBox.Show("Ocorreu um erro ao iniciar a aplicação.\nContate o administrador.", $"{_programa.AppName} - Atualizador", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ocorreeu um erro ao iniciar a aplicação.\nContate o administrador.", $"{_programa.AppName} - Atualizador", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
                     Application.Exit();
                     return;
@@ -84,9 +84,7 @@ namespace Updater
 
             if (versaoRecebida != _programa.AppVersion)
             {
-
                 MatarAplicacao();
-
                 novaVersao = versaoRecebida;
                 //var choice = MessageBox.Show("Atualizar agora?", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 var choice = MessageBox.Show("O sistema será atualizado.", $"{_programa.AppName} - [Atualização Disponível]", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -110,7 +108,7 @@ namespace Updater
 
         public void MatarAplicacao()
         {
-            foreach (Process processo in Process.GetProcessesByName("Sistema"))
+            foreach (Process processo in Process.GetProcessesByName(_programa.ExeName.Replace(".exe","")))
             {
                 try
                 {
@@ -127,7 +125,7 @@ namespace Updater
 
         private async Task BaixarArquivo()
         {
-            string pastaTemp = Path.Combine(_raizAplicacao, "temp");
+            string pastaTemp = Path.Combine(_raizUpdater, "temp");
             Directory.CreateDirectory(pastaTemp);
             string caminhoPacote = Path.Combine(pastaTemp, "package.zip");
 
@@ -175,7 +173,7 @@ namespace Updater
 
             try
             {
-                string arquivoZip = Path.Combine(_raizAplicacao, "temp", "package.zip");
+                string arquivoZip = Path.Combine(_raizUpdater, "temp", "package.zip");
                 if (!File.Exists(arquivoZip))
                 {
                     throw new Exception("Arquivo Compactado não encontrado");
@@ -186,8 +184,9 @@ namespace Updater
                     {
                         foreach (var entry in archive.Entries)
                         {
-                            string destino = Path.Combine(_raizAplicacao, entry.FullName);
-
+                            string raizUpdater = Directory.GetParent(AppContext.BaseDirectory).FullName;
+                            string raizSistema = Directory.GetParent(raizUpdater).FullName;
+                            string destino = Path.Combine(raizSistema, entry.FullName);
                             string pasta = Path.GetDirectoryName(destino);
                             if (!Directory.Exists(pasta))
                                 Directory.CreateDirectory(pasta);
@@ -200,6 +199,11 @@ namespace Updater
                     }
 
                     notificarUI("Extração Completa", "Finalizando");
+
+                    string pastaTemp = Path.Combine(_raizUpdater, "temp");
+                    if (Directory.Exists(pastaTemp))
+                        Directory.Delete(pastaTemp, true);
+                       
                     _programa.AppVersion = novaVersao;
                     bool salvo = CriarArquivoConfig.SalvarConfig(_programa);
                     if (!salvo)
@@ -219,7 +223,11 @@ namespace Updater
 
         private void IniciarAplicacao()
         {
-            string arquivoExecutavel = Path.Combine(_raizAplicacao, _programa.ExeName);
+            MatarAplicacao();  // mata caso esteja aberta
+
+            string pastaUpdater = Directory.GetParent(_raizUpdater).FullName;
+            string raizSistema = Directory.GetParent(pastaUpdater).FullName;
+            string arquivoExecutavel = Path.Combine(raizSistema, _programa.ExeName);
 
             if (File.Exists(arquivoExecutavel))
             {
