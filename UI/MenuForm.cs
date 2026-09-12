@@ -13,9 +13,16 @@ namespace Sistema.UI
 {
     public partial class MenuForm : BaseForm
     {
-        public MenuForm()
+        public InformacoesSistema Info;
+
+        public MenuForm(InformacoesSistema info) : base(info)
         {
             InitializeComponent();
+        }
+
+        private void MenuForm_Load(object sender, EventArgs e)
+        {
+            label2.Text = base.Info.UsuarioLogado.Nome;
         }
     }
 }

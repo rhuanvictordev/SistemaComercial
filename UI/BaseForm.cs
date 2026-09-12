@@ -15,16 +15,19 @@ namespace Sistema.UI
     {
         public InformacoesSistema Info;
 
-        public BaseForm()
-        {
-            
-        }
-
         public BaseForm(InformacoesSistema i)
         {
             Info = i;
             InitializeComponent();
-            this.Text = $"Sistema Comercial, Versão {Info.VersaoAtual} ";
+        }
+
+        private void BaseForm_Load(object sender, EventArgs e)
+        {
+            this.Text = $"{Info.NomeSistema}, Versão {Info.VersaoAtual} ";
+            if (!Info.ClienteAtualizado)
+            {
+                this.Text += " [Cliente Desatualizado]";
+            }
         }
     }
 }

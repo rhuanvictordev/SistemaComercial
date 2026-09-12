@@ -27,9 +27,11 @@ namespace Sistema
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             InformacoesSistema i = new InformacoesSistema();
-            i.ClienteAtualizado = true;
+            i.NomeSistema = "Sistema Comercial";
             i.VersaoAtual = "Desenvolvimento";
+            i.ClienteAtualizado = true;
 
 
 #if !DEBUG  // se tiver em producao vai verificar o updater se existe na raiz e etc e se ta em dev, pula  ( DEBUG / RELEASE ) do visual studio
@@ -43,7 +45,6 @@ namespace Sistema
             }
             #endregion
 
-            
             #region verifica se tem arquivo config na raiz
             string pathConfig = Path.Combine(PathRaiz, "updater", "config.json");
             string CURRENT_APP_VERSION = "";
@@ -61,22 +62,19 @@ namespace Sistema
             }
             #endregion
 
-
-
-            #region verifica se tem atualização disponivel
-            
+            #region verifica se tem atualização disponivel e/ou abre a aplicacao
             i.VersaoAtual = config.AppVersion;
             i.ClienteAtualizado = true;
 
             var versaoServidor = await VerificarVersaoAtual(BASE_URL_UPDATER, APP_KEY_NAME);
             if (versaoServidor != "")
             {
-                if (versaoServidor != CURRENT_APP_VERSION)  // tem atualizacao
+                if (versaoServidor != CURRENT_APP_VERSION)
                 {
                     i.ClienteAtualizado = false;
                     if (args.Contains("--updated"))  // veio do atualizador, atualizacao foi negada entao só abre o sistema
                     {
-                        Application.Run(new BaseForm(i));
+                        AbrirLogin(i);
                     }
                     else
                     {
@@ -86,21 +84,29 @@ namespace Sistema
                 }
                 else  // nao tem att (abre a aplicacao)
                 {
-                    Application.Run(new BaseForm(i));
+                    AbrirLogin(i);
                 }
             }
-            else // servidor pode estar inacessivel entao chama a aplicacao
+            else // servidor pode estar inacessivel entao abre a aplicacao
             {
-                Application.Run(new BaseForm(i));
+                AbrirLogin(i);
             }
 
             #endregion
 #else
-            Application.Run(new BaseForm(i));
+            AbrirLogin(i);
 #endif
         }
 
-        
+        public static void AbrirLogin(InformacoesSistema i)
+        {
+            LoginForm login = new LoginForm(i);
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new MenuForm(login.info));
+            }
+        }
+
         private async static Task<string> VerificarVersaoAtual(string baseUrl, string appKeyName)
         {
             try

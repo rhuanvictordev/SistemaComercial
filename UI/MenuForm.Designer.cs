@@ -58,7 +58,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "MenuForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuForm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.MenuForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
