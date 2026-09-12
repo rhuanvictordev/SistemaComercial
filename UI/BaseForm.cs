@@ -15,6 +15,11 @@ namespace Sistema.UI
     {
         public InformacoesSistema Info;
 
+        public BaseForm()
+        {
+            InitializeComponent();
+        }
+
         public BaseForm(InformacoesSistema i)
         {
             Info = i;
@@ -23,7 +28,11 @@ namespace Sistema.UI
 
         private void BaseForm_Load(object sender, EventArgs e)
         {
-            this.Text = $"{Info.NomeSistema}, Versão {Info.VersaoAtual} ";
+            if (Info == null)
+                return;
+
+            this.Text = $"{Info.NomeSistema}, Versão {Info.VersaoAtual}";
+
             if (!Info.ClienteAtualizado)
             {
                 this.Text += " [Cliente Desatualizado]";
