@@ -20,6 +20,8 @@ namespace SistemaComercial
         private static string APP_KEY_NAME = "d78s56f8876dt";
         private static string BASE_URL_UPDATER = "https://rhuan.uk/updater";
 
+        private static ArquivoConfig config;
+
         [STAThread]
         static async Task Main(string[] args)
         {
@@ -38,10 +40,11 @@ namespace SistemaComercial
             }
             #endregion
 
+            
             #region verifica se tem arquivo config na raiz
-            string arqConfig = Path.Combine(PathRaiz, "updater", "config.json");
+            string pathConfig = Path.Combine(PathRaiz, "updater", "config.json");
             string CURRENT_APP_VERSION = "";
-            if (!File.Exists(arqConfig))
+            if (!File.Exists(pathConfig))
             {
                 MessageBox.Show("Aplicação corrompida, contate o administrador.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
@@ -49,11 +52,12 @@ namespace SistemaComercial
             }
             else
             {
-                string conteudo = File.ReadAllText(arqConfig);
-                ArquivoConfig config = JsonConvert.DeserializeObject<ArquivoConfig>(conteudo);
+                string conteudo = File.ReadAllText(pathConfig);
+                config = JsonConvert.DeserializeObject<ArquivoConfig>(conteudo);
                 CURRENT_APP_VERSION = config.AppVersion;
             }
             #endregion
+
 
 
             #region verifica se tem atualização disponivel
@@ -65,7 +69,7 @@ namespace SistemaComercial
                 {
                     if (args.Contains("--updated"))  // veio do atualizador, atualizacao foi negada entao só abre o sistema
                     {
-                        Application.Run(new FormBase(true));
+                        Application.Run(new FormBase(true, config.AppVersion));
                     }
                     else
                     {
@@ -75,17 +79,17 @@ namespace SistemaComercial
                 }
                 else  // nao tem att (abre a aplicacao)
                 {
-                    Application.Run(new FormBase(false));
+                    Application.Run(new FormBase(false, config.AppVersion));
                 }
             }
             else // servidor pode estar inacessivel entao chama a aplicacao
             {
-                Application.Run(new FormBase(false));
+                Application.Run(new FormBase(false, config.AppVersion));
             }
 
             #endregion
 #else
-            Application.Run(new FormBase());
+            Application.Run(new FormBase(false, "vTESTES"));
 #endif
         }
 

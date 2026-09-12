@@ -1,0 +1,20 @@
+﻿
+NO .CJPROJ FOI ADICIONADO UM TARGET ANTES DA ULTIMA LINHA "/Project" 
+que quando o build for RELEASE, ele pega o conteudo gerado na pasta "bin/Release"
+e gera um arquivo compactado (.zip) na area de trabalho.
+
+
+
+O conteudo adicionado ao csproj foi:
+
+
+<Target Name="GerarZipRelease" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+	<PropertyGroup>
+		<NomeZip>$(ProjectName).zip</NomeZip>
+		<CaminhoZip>$(USERPROFILE)\Desktop\$(NomeZip)</CaminhoZip>
+	</PropertyGroup>
+
+	<Message Importance="high" Text=" [INFO] Gerando arquivo ZIP para Deploy" />
+	<Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;if (Test-Path '$(CaminhoZip)') { Remove-Item '$(CaminhoZip)' -Force }; Compress-Archive -Path '$(TargetDir)*' -DestinationPath '$(CaminhoZip)' -Force&quot;" />
+	<Message Importance="high" Text=" [INFO] Arquivo ZIP Gerado em: $(CaminhoZip)" />
+</Target>

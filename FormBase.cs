@@ -15,32 +15,23 @@ namespace SistemaComercial
 {
     public partial class FormBase : Form
     {
-        public string Versao { get; set; }
+        public string VersaoSistema { get; set; }
         public bool CLIENTE_DESATUALIZADO { get; set; }
 
-        public FormBase(bool clienteDesatualizado)
+        public FormBase(bool clienteDesatualizado, string versao)
         {
             InitializeComponent();
-            this.Text = "Sistema Comercial";
-            DefineTituloJanela();
             CLIENTE_DESATUALIZADO = clienteDesatualizado;
+            VersaoSistema = versao;
+            DefineTituloJanela();
         }
 
         public void DefineTituloJanela()
         {
-            string arqConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "updater", "config.json");
-
-            if (File.Exists(arqConfig))
+            this.Text = $"Sistema Comercial - v{VersaoSistema}";
+            if (CLIENTE_DESATUALIZADO)
             {
-                string conteudo = File.ReadAllText(arqConfig);
-                ArquivoConfig config = JsonConvert.DeserializeObject<ArquivoConfig>(conteudo);
-                this.Text += " v" + config.AppVersion;
-                
-                if (CLIENTE_DESATUALIZADO)
-                {
-                    this.Text += "  -  [ CLIENTE DESATUALIZADO! ]";
-                }
-
+                this.Text += "  -  [ CLIENTE DESATUALIZADO, NECESSÁRIO ATUALIZAR ]";
             }
         }
     }
