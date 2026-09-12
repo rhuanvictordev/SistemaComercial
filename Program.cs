@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Sistema.Models;
+using Sistema.UI;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SistemaComercial
+namespace Sistema
 {
     internal static class Program
     {
@@ -27,6 +27,9 @@ namespace SistemaComercial
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            InformacoesSistema i = new InformacoesSistema();
+            i.ClienteAtualizado = true;
+            i.VersaoAtual = "Desenvolvimento";
 
 
 #if !DEBUG  // se tiver em producao vai verificar o updater se existe na raiz e etc e se ta em dev, pula  ( DEBUG / RELEASE ) do visual studio
@@ -61,15 +64,19 @@ namespace SistemaComercial
 
 
             #region verifica se tem atualização disponivel
+            
+            i.VersaoAtual = config.AppVersion;
+            i.ClienteAtualizado = true;
 
             var versaoServidor = await VerificarVersaoAtual(BASE_URL_UPDATER, APP_KEY_NAME);
             if (versaoServidor != "")
             {
                 if (versaoServidor != CURRENT_APP_VERSION)  // tem atualizacao
                 {
+                    i.ClienteAtualizado = false;
                     if (args.Contains("--updated"))  // veio do atualizador, atualizacao foi negada entao só abre o sistema
                     {
-                        Application.Run(new FormBase(true, config.AppVersion));
+                        Application.Run(new BaseForm(i));
                     }
                     else
                     {
@@ -79,17 +86,17 @@ namespace SistemaComercial
                 }
                 else  // nao tem att (abre a aplicacao)
                 {
-                    Application.Run(new FormBase(false, config.AppVersion));
+                    Application.Run(new BaseForm(i));
                 }
             }
             else // servidor pode estar inacessivel entao chama a aplicacao
             {
-                Application.Run(new FormBase(false, config.AppVersion));
+                Application.Run(new BaseForm(i));
             }
 
             #endregion
 #else
-            Application.Run(new FormBase(false, "vTESTES"));
+            Application.Run(new BaseForm(i));
 #endif
         }
 

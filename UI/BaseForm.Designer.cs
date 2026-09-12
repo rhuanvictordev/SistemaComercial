@@ -1,6 +1,6 @@
-﻿namespace SistemaComercial
+﻿namespace Sistema.UI
 {
-    partial class FormBase
+    partial class BaseForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,19 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseForm));
             this.SuspendLayout();
             // 
-            // FormBase
+            // BaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(811, 513);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "FormBase";
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "BaseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sistema Comercial";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Text = "BaseForm";
             this.ResumeLayout(false);
 
         }
@@ -48,4 +47,3 @@
         #endregion
     }
 }
-
