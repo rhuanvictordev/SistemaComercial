@@ -1,4 +1,5 @@
 ﻿using Sistema.Models;
+using Sistema.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,15 +15,17 @@ namespace Sistema.UI
     public partial class BaseForm : Form
     {
         public InformacoesSistema Info;
+        public ParametrosLocais ParametrosLocais;
 
         public BaseForm()
         {
             InitializeComponent();
         }
 
-        public BaseForm(InformacoesSistema i)
+        public BaseForm(InformacoesSistema i, ParametrosLocais p)
         {
             Info = i;
+            ParametrosLocais = p;
             InitializeComponent();
         }
 

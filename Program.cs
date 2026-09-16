@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Sistema.Models;
+using Sistema.Services;
 using Sistema.UI;
 using System;
 using System.Diagnostics;
@@ -29,10 +30,21 @@ namespace Sistema
             Application.SetCompatibleTextRenderingDefault(false);
 
             InformacoesSistema i = new InformacoesSistema();
+            ParametrosLocais p = new ParametrosLocais();
+
             i.NomeSistema = "Sistema Comercial";
             i.VersaoAtual = "Desenvolvimento";
             i.ClienteAtualizado = true;
 
+            try
+            {
+                p = ArquivoConfiguracaoDoCliente.LerArquivo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro crítico");
+                return;
+            }
 
 #if !DEBUG  // se tiver em producao vai verificar o updater se existe na raiz e etc e se ta em dev, pula  ( DEBUG / RELEASE ) do visual studio
 
@@ -74,7 +86,7 @@ namespace Sistema
                     i.ClienteAtualizado = false;
                     if (args.Contains("--updated"))  // veio do atualizador, atualizacao foi negada entao só abre o sistema
                     {
-                        AbrirLogin(i);
+                        AbrirLogin(i, p);
                     }
                     else
                     {
@@ -84,26 +96,26 @@ namespace Sistema
                 }
                 else  // nao tem att (abre a aplicacao)
                 {
-                    AbrirLogin(i);
+                    AbrirLogin(i, p);
                 }
             }
             else // servidor pode estar inacessivel entao abre a aplicacao
             {
-                AbrirLogin(i);
+                AbrirLogin(i, p);
             }
 
             #endregion
 #else
-            AbrirLogin(i);
+            AbrirLogin(i, p);
 #endif
         }
 
-        public static void AbrirLogin(InformacoesSistema i)
+        public static void AbrirLogin(InformacoesSistema i, ParametrosLocais p)
         {
             LoginForm login = new LoginForm(i);
             if (login.ShowDialog() == DialogResult.OK)
             {
-                Application.Run(new MenuForm(login.info));
+                Application.Run(new MenuForm(login.info, p));
             }
         }
 

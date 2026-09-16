@@ -184,7 +184,7 @@ namespace Updater
                     {
                         foreach (var entry in archive.Entries)
                         {
-                            if (entry.Name == "Sistema.exe.config")
+                            if (entry.Name == "params.json")
                                 continue;
                             
                             string raizUpdater = Directory.GetParent(AppContext.BaseDirectory).FullName;

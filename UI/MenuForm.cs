@@ -1,5 +1,6 @@
 ﻿
 using Sistema.Models;
+using Sistema.Services;
 using System;
 using System.Windows.Forms;
 
@@ -12,7 +13,7 @@ namespace Sistema.UI
             InitializeComponent();
         }
 
-        public MenuForm(InformacoesSistema info) : base(info)
+        public MenuForm(InformacoesSistema info, ParametrosLocais p) : base(info, p)
         {
             InitializeComponent();
         }
