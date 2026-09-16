@@ -184,6 +184,9 @@ namespace Updater
                     {
                         foreach (var entry in archive.Entries)
                         {
+                            if (entry.Name == "Sistema.exe.config")
+                                continue;
+                            
                             string raizUpdater = Directory.GetParent(AppContext.BaseDirectory).FullName;
                             string raizSistema = Directory.GetParent(raizUpdater).FullName;
                             string destino = Path.Combine(raizSistema, entry.FullName);
