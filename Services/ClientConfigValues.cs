@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sistema.Services
 {
-    public class ParametrosLocais
+    public class ClientConfigValues
     {
         public string CNPJ { get; set; }
         public string ChaveCliente { get; set; }

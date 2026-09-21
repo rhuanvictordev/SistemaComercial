@@ -15,14 +15,14 @@ namespace Sistema.UI
     public partial class BaseForm : Form
     {
         public InformacoesSistema Info;
-        public ParametrosLocais ParametrosLocais;
+        public ClientConfigValues ParametrosLocais;
 
         public BaseForm()
         {
             InitializeComponent();
         }
 
-        public BaseForm(InformacoesSistema i, ParametrosLocais p)
+        public BaseForm(InformacoesSistema i, ClientConfigValues p)
         {
             Info = i;
             ParametrosLocais = p;

@@ -31,7 +31,12 @@ namespace Sistema.UI
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            this.Text = info.NomeSistema;
+            this.Text = info.NomeSistema + " - " +  info.VersaoAtual ;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

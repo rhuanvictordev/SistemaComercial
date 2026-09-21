@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Sistema.Database;
 using Sistema.Models;
 using Sistema.Services;
 using Sistema.UI;
@@ -30,7 +31,7 @@ namespace Sistema
             Application.SetCompatibleTextRenderingDefault(false);
 
             InformacoesSistema i = new InformacoesSistema();
-            ParametrosLocais p = new ParametrosLocais();
+            ClientConfigValues p = new ClientConfigValues();
 
             i.NomeSistema = "Sistema Comercial";
             i.VersaoAtual = "Desenvolvimento";
@@ -38,7 +39,7 @@ namespace Sistema
 
             try
             {
-                p = ArquivoConfiguracaoDoCliente.LerArquivo();
+                p = ClientConfigHandler.LerArquivo();
             }
             catch (Exception ex)
             {
@@ -110,8 +111,18 @@ namespace Sistema
 #endif
         }
 
-        public static void AbrirLogin(InformacoesSistema i, ParametrosLocais p)
+        public static void AbrirLogin(InformacoesSistema i, ClientConfigValues p)
         {
+            try
+            {
+                MigrationService.RunMigrations();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Erro Migrations");
+                return;
+            }
+            
             LoginForm login = new LoginForm(i);
             if (login.ShowDialog() == DialogResult.OK)
             {

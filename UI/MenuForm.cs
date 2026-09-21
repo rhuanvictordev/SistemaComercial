@@ -13,14 +13,14 @@ namespace Sistema.UI
             InitializeComponent();
         }
 
-        public MenuForm(InformacoesSistema info, ParametrosLocais p) : base(info, p)
+        public MenuForm(InformacoesSistema info, ClientConfigValues p) : base(info, p)
         {
             InitializeComponent();
         }
 
         private void MenuForm_Load(object sender, EventArgs e)
         {
-            
+            menuParametros.Visible = true;
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
@@ -28,6 +28,19 @@ namespace Sistema.UI
             if (MessageBox.Show("Deseja realmente sair?", "Confirmação", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 Application.Exit();
+            }
+        }
+
+        private void menuParametros_Click(object sender, EventArgs e)
+        {
+            string senha = InputForm.Show("Informe a senha");
+
+            if (senha == "123")
+            {
+                ParametrosClienteForm f = new ParametrosClienteForm();
+                f.MdiParent = this;
+                f.WindowState = FormWindowState.Normal;
+                f.Show();
             }
         }
     }
