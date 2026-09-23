@@ -118,6 +118,10 @@
     <Compile Include="Data\MigrationService.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\Migrations\CriaBanco.cs" />
+    <Compile Include="Framework\DataAccess.cs" />
+    <Compile Include="Framework\DataField.cs" />
+    <Compile Include="Framework\DataRecord.cs" />
+    <Compile Include="Framework\IDataExchange.cs" />
     <Compile Include="Models\InformacoesSistema.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Services\ApiService.cs" />
@@ -156,6 +160,12 @@
     <Compile Include="UI\ParametrosClienteForm.Designer.cs">
       <DependentUpon>ParametrosClienteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UsuariosDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UsuariosDialog.Designer.cs">
+      <DependentUpon>UsuariosDialog.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -180,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ParametrosClienteForm.resx">
       <DependentUpon>ParametrosClienteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UsuariosDialog.resx">
+      <DependentUpon>UsuariosDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

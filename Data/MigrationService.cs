@@ -1,13 +1,10 @@
-﻿using Sistema.Database.Migrations;
+﻿using Sistema.Data.Migrations;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Sistema.Database
+namespace Sistema.Data
 {
     public static class MigrationService
     {

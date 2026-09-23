@@ -20,7 +20,7 @@ namespace Sistema.UI
 
         private void MenuForm_Load(object sender, EventArgs e)
         {
-            menuParametros.Visible = true;
+            
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
@@ -42,6 +42,28 @@ namespace Sistema.UI
                 f.WindowState = FormWindowState.Normal;
                 f.Show();
             }
+        }
+
+        private void cadUsuariosMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirMenu(typeof(UsuariosDialog));
+        }
+
+        private void AbrirMenu(Type tipo)
+        {
+            foreach (Form f in this.MdiChildren)
+            {
+                if (f.GetType() == tipo)
+                {
+                    f.BringToFront();
+                    f.WindowState = FormWindowState.Maximized;
+                    return;
+                }
+            }
+            Form dialog = (Form)Activator.CreateInstance(tipo);
+            dialog.MdiParent = this;
+            dialog.WindowState = FormWindowState.Maximized;
+            dialog.Show();
         }
     }
 }

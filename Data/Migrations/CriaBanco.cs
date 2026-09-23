@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sistema.Database.Migrations
+namespace Sistema.Data.Migrations
 {
     public static class CriaBanco
     {
