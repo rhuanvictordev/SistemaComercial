@@ -51,6 +51,11 @@ namespace Sistema.Models
             }
         }
 
+        public void Save()
+        {
+            base.Save(CreateDataRecord(), this);
+        }
+
         public DataRecord CreateDataRecord()
         {
             return new DataRecord("USUARIOS", new DataField[]
@@ -59,7 +64,7 @@ namespace Sistema.Models
                 new DataField(FIELD_NOME, "NOME", false),
                 new DataField(FIELD_EMAIL, "EMAIL", false),
                 new DataField(FIELD_SENHA, "SENHA", false),
-                new DataField(FIELD_IDGRUPO, "IDGRUPO", true),
+                new DataField(FIELD_IDGRUPO, "IDGRUPO", false),
                 new DataField(FIELD_CRIADO, "CRIADO", false),
                 new DataField(FIELD_ALTERADO, "ALTERADO", false)
             });

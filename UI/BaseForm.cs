@@ -40,6 +40,8 @@ namespace Sistema.UI
             {
                 this.Text += " [Cliente Desatualizado]";
             }
+
+            this.WindowState = FormWindowState.Maximized;
         }
     }
 }
