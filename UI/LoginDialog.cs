@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace Sistema.UI
 {
-    public partial class LoginForm : Form
+    public partial class LoginDialog : Form
     {
         public InformacoesSistema info;
 
-        public LoginForm(InformacoesSistema info)
+        public LoginDialog(InformacoesSistema info)
         {
             this.info = info;
             InitializeComponent();

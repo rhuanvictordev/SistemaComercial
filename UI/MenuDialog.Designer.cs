@@ -1,6 +1,6 @@
 ﻿namespace Sistema.UI
 {
-    partial class MenuForm
+    partial class MenuDialog
     {
         /// <summary>
         /// Required designer variable.

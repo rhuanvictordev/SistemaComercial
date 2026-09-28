@@ -1,6 +1,6 @@
 ﻿namespace Sistema.UI
 {
-    partial class LoginForm
+    partial class LoginDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginDialog));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,17 +40,17 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(38, 72);
+            this.textBox1.Location = new System.Drawing.Point(28, 96);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(463, 31);
+            this.textBox1.Size = new System.Drawing.Size(336, 31);
             this.textBox1.TabIndex = 0;
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(38, 161);
+            this.textBox2.Location = new System.Drawing.Point(28, 191);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(463, 31);
+            this.textBox2.Size = new System.Drawing.Size(336, 31);
             this.textBox2.TabIndex = 1;
             // 
             // label2
@@ -58,7 +58,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.label2.Location = new System.Drawing.Point(46, 43);
+            this.label2.Location = new System.Drawing.Point(23, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 26);
             this.label2.TabIndex = 0;
@@ -70,7 +70,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.label3.Location = new System.Drawing.Point(46, 132);
+            this.label3.Location = new System.Drawing.Point(23, 162);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 26);
             this.label3.TabIndex = 0;
@@ -81,7 +81,7 @@
             // 
             this.button1.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button1.Location = new System.Drawing.Point(292, 243);
+            this.button1.Location = new System.Drawing.Point(218, 276);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(146, 43);
             this.button1.TabIndex = 2;
@@ -93,7 +93,7 @@
             // 
             this.button2.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button2.Location = new System.Drawing.Point(95, 243);
+            this.button2.Location = new System.Drawing.Point(28, 276);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(146, 43);
             this.button2.TabIndex = 2;
@@ -101,12 +101,12 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // LoginForm
+            // LoginDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(536, 339);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(392, 375);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
@@ -117,7 +117,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "LoginForm";
+            this.Name = "LoginDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.LoginForm_Load);

@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Sistema.UI
 {
-    public partial class InputForm : Form
+    public partial class InputDialog : Form
     {
         public string Valor { get; private set; }
 
-        private InputForm(string title)
+        private InputDialog(string title)
         {
             InitializeComponent();
             lblTitle.Text = title;
@@ -22,7 +22,7 @@ namespace Sistema.UI
 
         public static string Show(string title)
         {
-            using (InputForm form = new InputForm(title))
+            using (InputDialog form = new InputDialog(title))
             {
                 if (form.ShowDialog() == DialogResult.OK)
                     return form.txtValor.Text;

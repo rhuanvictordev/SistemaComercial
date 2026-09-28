@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
 using Sistema.Framework;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,164 @@ namespace Sistema.Data
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+        public static bool Save(DataRecord record, IDataExchange values)
+        {
+            if (Exists(record, values))
+                return Update(record, values);
+            else
+                return Insert(record, values);
+        }
+
+        public static bool Update(DataRecord record, IDataExchange values)
+        {
+            try
+            {
+                List<string> sets = new List<string>();
+                List<string> conditions = new List<string>();
+
+                using (var cmd = Database.Connect().CreateCommand())
+                {
+                    foreach (DataField field in record.Fields)
+                    {
+                        string parameterName = $"@p{field.Index}";
+
+                        if (field.Key)
+                        {
+                            conditions.Add($"{field.Name} = {parameterName}");
+                        }
+                        else
+                        {
+                            sets.Add($"{field.Name} = {parameterName}");
+                        }
+
+                        cmd.Parameters.AddWithValue(
+                            parameterName,
+                            values.ExchangeValues[field.Index] ?? DBNull.Value
+                        );
+                    }
+
+                    if (conditions.Count == 0)
+                        throw new Exception("Nenhuma chave foi definida no DataRecord.");
+
+                    cmd.CommandText =
+                        $"UPDATE {record.Name} SET {string.Join(", ", sets)} " +
+                        $"WHERE {string.Join(" AND ", conditions)}";
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex) 
+            {
+                return false;
+            }
+        }
+
+        public static bool Insert(DataRecord record, IDataExchange values)
+        {
+            try
+            {
+                List<string> columns = new List<string>();
+                List<string> parameters = new List<string>();
+
+                using (var cmd = Database.Connect().CreateCommand())
+                {
+                    foreach (DataField field in record.Fields)
+                    {
+                        if (field.Key)
+                            continue;
+
+                        string parameterName = $"@p{field.Index}";
+                        columns.Add(field.Name);
+                        parameters.Add(parameterName);
+                        cmd.Parameters.AddWithValue(parameterName, values.ExchangeValues[field.Index] ?? DBNull.Value);
+                    }
+                    string sql = $"INSERT INTO {record.Name} ({string.Join(", ", columns)}) VALUES ({string.Join(", ", parameters)})";
+                    cmd.CommandText = sql;
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex) 
+            {
+                return false;
+            }
+        }
+
+        public static bool Exists(DataRecord record, IDataExchange values)
+        {
+            List<string> conditions = new List<string>();
+
+            using (var cmd = Database.Connect().CreateCommand())
+            {
+                foreach (DataField field in record.Fields)
+                {
+                    if (!field.Key)
+                        continue;
+
+                    string parameterName = $"@p{field.Index}";
+
+                    conditions.Add($"{field.Name} = {parameterName}");
+
+                    cmd.Parameters.AddWithValue(
+                        parameterName,
+                        values.ExchangeValues[field.Index] ?? DBNull.Value
+                    );
+                }
+
+                if (conditions.Count == 0)
+                    throw new Exception("Nenhuma chave foi definida no DataRecord.");
+
+                cmd.CommandText = $"SELECT 1 FROM {record.Name} WHERE {string.Join(" AND ", conditions)} LIMIT 1";
+
+                return cmd.ExecuteScalar() != null;
+            }
+        }
+
+        public static object[] Load(DataRecord record, long id)
+        {
+            object[] values = new object[record.Fields.Length];
+
+            StringBuilder sb = new StringBuilder("SELECT ");
+
+            for (int i = 0; i < record.Fields.Length; i++)
+            {
+                sb.Append(record.Fields[i].Name);
+
+                if (i < record.Fields.Length - 1)
+                    sb.Append(", ");
+            }
+
+            sb.Append($" FROM {record.Name}");
+
+            foreach (DataField field in record.Fields)
+            {
+                if (field.Key)
+                {
+                    sb.Append($" WHERE {field.Name} = @id");
+                    break;
+                }
+            }
+
+            using (var connection = Database.Connect())
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = sb.ToString();
+                command.Parameters.AddWithValue("@id", id);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        for (int i = 0; i < record.Fields.Length; i++)
+                        {
+                            values[i] = reader[i];
+                        }
+                    }
+                }
+            }
+
+            return values;
         }
 
         public static List<T> Query<T>() where T : IDataExchange, new()

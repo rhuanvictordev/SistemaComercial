@@ -123,10 +123,10 @@ namespace Sistema
                 return;
             }
             
-            LoginForm login = new LoginForm(i);
+            LoginDialog login = new LoginDialog(i);
             if (login.ShowDialog() == DialogResult.OK)
             {
-                Application.Run(new MenuForm(login.info, p));
+                Application.Run(new MenuDialog(login.info, p));
             }
         }
 

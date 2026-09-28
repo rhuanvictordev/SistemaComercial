@@ -1,6 +1,6 @@
 ﻿namespace Sistema.UI
 {
-    partial class ParametrosClienteForm
+    partial class ParametrosDialog
     {
         /// <summary>
         /// Required designer variable.

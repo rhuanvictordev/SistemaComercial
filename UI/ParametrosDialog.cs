@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace Sistema.UI
 {
-    public partial class ParametrosClienteForm : Form
+    public partial class ParametrosDialog : Form
     {
         ClientConfigValues values;
-        public ParametrosClienteForm()
+        public ParametrosDialog()
         {
             InitializeComponent();
             values = ClientConfigHandler.LerArquivo();

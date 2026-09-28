@@ -1,6 +1,6 @@
 ﻿namespace Sistema.UI
 {
-    partial class InputForm
+    partial class InputDialog
     {
         /// <summary>
         /// Required designer variable.

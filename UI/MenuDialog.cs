@@ -6,14 +6,14 @@ using System.Windows.Forms;
 
 namespace Sistema.UI
 {
-    public partial class MenuForm : BaseForm
+    public partial class MenuDialog : BaseDialog
     {
-        public MenuForm() : base()
+        public MenuDialog() : base()
         {
             InitializeComponent();
         }
 
-        public MenuForm(InformacoesSistema info, ClientConfigValues p) : base(info, p)
+        public MenuDialog(InformacoesSistema info, ClientConfigValues p) : base(info, p)
         {
             InitializeComponent();
         }
@@ -33,11 +33,11 @@ namespace Sistema.UI
 
         private void menuParametros_Click(object sender, EventArgs e)
         {
-            string senha = InputForm.Show("Informe a senha");
+            string senha = InputDialog.Show("Informe a senha");
 
             if (senha == "123")
             {
-                ParametrosClienteForm f = new ParametrosClienteForm();
+                ParametrosDialog f = new ParametrosDialog();
                 f.MdiParent = this;
                 f.WindowState = FormWindowState.Normal;
                 f.Show();

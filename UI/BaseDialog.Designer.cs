@@ -1,6 +1,6 @@
 ﻿namespace Sistema.UI
 {
-    partial class BaseForm
+    partial class BaseDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseDialog));
             this.SuspendLayout();
             // 
             // BaseForm

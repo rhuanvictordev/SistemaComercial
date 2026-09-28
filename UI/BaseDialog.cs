@@ -12,17 +12,17 @@ using System.Windows.Forms;
 
 namespace Sistema.UI
 {
-    public partial class BaseForm : Form
+    public partial class BaseDialog : Form
     {
         public InformacoesSistema Info;
         public ClientConfigValues ParametrosLocais;
 
-        public BaseForm()
+        public BaseDialog()
         {
             InitializeComponent();
         }
 
-        public BaseForm(InformacoesSistema i, ClientConfigValues p)
+        public BaseDialog(InformacoesSistema i, ClientConfigValues p)
         {
             Info = i;
             ParametrosLocais = p;
