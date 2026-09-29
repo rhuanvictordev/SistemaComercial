@@ -1,6 +1,7 @@
 ﻿using Sistema.Data;
 using Sistema.Models;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Sistema.UI
@@ -22,6 +23,12 @@ namespace Sistema.UI
         private const int COLUMN_GRUPO_ALTERADO = 4;
         private const int COLUMN_GRUPO_COUNT = 5;
 
+        private const int COLUMN_PERMISSAO_IDGRUPO = 0;
+        private const int COLUMN_PERMISSAO_RECURSO = 1;
+        private const int COLUMN_PERMISSAO_DESCRICAO = 2;
+        private const int COLUMN_PERMISSAO_ATIVAR = 3;
+        private const int COLUMN_PERMISSAO_COUNT = 4;
+
         public UsuariosDialog()
         {
             InitializeComponent();
@@ -37,8 +44,8 @@ namespace Sistema.UI
             var usuarios = Database.Query<Usuario>();
             var grupos = Database.Query<Grupo>();
 
-            dgvUsuarios.Rows.Clear();
-            dgvGrupos.Rows.Clear();
+            dgvUsuarios.Rows.Clear(); dgvUsuarios.SuspendLayout();
+            dgvGrupos.Rows.Clear(); dgvGrupos.SuspendLayout();
 
             object[] rowG = new object[COLUMN_GRUPO_COUNT];
             cboGrupo.Items.Clear();
@@ -68,7 +75,11 @@ namespace Sistema.UI
                 row[COLUMN_USUARIO_CRIADO] = u.Criado;
                 row[COLUMN_USUARIO_ALTERADO] = u.Alterado;
                 int index = dgvUsuarios.Rows.Add(row);
+                dgvUsuarios.Rows[index].Height = 30;
             }
+
+            dgvGrupos.ResumeLayout(); dgvUsuarios.ClearSelection();
+            dgvUsuarios.ResumeLayout(); dgvGrupos.ClearSelection();
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
@@ -77,6 +88,7 @@ namespace Sistema.UI
             if (u.Save())
             {
                 MessageBox.Show("Usuário cadastrado com sucesso", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataShow();
             }
             else
             {
@@ -90,9 +102,27 @@ namespace Sistema.UI
                 return;
 
             DataGridViewRow row = dgvGrupos.Rows[e.RowIndex];
-            txtNome.Text = row.Cells[COLUMN_USUARIO_NOME].Value.ToString();
-            txtEmail.Text = row.Cells[COLUMN_USUARIO_EMAIL].Value.ToString();
-            
+            txtGNome.Text = row.Cells[COLUMN_GRUPO_NOME].Value.ToString();
+            txtGDescricao.Text = row.Cells[COLUMN_GRUPO_DESCRICAO].Value.ToString();
+            dgvPermissoes.Rows.Clear();
+
+            List<string> permissoes = new List<string>();
+            string idGrupo = row.Cells[COLUMN_GRUPO_ID].Value.ToString();
+            Grupo grupo = new Grupo();
+            if (grupo.Load(long.Parse(idGrupo)))
+            {
+                permissoes = grupo.ObterPermissoes();
+            }
+
+            foreach (var p in this.PermissoesMenu)
+            {
+                var rowP = new object[COLUMN_PERMISSAO_COUNT];
+                rowP[COLUMN_PERMISSAO_IDGRUPO] = idGrupo;
+                rowP[COLUMN_PERMISSAO_RECURSO] = p.Split('-')[0].Trim();
+                rowP[COLUMN_PERMISSAO_DESCRICAO] = p.Split('-')[1].Trim();
+                rowP[COLUMN_PERMISSAO_ATIVAR] = permissoes.Contains(p.Split('-')[0].ToString());
+                dgvPermissoes.Rows.Add(rowP);
+            }
         }
 
         private void btnCriarGrupo_Click(object sender, EventArgs e)
@@ -101,6 +131,7 @@ namespace Sistema.UI
             if (g.Save())
             { 
                 MessageBox.Show("Grupo cadastrado com sucesso", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataShow();
             }
         }
 
@@ -113,6 +144,39 @@ namespace Sistema.UI
             txtNome.Text = row.Cells[COLUMN_USUARIO_NOME].Value.ToString();
             txtEmail.Text = row.Cells[COLUMN_USUARIO_EMAIL].Value.ToString();
             cboGrupo.Text = row.Cells[COLUMN_USUARIO_GRUPO].Value.ToString();
+        }
+
+        private void UsuariosDialog_Click(object sender, EventArgs e)
+        {
+            dgvUsuarios.ClearSelection();
+            dgvGrupos.ClearSelection();
+        }
+
+        private void btnSalvarPermissoes_Click(object sender, EventArgs e)
+        {
+            if (dgvPermissoes.Rows.Count < 1)
+                return;
+
+            string idGrupo = dgvPermissoes.Rows[0].Cells[COLUMN_PERMISSAO_IDGRUPO].Value.ToString();
+            Permissao p = new Permissao();
+            p.DeletePermissoesDoGrupo(idGrupo);
+            dgvPermissoes.EndEdit();
+        }
+
+        private void dgvPermissoes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            foreach (DataGridViewRow row in dgvPermissoes.Rows)
+            {
+                bool ativar = (bool)row.Cells[COLUMN_PERMISSAO_ATIVAR].Value;
+                long idGrupo = long.Parse(row.Cells[COLUMN_PERMISSAO_IDGRUPO].Value.ToString());
+                string recurso = row.Cells[COLUMN_PERMISSAO_RECURSO].Value.ToString();
+                string descricao = row.Cells[COLUMN_PERMISSAO_DESCRICAO].Value.ToString();
+                if (ativar)
+                {
+                    Permissao p = new Permissao() { Recurso = recurso, Descricao = descricao, IdGrupo = idGrupo };
+                    p.Save();
+                }
+            }
         }
     }
 }

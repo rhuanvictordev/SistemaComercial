@@ -22,7 +22,13 @@ namespace Sistema.Models
         public string Descricao { get; set; }
         public DateTime Criado { get; set; }
         public DateTime Alterado { get; set; }
-        
+        public List<string> PermissoesCodes { get; set; }
+
+        public Grupo()
+        {
+            PermissoesCodes = new List<string>();
+        }
+
         public object[] ExchangeValues 
         {
             get 
@@ -58,6 +64,25 @@ namespace Sistema.Models
         {
             DataRecord record = CreateDataRecord();
             return Database.Save(record, this);
+        }
+
+        public List<string> ObterPermissoes()
+        { 
+            List<string> result = new List<string>();
+
+            using (var command = Database.Connect().CreateCommand())
+            {
+                command.CommandText = $"SELECT RECURSO FROM PERMISSOES WHERE IDGRUPO = {this.IdGrupo}";
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result.Add(reader[0].ToString());
+                    }
+                }
+            }
+
+            return result;
         }
 
         public DataRecord CreateDataRecord()

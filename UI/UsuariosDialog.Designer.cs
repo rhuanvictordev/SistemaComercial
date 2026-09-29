@@ -36,7 +36,6 @@
             this.Criado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Alterado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCriarUsuario = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,16 +50,23 @@
             this.DescGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GrupoCriado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GrupoAlterado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtGDescricao = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtGNome = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnCriarGrupo = new System.Windows.Forms.Button();
+            this.dgvPermissoes = new System.Windows.Forms.DataGridView();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnSalvarPermissoes = new System.Windows.Forms.Button();
+            this.IdGrp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RecursoCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RecursoDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GrupoPermissao = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupos)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPermissoes)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvUsuarios
@@ -70,6 +76,7 @@
             this.dgvUsuarios.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvUsuarios.BackgroundColor = System.Drawing.SystemColors.InactiveCaption;
             this.dgvUsuarios.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -79,11 +86,12 @@
             this.Grupo,
             this.Criado,
             this.Alterado});
-            this.dgvUsuarios.Location = new System.Drawing.Point(10, 124);
+            this.dgvUsuarios.Location = new System.Drawing.Point(12, 53);
+            this.dgvUsuarios.Margin = new System.Windows.Forms.Padding(4);
             this.dgvUsuarios.Name = "dgvUsuarios";
             this.dgvUsuarios.ReadOnly = true;
             this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsuarios.Size = new System.Drawing.Size(906, 164);
+            this.dgvUsuarios.Size = new System.Drawing.Size(678, 185);
             this.dgvUsuarios.TabIndex = 0;
             this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
             // 
@@ -103,7 +111,7 @@
             this.Nome.HeaderText = "Nome";
             this.Nome.Name = "Nome";
             this.Nome.ReadOnly = true;
-            this.Nome.Width = 60;
+            this.Nome.Width = 69;
             // 
             // Email
             // 
@@ -121,7 +129,7 @@
             this.Grupo.HeaderText = "Grupo";
             this.Grupo.Name = "Grupo";
             this.Grupo.ReadOnly = true;
-            this.Grupo.Width = 61;
+            this.Grupo.Width = 69;
             // 
             // Criado
             // 
@@ -130,7 +138,7 @@
             this.Criado.HeaderText = "Criado";
             this.Criado.Name = "Criado";
             this.Criado.ReadOnly = true;
-            this.Criado.Width = 62;
+            this.Criado.Width = 72;
             // 
             // Alterado
             // 
@@ -139,100 +147,99 @@
             this.Alterado.HeaderText = "Alterado";
             this.Alterado.Name = "Alterado";
             this.Alterado.ReadOnly = true;
-            this.Alterado.Width = 71;
+            this.Alterado.Width = 83;
             // 
             // btnCriarUsuario
             // 
-            this.btnCriarUsuario.Location = new System.Drawing.Point(340, 46);
+            this.btnCriarUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCriarUsuario.Location = new System.Drawing.Point(363, 281);
+            this.btnCriarUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.btnCriarUsuario.Name = "btnCriarUsuario";
-            this.btnCriarUsuario.Size = new System.Drawing.Size(75, 23);
+            this.btnCriarUsuario.Size = new System.Drawing.Size(100, 28);
             this.btnCriarUsuario.TabIndex = 1;
             this.btnCriarUsuario.Text = "Criar usuário";
             this.btnCriarUsuario.UseVisualStyleBackColor = true;
             this.btnCriarUsuario.Click += new System.EventHandler(this.btnNovo_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.txtSenha);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtEmail);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtNome);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.cboGrupo);
-            this.groupBox1.Controls.Add(this.btnCriarUsuario);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(906, 106);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(231, 20);
+            this.label4.Location = new System.Drawing.Point(268, 252);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 13);
+            this.label4.Size = new System.Drawing.Size(44, 16);
             this.label4.TabIndex = 5;
             this.label4.Text = "Grupo";
             // 
             // txtSenha
             // 
-            this.txtSenha.Location = new System.Drawing.Point(48, 69);
+            this.txtSenha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtSenha.Location = new System.Drawing.Point(66, 310);
+            this.txtSenha.Margin = new System.Windows.Forms.Padding(4);
             this.txtSenha.Name = "txtSenha";
-            this.txtSenha.Size = new System.Drawing.Size(155, 20);
+            this.txtSenha.Size = new System.Drawing.Size(194, 22);
             this.txtSenha.TabIndex = 4;
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 72);
+            this.label3.Location = new System.Drawing.Point(12, 310);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 13);
+            this.label3.Size = new System.Drawing.Size(46, 16);
             this.label3.TabIndex = 3;
             this.label3.Text = "Senha";
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(48, 43);
+            this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtEmail.Location = new System.Drawing.Point(66, 276);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(219, 20);
+            this.txtEmail.Size = new System.Drawing.Size(194, 22);
             this.txtEmail.TabIndex = 4;
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 46);
+            this.label2.Location = new System.Drawing.Point(17, 279);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 13);
+            this.label2.Size = new System.Drawing.Size(41, 16);
             this.label2.TabIndex = 3;
             this.label2.Text = "Email";
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(48, 17);
+            this.txtNome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtNome.Location = new System.Drawing.Point(66, 246);
+            this.txtNome.Margin = new System.Windows.Forms.Padding(4);
             this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(155, 20);
+            this.txtNome.Size = new System.Drawing.Size(194, 22);
             this.txtNome.TabIndex = 4;
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 20);
+            this.label1.Location = new System.Drawing.Point(14, 246);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(44, 16);
             this.label1.TabIndex = 3;
             this.label1.Text = "Nome";
             // 
             // cboGrupo
             // 
+            this.cboGrupo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cboGrupo.FormattingEnabled = true;
-            this.cboGrupo.Location = new System.Drawing.Point(273, 17);
+            this.cboGrupo.Location = new System.Drawing.Point(320, 249);
+            this.cboGrupo.Margin = new System.Windows.Forms.Padding(4);
             this.cboGrupo.Name = "cboGrupo";
-            this.cboGrupo.Size = new System.Drawing.Size(142, 21);
+            this.cboGrupo.Size = new System.Drawing.Size(143, 24);
             this.cboGrupo.TabIndex = 2;
             // 
             // dgvGrupos
@@ -241,6 +248,7 @@
             this.dgvGrupos.AllowUserToDeleteRows = false;
             this.dgvGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvGrupos.BackgroundColor = System.Drawing.SystemColors.InactiveCaption;
             this.dgvGrupos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGrupos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdGrupo,
@@ -248,11 +256,12 @@
             this.DescGrupo,
             this.GrupoCriado,
             this.GrupoAlterado});
-            this.dgvGrupos.Location = new System.Drawing.Point(9, 294);
+            this.dgvGrupos.Location = new System.Drawing.Point(12, 393);
+            this.dgvGrupos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvGrupos.Name = "dgvGrupos";
             this.dgvGrupos.ReadOnly = true;
             this.dgvGrupos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGrupos.Size = new System.Drawing.Size(906, 154);
+            this.dgvGrupos.Size = new System.Drawing.Size(678, 224);
             this.dgvGrupos.TabIndex = 3;
             this.dgvGrupos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGrupos_CellClick);
             // 
@@ -269,7 +278,7 @@
             this.NomeGrupo.HeaderText = "Nome";
             this.NomeGrupo.Name = "NomeGrupo";
             this.NomeGrupo.ReadOnly = true;
-            this.NomeGrupo.Width = 60;
+            this.NomeGrupo.Width = 69;
             // 
             // DescGrupo
             // 
@@ -277,99 +286,220 @@
             this.DescGrupo.HeaderText = "Descrição";
             this.DescGrupo.Name = "DescGrupo";
             this.DescGrupo.ReadOnly = true;
-            this.DescGrupo.Width = 80;
+            this.DescGrupo.Width = 94;
             // 
             // GrupoCriado
             // 
+            this.GrupoCriado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.GrupoCriado.HeaderText = "Criado";
             this.GrupoCriado.Name = "GrupoCriado";
             this.GrupoCriado.ReadOnly = true;
+            this.GrupoCriado.Width = 72;
             // 
             // GrupoAlterado
             // 
+            this.GrupoAlterado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.GrupoAlterado.HeaderText = "Alterado";
             this.GrupoAlterado.Name = "GrupoAlterado";
             this.GrupoAlterado.ReadOnly = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.txtGDescricao);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.txtGNome);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.btnCriarGrupo);
-            this.groupBox2.Location = new System.Drawing.Point(10, 454);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(905, 72);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
+            this.GrupoAlterado.Width = 83;
             // 
             // txtGDescricao
             // 
-            this.txtGDescricao.Location = new System.Drawing.Point(67, 42);
+            this.txtGDescricao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtGDescricao.Location = new System.Drawing.Point(268, 628);
+            this.txtGDescricao.Margin = new System.Windows.Forms.Padding(4);
             this.txtGDescricao.Name = "txtGDescricao";
-            this.txtGDescricao.Size = new System.Drawing.Size(222, 20);
+            this.txtGDescricao.Size = new System.Drawing.Size(298, 22);
             this.txtGDescricao.TabIndex = 4;
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 42);
+            this.label6.Location = new System.Drawing.Point(191, 631);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 13);
+            this.label6.Size = new System.Drawing.Size(69, 16);
             this.label6.TabIndex = 3;
             this.label6.Text = "Descrição";
             // 
             // txtGNome
             // 
-            this.txtGNome.Location = new System.Drawing.Point(47, 16);
+            this.txtGNome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtGNome.Location = new System.Drawing.Point(66, 628);
+            this.txtGNome.Margin = new System.Windows.Forms.Padding(4);
             this.txtGNome.Name = "txtGNome";
-            this.txtGNome.Size = new System.Drawing.Size(155, 20);
+            this.txtGNome.Size = new System.Drawing.Size(117, 22);
             this.txtGNome.TabIndex = 4;
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 16);
+            this.label5.Location = new System.Drawing.Point(14, 631);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.Size = new System.Drawing.Size(44, 16);
             this.label5.TabIndex = 3;
             this.label5.Text = "Nome";
             // 
             // btnCriarGrupo
             // 
-            this.btnCriarGrupo.Location = new System.Drawing.Point(295, 43);
+            this.btnCriarGrupo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCriarGrupo.Location = new System.Drawing.Point(574, 625);
+            this.btnCriarGrupo.Margin = new System.Windows.Forms.Padding(4);
             this.btnCriarGrupo.Name = "btnCriarGrupo";
-            this.btnCriarGrupo.Size = new System.Drawing.Size(75, 23);
+            this.btnCriarGrupo.Size = new System.Drawing.Size(100, 28);
             this.btnCriarGrupo.TabIndex = 1;
             this.btnCriarGrupo.Text = "Criar grupo";
             this.btnCriarGrupo.UseVisualStyleBackColor = true;
             this.btnCriarGrupo.Click += new System.EventHandler(this.btnCriarGrupo_Click);
             // 
+            // dgvPermissoes
+            // 
+            this.dgvPermissoes.AllowUserToAddRows = false;
+            this.dgvPermissoes.AllowUserToDeleteRows = false;
+            this.dgvPermissoes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvPermissoes.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgvPermissoes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPermissoes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdGrp,
+            this.RecursoCodigo,
+            this.RecursoDescricao,
+            this.GrupoPermissao});
+            this.dgvPermissoes.Location = new System.Drawing.Point(697, 52);
+            this.dgvPermissoes.Name = "dgvPermissoes";
+            this.dgvPermissoes.RowTemplate.Height = 24;
+            this.dgvPermissoes.Size = new System.Drawing.Size(531, 565);
+            this.dgvPermissoes.TabIndex = 6;
+            this.dgvPermissoes.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPermissoes_CellEndEdit);
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.BackColor = System.Drawing.Color.SteelBlue;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(697, 12);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(530, 37);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Permissões";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.BackColor = System.Drawing.Color.SteelBlue;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(13, 12);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(677, 37);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Usuários";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.BackColor = System.Drawing.Color.SteelBlue;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(13, 349);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(677, 37);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Grupos";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnSalvarPermissoes
+            // 
+            this.btnSalvarPermissoes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSalvarPermissoes.Location = new System.Drawing.Point(1029, 624);
+            this.btnSalvarPermissoes.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSalvarPermissoes.Name = "btnSalvarPermissoes";
+            this.btnSalvarPermissoes.Size = new System.Drawing.Size(198, 28);
+            this.btnSalvarPermissoes.TabIndex = 1;
+            this.btnSalvarPermissoes.Text = "Salvar Permissões";
+            this.btnSalvarPermissoes.UseVisualStyleBackColor = true;
+            this.btnSalvarPermissoes.Click += new System.EventHandler(this.btnSalvarPermissoes_Click);
+            // 
+            // IdGrp
+            // 
+            this.IdGrp.HeaderText = "Grupo";
+            this.IdGrp.Name = "IdGrp";
+            this.IdGrp.Visible = false;
+            // 
+            // RecursoCodigo
+            // 
+            this.RecursoCodigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.RecursoCodigo.HeaderText = "Recurso";
+            this.RecursoCodigo.Name = "RecursoCodigo";
+            this.RecursoCodigo.Width = 83;
+            // 
+            // RecursoDescricao
+            // 
+            this.RecursoDescricao.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.RecursoDescricao.HeaderText = "Descrição";
+            this.RecursoDescricao.Name = "RecursoDescricao";
+            this.RecursoDescricao.Width = 94;
+            // 
+            // GrupoPermissao
+            // 
+            this.GrupoPermissao.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.GrupoPermissao.HeaderText = "Permitir";
+            this.GrupoPermissao.Name = "GrupoPermissao";
+            this.GrupoPermissao.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrupoPermissao.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.GrupoPermissao.Width = 77;
+            // 
             // UsuariosDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(930, 538);
-            this.Controls.Add(this.groupBox2);
+            this.ClientSize = new System.Drawing.Size(1240, 662);
+            this.Controls.Add(this.dgvPermissoes);
+            this.Controls.Add(this.txtGDescricao);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.txtGNome);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtSenha);
+            this.Controls.Add(this.btnSalvarPermissoes);
+            this.Controls.Add(this.btnCriarGrupo);
             this.Controls.Add(this.dgvGrupos);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.dgvUsuarios);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtNome);
+            this.Controls.Add(this.btnCriarUsuario);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cboGrupo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "UsuariosDialog";
             this.ShowIcon = false;
             this.Text = "Usuários Grupos e Permissões";
             this.Load += new System.EventHandler(this.UsuariosDialog_Load);
+            this.Click += new System.EventHandler(this.UsuariosDialog_Click);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupos)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPermissoes)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -377,7 +507,6 @@
 
         private System.Windows.Forms.DataGridView dgvUsuarios;
         private System.Windows.Forms.Button btnCriarUsuario;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtNome;
@@ -387,7 +516,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dgvGrupos;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtGDescricao;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtGNome;
@@ -399,10 +527,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Grupo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Criado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Alterado;
+        private System.Windows.Forms.DataGridView dgvPermissoes;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdGrupo;
         private System.Windows.Forms.DataGridViewTextBoxColumn NomeGrupo;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescGrupo;
         private System.Windows.Forms.DataGridViewTextBoxColumn GrupoCriado;
         private System.Windows.Forms.DataGridViewTextBoxColumn GrupoAlterado;
+        private System.Windows.Forms.Button btnSalvarPermissoes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdGrp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RecursoCodigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RecursoDescricao;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn GrupoPermissao;
     }
 }

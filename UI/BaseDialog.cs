@@ -16,10 +16,15 @@ namespace Sistema.UI
     {
         public InformacoesSistema Info;
         public ClientConfigValues ParametrosLocais;
+        public List<string> PermissoesMenu;
 
         public BaseDialog()
         {
             InitializeComponent();
+            PermissoesMenu = new List<string>()
+            {
+                "menuUGP-Usuarios Grupos e Permissoes"
+            };
         }
 
         public BaseDialog(InformacoesSistema i, ClientConfigValues p)

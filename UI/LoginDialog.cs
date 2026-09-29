@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -24,14 +25,28 @@ namespace Sistema.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            info.UsuarioLogado = new Usuario() { Nome = textBox1.Text };
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            Usuario u = new Usuario();
+            if (u.Login(txtEmail.Text, txtSenha.Text))
+            {
+                info.UsuarioLogado = u;
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Usuário e/ou senha inválidos", "Credenciais inválidas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            this.Text = info.NomeSistema + " - " +  info.VersaoAtual ;
+            this.Text = info.NomeSistema + " - " + "Login";
+
+            if (Debugger.IsAttached)
+            {
+                txtEmail.Text = "suporte@email.com";
+                txtSenha.Text = "123";
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

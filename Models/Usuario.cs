@@ -23,7 +23,8 @@ namespace Sistema.Models
         public long IdGrupo { get; set; }
         public DateTime Criado { get; set; }
         public DateTime Alterado { get; set; }
-        
+
+
         public object[] ExchangeValues
         {
             get
@@ -69,6 +70,31 @@ namespace Sistema.Models
         {
             DataRecord record = CreateDataRecord();
             return Database.Save(record, this);
+        }
+
+        public bool Login(string email, string senha)
+        {
+            using (var command = Database.Connect().CreateCommand())
+            {
+                command.CommandText = "SELECT IDUSUARIO, NOME, EMAIL, SENHA, IDGRUPO, CRIADO, ALTERADO FROM USUARIOS WHERE EMAIL = @email AND SENHA = @senha";
+                command.Parameters.AddWithValue("@email", email);
+                command.Parameters.AddWithValue("@senha", senha);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        this.IdUsuario = long.Parse(reader[0].ToString());
+                        this.Nome = reader[1].ToString();
+                        this.Email = reader[2].ToString();
+                        this.Senha = reader[3].ToString();
+                        this.IdGrupo = long.Parse(reader[4].ToString());
+                        this.Criado = DateTime.Parse(reader[5].ToString());
+                        this.Alterado = DateTime.Parse(reader[6].ToString());
+                        return true;
+                    }
+                    return false;
+                }
+            }
         }
     }
 }

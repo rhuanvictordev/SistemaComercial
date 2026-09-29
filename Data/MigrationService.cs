@@ -12,7 +12,8 @@ namespace Sistema.Data
 
         public static List<Migration> Migrations = new List<Migration>()
         {
-            new Migration(1, "CRIACAO DO BANCO", CriaBanco.Conteudo())
+            new Migration(1, "Criacao do banco", CriaBanco.Conteudo()),
+            new Migration(2, "Add Tabela Permissoes", CriaTabelaPermissoes.Conteudo())
         };
 
 
