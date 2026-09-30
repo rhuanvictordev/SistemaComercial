@@ -37,7 +37,11 @@ namespace Sistema.UI
             {
                 var permissoes = g.ObterPermissoes();
 
-                menuUGP.Enabled = permissoes.Contains("menuUGP");
+                menuUGP.Enabled = (permissoes.Contains("menuUGP") || g.IdGrupo == 1);
+                menuClientes.Enabled = permissoes.Contains("menuClientes");
+                menuEstoque.Enabled = permissoes.Contains("menuEstoque");
+                menuProdutos.Enabled = permissoes.Contains("menuProdutos");
+                menuParametros.Enabled = permissoes.Contains("menuParametros");
             }
         }
 
@@ -95,6 +99,11 @@ namespace Sistema.UI
                 f.WindowState = FormWindowState.Normal;
                 f.Show();
             }
+        }
+
+        private void cLientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

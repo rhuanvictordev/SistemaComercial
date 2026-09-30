@@ -53,6 +53,9 @@ namespace Sistema.UI
             cboGrupo.Items.Clear();
             foreach (var g in grupos)
             {
+                /*if (g.Nome.ToUpper() == "SUPORTE")
+                    continue;*/
+
                 rowG[COLUMN_GRUPO_ID] = g.IdGrupo;
                 rowG[COLUMN_GRUPO_NOME] = g.Nome;
                 rowG[COLUMN_GRUPO_DESCRICAO] = g.Descricao;
@@ -66,12 +69,15 @@ namespace Sistema.UI
             object[] row = new object[COLUMN_USUARIO_COUNT];
             foreach (var u in usuarios)
             {
+                /*if (u.Nome.ToUpper() == "SUPORTE")
+                    continue;*/
+
                 Grupo g = new Grupo();
                 row[COLUMN_USUARIO_ID] = u.IdUsuario;
                 row[COLUMN_USUARIO_NOME] = u.Nome;
                 row[COLUMN_USUARIO_EMAIL] = u.Email;
                 row[COLUMN_USUARIO_GRUPO] = "";
-                
+
                 if (g.Load(u.IdGrupo))
                     row[COLUMN_USUARIO_GRUPO] = $"{g.IdGrupo}-{g.Nome}";
 
@@ -93,7 +99,7 @@ namespace Sistema.UI
             string email = txtEmail.Text.Trim();
             string senha = txtSenha.Text.Trim();
             string idGrupo = cboGrupo.Text.Split('-')[0].Trim();
-            
+
             if (String.IsNullOrEmpty(nome) || String.IsNullOrEmpty(email) || String.IsNullOrEmpty(senha) || String.IsNullOrEmpty(idGrupo))
             {
                 MessageBox.Show("Informe todos os campos", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -104,8 +110,9 @@ namespace Sistema.UI
             if (u.Save())
                 MessageBox.Show("Usuário cadastrado com sucesso", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show("Erro ao salvar o usuário", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            
+                MessageBox.Show("Erro ao salvar o usuário\nTalvez já exista um usuário com esse email!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            LimpaCamposUsuario();
             DataShow();
         }
 
@@ -117,9 +124,9 @@ namespace Sistema.UI
             DataGridViewRow row = dgvGrupos.Rows[e.RowIndex];
             txtGNome.Text = row.Cells[COLUMN_GRUPO_NOME].Value.ToString();
             txtGDescricao.Text = row.Cells[COLUMN_GRUPO_DESCRICAO].Value.ToString();
-            
+
             string idGrupo = row.Cells[COLUMN_GRUPO_ID].Value.ToString();
-            Grupo grupo = new Grupo() { IdGrupo = long.Parse(idGrupo)};
+            Grupo grupo = new Grupo() { IdGrupo = long.Parse(idGrupo) };
             var permissoesDoGrupo = grupo.ObterPermissoes();
 
             dgvPermissoes.Rows.Clear();
@@ -132,16 +139,50 @@ namespace Sistema.UI
                 rowP[COLUMN_PERMISSAO_ATIVAR] = permissoesDoGrupo.Contains(menu.Split('-')[0].Trim());
                 dgvPermissoes.Rows.Add(rowP);
             }
+
+            if (e.ColumnIndex == COLUMN_GRUPO_EXCLUIR)
+            {
+                if (MessageBox.Show("Confirma a exclusão desse grupo?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    grupo.Delete();
+                }
+                DataShow();
+            }
         }
 
         private void btnCriarGrupo_Click(object sender, EventArgs e)
         {
-            Grupo g = new Grupo() { Nome = txtGNome.Text, Descricao = txtGDescricao.Text, Criado = DateTime.Now, Alterado = DateTime.Now };
-            if (g.Save())
-            { 
-                MessageBox.Show("Grupo cadastrado com sucesso", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DataShow();
+            string nome = txtGNome.Text.Trim();
+            string descricao = txtGDescricao.Text.Trim();
+
+            if (String.IsNullOrEmpty(nome) || String.IsNullOrEmpty(descricao))
+            {
+                MessageBox.Show("Digite todos os campos","Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
+            
+            Grupo g = new Grupo() { Nome = nome, Descricao = descricao, Criado = DateTime.Now, Alterado = DateTime.Now };
+            if (g.Save())
+                MessageBox.Show("Grupo cadastrado com sucesso", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("Erro ao salvar o grupo\nTalvez já exista um grupo com esse nome!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            LimpaCamposGrupo();
+            DataShow();
+        }
+
+        public void LimpaCamposUsuario()
+        {
+            txtNome.Text = String.Empty;
+            txtEmail.Text = String.Empty;
+            txtSenha.Text = String.Empty;
+            cboGrupo.Text = String.Empty;
+        }
+
+        public void LimpaCamposGrupo()
+        {
+            txtGNome.Text = String.Empty;
+            txtGDescricao.Text = String.Empty;
         }
 
         private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -153,7 +194,7 @@ namespace Sistema.UI
             txtNome.Text = row.Cells[COLUMN_USUARIO_NOME].Value.ToString();
             txtEmail.Text = row.Cells[COLUMN_USUARIO_EMAIL].Value.ToString();
             cboGrupo.Text = row.Cells[COLUMN_USUARIO_GRUPO].Value.ToString();
-
+           
             if (e.ColumnIndex == COLUMN_USUARIO_EXCLUIR)
             {
                 if (MessageBox.Show("Confirma a exclusão desse usuário?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -192,13 +233,8 @@ namespace Sistema.UI
                     p.Save();
                 }
             }
-            MessageBox.Show("Permissões salvas");
+            MessageBox.Show("Permissões do grupo atualizadas com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
             DataShow();
-        }
-
-        private void dgvPermissoes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            
         }
     }
 }

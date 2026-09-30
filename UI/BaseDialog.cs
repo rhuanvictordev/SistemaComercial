@@ -23,7 +23,11 @@ namespace Sistema.UI
             InitializeComponent();
             Menus = new List<string>()
             {
-                "menuUGP - Usuários Grupos e Permissões"
+                "menuUGP - Usuários Grupos e Permissões",
+                "menuClientes - Clientes cadastrados",
+                "menuEstoque - Itens no estoque",
+                "menuProdutos - Produtos de venda",
+                "menuParametros - Parâmetros do cliente"
             };
         }
 

@@ -66,6 +66,17 @@ namespace Sistema.Models
             return Database.Save(record, this);
         }
 
+
+        public bool Delete()
+        {
+            using (var command = Database.Connect().CreateCommand())
+            {
+                command.CommandText = "DELETE FROM GRUPO_USUARIO WHERE IDGRUPO = @id";
+                command.Parameters.AddWithValue("@id", this.IdGrupo);
+                return command.ExecuteNonQuery() > 0;
+            }
+        }
+
         public List<string> ObterPermissoes()
         { 
             List<string> result = new List<string>();

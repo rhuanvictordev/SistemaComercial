@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Criado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Alterado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Excluir = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnCriarUsuario = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSenha = new System.Windows.Forms.TextBox();
@@ -53,13 +60,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btnSalvarPermissoes = new System.Windows.Forms.Button();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Criado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Alterado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Excluir = new System.Windows.Forms.DataGridViewButtonColumn();
             this.IdGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NomeGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,6 +96,70 @@
             this.dgvUsuarios.Size = new System.Drawing.Size(508, 150);
             this.dgvUsuarios.TabIndex = 0;
             this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
+            // 
+            // ID
+            // 
+            this.ID.FillWeight = 12.69035F;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            this.ID.Width = 200;
+            // 
+            // Nome
+            // 
+            this.Nome.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Nome.FillWeight = 12.69035F;
+            this.Nome.HeaderText = "Nome";
+            this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
+            this.Nome.Width = 60;
+            // 
+            // Email
+            // 
+            this.Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Email.FillWeight = 10F;
+            this.Email.HeaderText = "Email";
+            this.Email.MinimumWidth = 100;
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            // 
+            // Grupo
+            // 
+            this.Grupo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Grupo.FillWeight = 12.69035F;
+            this.Grupo.HeaderText = "Grupo";
+            this.Grupo.Name = "Grupo";
+            this.Grupo.ReadOnly = true;
+            this.Grupo.Width = 61;
+            // 
+            // Criado
+            // 
+            this.Criado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Criado.FillWeight = 12.69035F;
+            this.Criado.HeaderText = "Criado";
+            this.Criado.Name = "Criado";
+            this.Criado.ReadOnly = true;
+            this.Criado.Width = 62;
+            // 
+            // Alterado
+            // 
+            this.Alterado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Alterado.FillWeight = 12.69035F;
+            this.Alterado.HeaderText = "Alterado";
+            this.Alterado.Name = "Alterado";
+            this.Alterado.ReadOnly = true;
+            this.Alterado.Width = 71;
+            // 
+            // Excluir
+            // 
+            this.Excluir.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Excluir.HeaderText = "";
+            this.Excluir.Name = "Excluir";
+            this.Excluir.ReadOnly = true;
+            this.Excluir.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Excluir.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Excluir.Width = 19;
             // 
             // btnCriarUsuario
             // 
@@ -271,7 +335,6 @@
             this.dgvPermissoes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPermissoes.Size = new System.Drawing.Size(398, 459);
             this.dgvPermissoes.TabIndex = 6;
-            this.dgvPermissoes.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPermissoes_CellEndEdit);
             // 
             // IdGrp
             // 
@@ -353,70 +416,6 @@
             this.btnSalvarPermissoes.Text = "Salvar Permissões";
             this.btnSalvarPermissoes.UseVisualStyleBackColor = true;
             this.btnSalvarPermissoes.Click += new System.EventHandler(this.btnSalvarPermissoes_Click);
-            // 
-            // ID
-            // 
-            this.ID.FillWeight = 12.69035F;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            this.ID.Width = 200;
-            // 
-            // Nome
-            // 
-            this.Nome.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Nome.FillWeight = 12.69035F;
-            this.Nome.HeaderText = "Nome";
-            this.Nome.Name = "Nome";
-            this.Nome.ReadOnly = true;
-            this.Nome.Width = 60;
-            // 
-            // Email
-            // 
-            this.Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Email.FillWeight = 10F;
-            this.Email.HeaderText = "Email";
-            this.Email.MinimumWidth = 100;
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            // 
-            // Grupo
-            // 
-            this.Grupo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Grupo.FillWeight = 12.69035F;
-            this.Grupo.HeaderText = "Grupo";
-            this.Grupo.Name = "Grupo";
-            this.Grupo.ReadOnly = true;
-            this.Grupo.Width = 61;
-            // 
-            // Criado
-            // 
-            this.Criado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Criado.FillWeight = 12.69035F;
-            this.Criado.HeaderText = "Criado";
-            this.Criado.Name = "Criado";
-            this.Criado.ReadOnly = true;
-            this.Criado.Width = 62;
-            // 
-            // Alterado
-            // 
-            this.Alterado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Alterado.FillWeight = 12.69035F;
-            this.Alterado.HeaderText = "Alterado";
-            this.Alterado.Name = "Alterado";
-            this.Alterado.ReadOnly = true;
-            this.Alterado.Width = 71;
-            // 
-            // Excluir
-            // 
-            this.Excluir.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Excluir.HeaderText = "";
-            this.Excluir.Name = "Excluir";
-            this.Excluir.ReadOnly = true;
-            this.Excluir.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Excluir.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Excluir.Width = 19;
             // 
             // IdGrupo
             // 

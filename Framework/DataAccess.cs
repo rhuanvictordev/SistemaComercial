@@ -59,35 +59,7 @@ namespace Sistema.Framework
 
         public virtual void Delete(IDataExchange values)
         {
-            DataRecord record = values.CreateDataRecord();
-
-            List<string> conditions = new List<string>();
-
-            using (var cmd = Database.Connect().CreateCommand())
-            {
-                foreach (DataField field in record.Fields)
-                {
-                    if (!field.Key)
-                        continue;
-
-                    string parameterName = $"@p{field.Index}";
-
-                    conditions.Add($"{field.Name} = {parameterName}");
-
-                    cmd.Parameters.AddWithValue(
-                        parameterName,
-                        values.ExchangeValues[field.Index] ?? DBNull.Value
-                    );
-                }
-
-                if (conditions.Count == 0)
-                    throw new Exception("Nenhuma chave foi definida no DataRecord.");
-
-                cmd.CommandText =
-                    $"DELETE FROM {record.Name} WHERE {string.Join(" AND ", conditions)}";
-
-                cmd.ExecuteNonQuery();
-            }
+            
         }
     }
 }
