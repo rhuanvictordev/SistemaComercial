@@ -2,6 +2,7 @@
 using Sistema.Framework;
 using System;
 using System.Collections.Generic;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Sistema.Models
 {
@@ -70,6 +71,16 @@ namespace Sistema.Models
         {
             DataRecord record = CreateDataRecord();
             return Database.Save(record, this);
+        }
+
+        public bool Delete(string id)
+        {
+            using (var command = Database.Connect().CreateCommand())
+            {
+                command.CommandText = "DELETE FROM USUARIOS WHERE IDUSUARIO = @id";
+                command.Parameters.AddWithValue("@id", id);
+                return command.ExecuteNonQuery() > 0;
+            }
         }
 
         public bool Login(string email, string senha)

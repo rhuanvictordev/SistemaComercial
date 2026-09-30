@@ -16,11 +16,14 @@ namespace Sistema.Data.Migrations
 
             @"CREATE TABLE PERMISSOES(
             RECURSO VARCHAR(50) NOT NULL,
-            DESCRICAO VARCHAR(100) NOT NULL,
             IDGRUPO INT NOT NULL,
             FOREIGN KEY (IDGRUPO) REFERENCES GRUPO_USUARIO (IDGRUPO),
             CONSTRAINT UK_PERMISSAO UNIQUE (RECURSO, IDGRUPO)
-            );";
+            );
+            
+            INSERT INTO PERMISSOES (RECURSO, IDGRUPO) VALUES ('menuUGP',1);
+
+            ";
         }
     }
 }

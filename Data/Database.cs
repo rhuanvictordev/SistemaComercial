@@ -145,7 +145,7 @@ namespace Sistema.Data
                 }
 
                 if (conditions.Count == 0)
-                    throw new Exception("Nenhuma chave foi definida no DataRecord.");
+                    return false;
 
                 cmd.CommandText = $"SELECT 1 FROM {record.Name} WHERE {string.Join(" AND ", conditions)} LIMIT 1";
 

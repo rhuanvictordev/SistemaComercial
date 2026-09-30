@@ -11,12 +11,10 @@ namespace Sistema.Models
     public class Permissao : DataAccess, IDataExchange
     {
         private const int FIELD_RECURSO = 0;
-        private const int FIELD_DESCRICAO = 1;
-        private const int FIELD_IDGRUPO = 2;
-        private const int FIELD_COUNT = 3;
+        private const int FIELD_IDGRUPO = 1;
+        private const int FIELD_COUNT = 2;
 
         public string Recurso { get; set; }
-        public string Descricao { get; set; }
         public long IdGrupo { get; set; }
 
         public object[] ExchangeValues 
@@ -25,7 +23,6 @@ namespace Sistema.Models
             {
                 object[] values = new object[FIELD_COUNT];
                 values[FIELD_RECURSO] = this.Recurso;
-                values[FIELD_DESCRICAO] = this.Descricao;
                 values[FIELD_IDGRUPO] = this.IdGrupo;
                 return values;
             }
@@ -33,7 +30,6 @@ namespace Sistema.Models
             {
                 object[] values = value;
                 this.Recurso = values[FIELD_RECURSO].ToString();
-                this.Descricao = values[FIELD_DESCRICAO].ToString();
                 this.IdGrupo = long.Parse(values[FIELD_IDGRUPO].ToString());
             }
         }
@@ -43,9 +39,14 @@ namespace Sistema.Models
             return new DataRecord("PERMISSOES", new DataField[]
             { 
                 new DataField(FIELD_RECURSO, "RECURSO", false),
-                new DataField(FIELD_DESCRICAO, "DESCRICAO", false),
                 new DataField(FIELD_IDGRUPO, "IDGRUPO", false)
             });
+        }
+
+        public override bool Save()
+        {
+            DataRecord record = CreateDataRecord();
+            return Database.Save(record, this);
         }
 
         public void DeletePermissoesDoGrupo(string idGrupo)

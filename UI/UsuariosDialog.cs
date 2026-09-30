@@ -14,14 +14,16 @@ namespace Sistema.UI
         private const int COLUMN_USUARIO_GRUPO = 3;
         private const int COLUMN_USUARIO_CRIADO = 4;
         private const int COLUMN_USUARIO_ALTERADO = 5;
-        private const int COLUMN_USUARIO_COUNT = 6;
+        private const int COLUMN_USUARIO_EXCLUIR = 6;
+        private const int COLUMN_USUARIO_COUNT = 7;
 
         private const int COLUMN_GRUPO_ID = 0;
         private const int COLUMN_GRUPO_NOME = 1;
         private const int COLUMN_GRUPO_DESCRICAO = 2;
         private const int COLUMN_GRUPO_CRIADO = 3;
         private const int COLUMN_GRUPO_ALTERADO = 4;
-        private const int COLUMN_GRUPO_COUNT = 5;
+        private const int COLUMN_GRUPO_EXCLUIR = 5;
+        private const int COLUMN_GRUPO_COUNT = 6;
 
         private const int COLUMN_PERMISSAO_IDGRUPO = 0;
         private const int COLUMN_PERMISSAO_RECURSO = 1;
@@ -56,8 +58,9 @@ namespace Sistema.UI
                 rowG[COLUMN_GRUPO_DESCRICAO] = g.Descricao;
                 rowG[COLUMN_GRUPO_CRIADO] = g.Criado;
                 rowG[COLUMN_GRUPO_ALTERADO] = g.Alterado;
+                rowG[COLUMN_GRUPO_EXCLUIR] = "Excluir";
                 int index = dgvGrupos.Rows.Add(rowG);
-                cboGrupo.Items.Add(g.Nome);
+                cboGrupo.Items.Add($"{g.IdGrupo}-{g.Nome}");
             }
 
             object[] row = new object[COLUMN_USUARIO_COUNT];
@@ -67,33 +70,43 @@ namespace Sistema.UI
                 row[COLUMN_USUARIO_ID] = u.IdUsuario;
                 row[COLUMN_USUARIO_NOME] = u.Nome;
                 row[COLUMN_USUARIO_EMAIL] = u.Email;
-                row[COLUMN_USUARIO_GRUPO] = u.IdGrupo;
+                row[COLUMN_USUARIO_GRUPO] = "";
                 
                 if (g.Load(u.IdGrupo))
-                    row[COLUMN_USUARIO_GRUPO] = g.Nome;
+                    row[COLUMN_USUARIO_GRUPO] = $"{g.IdGrupo}-{g.Nome}";
 
                 row[COLUMN_USUARIO_CRIADO] = u.Criado;
                 row[COLUMN_USUARIO_ALTERADO] = u.Alterado;
+                row[COLUMN_USUARIO_EXCLUIR] = "Excluir";
                 int index = dgvUsuarios.Rows.Add(row);
                 dgvUsuarios.Rows[index].Height = 30;
             }
 
             dgvGrupos.ResumeLayout(); dgvUsuarios.ClearSelection();
             dgvUsuarios.ResumeLayout(); dgvGrupos.ClearSelection();
+            dgvPermissoes.Rows.Clear();
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            Usuario u = new Usuario() { Nome = txtNome.Text, Email = txtEmail.Text, Senha = txtSenha.Text, IdGrupo = 1, Criado = DateTime.Now, Alterado = DateTime.Now };
+            string nome = txtNome.Text.Trim();
+            string email = txtEmail.Text.Trim();
+            string senha = txtSenha.Text.Trim();
+            string idGrupo = cboGrupo.Text.Split('-')[0].Trim();
+            
+            if (String.IsNullOrEmpty(nome) || String.IsNullOrEmpty(email) || String.IsNullOrEmpty(senha) || String.IsNullOrEmpty(idGrupo))
+            {
+                MessageBox.Show("Informe todos os campos", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            Usuario u = new Usuario() { Nome = nome, Email = email, Senha = senha, IdGrupo = long.Parse(idGrupo), Criado = DateTime.Now, Alterado = DateTime.Now };
             if (u.Save())
-            {
                 MessageBox.Show("Usuário cadastrado com sucesso", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DataShow();
-            }
             else
-            {
                 MessageBox.Show("Erro ao salvar o usuário", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+            
+            DataShow();
         }
 
         private void dgvGrupos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -104,23 +117,19 @@ namespace Sistema.UI
             DataGridViewRow row = dgvGrupos.Rows[e.RowIndex];
             txtGNome.Text = row.Cells[COLUMN_GRUPO_NOME].Value.ToString();
             txtGDescricao.Text = row.Cells[COLUMN_GRUPO_DESCRICAO].Value.ToString();
-            dgvPermissoes.Rows.Clear();
-
-            List<string> permissoes = new List<string>();
+            
             string idGrupo = row.Cells[COLUMN_GRUPO_ID].Value.ToString();
-            Grupo grupo = new Grupo();
-            if (grupo.Load(long.Parse(idGrupo)))
-            {
-                permissoes = grupo.ObterPermissoes();
-            }
+            Grupo grupo = new Grupo() { IdGrupo = long.Parse(idGrupo)};
+            var permissoesDoGrupo = grupo.ObterPermissoes();
 
-            foreach (var p in this.PermissoesMenu)
+            dgvPermissoes.Rows.Clear();
+            foreach (var menu in this.Menus)
             {
                 var rowP = new object[COLUMN_PERMISSAO_COUNT];
                 rowP[COLUMN_PERMISSAO_IDGRUPO] = idGrupo;
-                rowP[COLUMN_PERMISSAO_RECURSO] = p.Split('-')[0].Trim();
-                rowP[COLUMN_PERMISSAO_DESCRICAO] = p.Split('-')[1].Trim();
-                rowP[COLUMN_PERMISSAO_ATIVAR] = permissoes.Contains(p.Split('-')[0].ToString());
+                rowP[COLUMN_PERMISSAO_RECURSO] = menu.Split('-')[0].Trim();
+                rowP[COLUMN_PERMISSAO_DESCRICAO] = menu.Split('-')[1].Trim();
+                rowP[COLUMN_PERMISSAO_ATIVAR] = permissoesDoGrupo.Contains(menu.Split('-')[0].Trim());
                 dgvPermissoes.Rows.Add(rowP);
             }
         }
@@ -144,6 +153,17 @@ namespace Sistema.UI
             txtNome.Text = row.Cells[COLUMN_USUARIO_NOME].Value.ToString();
             txtEmail.Text = row.Cells[COLUMN_USUARIO_EMAIL].Value.ToString();
             cboGrupo.Text = row.Cells[COLUMN_USUARIO_GRUPO].Value.ToString();
+
+            if (e.ColumnIndex == COLUMN_USUARIO_EXCLUIR)
+            {
+                if (MessageBox.Show("Confirma a exclusão desse usuário?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    string id = row.Cells[COLUMN_USUARIO_ID].Value.ToString();
+                    Usuario u = new Usuario();
+                    u.Delete(id);
+                    DataShow();
+                }
+            }
         }
 
         private void UsuariosDialog_Click(object sender, EventArgs e)
@@ -154,29 +174,31 @@ namespace Sistema.UI
 
         private void btnSalvarPermissoes_Click(object sender, EventArgs e)
         {
-            if (dgvPermissoes.Rows.Count < 1)
+            if (dgvPermissoes.Rows.Count < 0)
                 return;
 
             string idGrupo = dgvPermissoes.Rows[0].Cells[COLUMN_PERMISSAO_IDGRUPO].Value.ToString();
             Permissao p = new Permissao();
             p.DeletePermissoesDoGrupo(idGrupo);
             dgvPermissoes.EndEdit();
+            foreach (DataGridViewRow row in dgvPermissoes.Rows)
+            {
+                bool ativar = (bool)row.Cells[COLUMN_PERMISSAO_ATIVAR].Value;
+                string recurso = row.Cells[COLUMN_PERMISSAO_RECURSO].Value.ToString();
+                if (ativar)
+                {
+                    p.Recurso = recurso;
+                    p.IdGrupo = long.Parse(idGrupo);
+                    p.Save();
+                }
+            }
+            MessageBox.Show("Permissões salvas");
+            DataShow();
         }
 
         private void dgvPermissoes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            foreach (DataGridViewRow row in dgvPermissoes.Rows)
-            {
-                bool ativar = (bool)row.Cells[COLUMN_PERMISSAO_ATIVAR].Value;
-                long idGrupo = long.Parse(row.Cells[COLUMN_PERMISSAO_IDGRUPO].Value.ToString());
-                string recurso = row.Cells[COLUMN_PERMISSAO_RECURSO].Value.ToString();
-                string descricao = row.Cells[COLUMN_PERMISSAO_DESCRICAO].Value.ToString();
-                if (ativar)
-                {
-                    Permissao p = new Permissao() { Recurso = recurso, Descricao = descricao, IdGrupo = idGrupo };
-                    p.Save();
-                }
-            }
+            
         }
     }
 }
