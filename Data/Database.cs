@@ -153,6 +153,74 @@ namespace Sistema.Data
             }
         }
 
+
+        public static object[] Load(DataRecord record)
+        {
+            StringBuilder sb = new StringBuilder("SELECT ");
+
+            for (int i = 0; i < record.Fields.Length; i++)
+            {
+                sb.Append(record.Fields[i].Name);
+                if (i < record.Fields.Length - 1)
+                    sb.Append(", ");
+            }
+            sb.Append($" FROM {record.Name}");
+            bool firstFilter = true;
+
+            foreach (var filter in record.Filters)
+            {
+                if (filter == null)
+                    continue;
+
+                if (filter.FilterValue == null || filter.FilterValue.ToString() == String.Empty)
+                    continue;
+
+                if (firstFilter)
+                {
+                    sb.Append(" WHERE ");
+                    firstFilter = false;
+                }
+                else
+                {
+                    sb.Append(" AND ");
+                }
+
+                switch (filter.FilterValue)
+                {
+                    case string valor:
+                        sb.Append($"{filter.FilterName} = '{valor}'");
+                        break;
+
+                    default:
+                        sb.Append($"{filter.FilterName} = {filter.FilterValue}");
+                        break;
+                }
+            }
+
+            using (var command = Database.Connect().CreateCommand())
+            {
+                command.CommandText = sb.ToString();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        object[] values = new object[record.Fields.Length];
+
+                        for (int i = 0; i < record.Fields.Length; i++)
+                        {
+                            values[i] = reader[i];
+                        }
+
+                        return values;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+
         public static object[] Load(DataRecord record, long id)
         {
             object[] values = new object[record.Fields.Length];

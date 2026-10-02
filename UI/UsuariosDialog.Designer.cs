@@ -46,6 +46,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cboGrupo = new System.Windows.Forms.ComboBox();
             this.dgvGrupos = new System.Windows.Forms.DataGridView();
+            this.IdGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NomeGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GrupoCriado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GrupoAlterado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ExcluirG = new System.Windows.Forms.DataGridViewButtonColumn();
             this.txtGDescricao = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtGNome = new System.Windows.Forms.TextBox();
@@ -60,12 +66,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btnSalvarPermissoes = new System.Windows.Forms.Button();
-            this.IdGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NomeGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GrupoCriado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GrupoAlterado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExcluirG = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.lblUsuarioID = new System.Windows.Forms.Label();
+            this.lblGrupoID = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPermissoes)).BeginInit();
@@ -268,6 +270,53 @@
             this.dgvGrupos.TabIndex = 3;
             this.dgvGrupos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGrupos_CellClick);
             // 
+            // IdGrupo
+            // 
+            this.IdGrupo.HeaderText = "IdGrupo";
+            this.IdGrupo.Name = "IdGrupo";
+            this.IdGrupo.ReadOnly = true;
+            this.IdGrupo.Visible = false;
+            // 
+            // NomeGrupo
+            // 
+            this.NomeGrupo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.NomeGrupo.HeaderText = "Nome";
+            this.NomeGrupo.Name = "NomeGrupo";
+            this.NomeGrupo.ReadOnly = true;
+            this.NomeGrupo.Width = 60;
+            // 
+            // DescGrupo
+            // 
+            this.DescGrupo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.DescGrupo.HeaderText = "Descrição";
+            this.DescGrupo.Name = "DescGrupo";
+            this.DescGrupo.ReadOnly = true;
+            this.DescGrupo.Width = 80;
+            // 
+            // GrupoCriado
+            // 
+            this.GrupoCriado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.GrupoCriado.HeaderText = "Criado";
+            this.GrupoCriado.Name = "GrupoCriado";
+            this.GrupoCriado.ReadOnly = true;
+            this.GrupoCriado.Width = 62;
+            // 
+            // GrupoAlterado
+            // 
+            this.GrupoAlterado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.GrupoAlterado.HeaderText = "Alterado";
+            this.GrupoAlterado.Name = "GrupoAlterado";
+            this.GrupoAlterado.ReadOnly = true;
+            this.GrupoAlterado.Width = 71;
+            // 
+            // ExcluirG
+            // 
+            this.ExcluirG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ExcluirG.HeaderText = "";
+            this.ExcluirG.Name = "ExcluirG";
+            this.ExcluirG.ReadOnly = true;
+            this.ExcluirG.Width = 5;
+            // 
             // txtGDescricao
             // 
             this.txtGDescricao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -417,52 +466,25 @@
             this.btnSalvarPermissoes.UseVisualStyleBackColor = true;
             this.btnSalvarPermissoes.Click += new System.EventHandler(this.btnSalvarPermissoes_Click);
             // 
-            // IdGrupo
+            // lblUsuarioID
             // 
-            this.IdGrupo.HeaderText = "IdGrupo";
-            this.IdGrupo.Name = "IdGrupo";
-            this.IdGrupo.ReadOnly = true;
-            this.IdGrupo.Visible = false;
+            this.lblUsuarioID.AutoSize = true;
+            this.lblUsuarioID.Location = new System.Drawing.Point(439, 200);
+            this.lblUsuarioID.Name = "lblUsuarioID";
+            this.lblUsuarioID.Size = new System.Drawing.Size(78, 13);
+            this.lblUsuarioID.TabIndex = 7;
+            this.lblUsuarioID.Text = "idUsuarioSelec";
+            this.lblUsuarioID.Visible = false;
             // 
-            // NomeGrupo
+            // lblGrupoID
             // 
-            this.NomeGrupo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.NomeGrupo.HeaderText = "Nome";
-            this.NomeGrupo.Name = "NomeGrupo";
-            this.NomeGrupo.ReadOnly = true;
-            this.NomeGrupo.Width = 60;
-            // 
-            // DescGrupo
-            // 
-            this.DescGrupo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.DescGrupo.HeaderText = "Descrição";
-            this.DescGrupo.Name = "DescGrupo";
-            this.DescGrupo.ReadOnly = true;
-            this.DescGrupo.Width = 80;
-            // 
-            // GrupoCriado
-            // 
-            this.GrupoCriado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.GrupoCriado.HeaderText = "Criado";
-            this.GrupoCriado.Name = "GrupoCriado";
-            this.GrupoCriado.ReadOnly = true;
-            this.GrupoCriado.Width = 62;
-            // 
-            // GrupoAlterado
-            // 
-            this.GrupoAlterado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.GrupoAlterado.HeaderText = "Alterado";
-            this.GrupoAlterado.Name = "GrupoAlterado";
-            this.GrupoAlterado.ReadOnly = true;
-            this.GrupoAlterado.Width = 71;
-            // 
-            // ExcluirG
-            // 
-            this.ExcluirG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ExcluirG.HeaderText = "";
-            this.ExcluirG.Name = "ExcluirG";
-            this.ExcluirG.ReadOnly = true;
-            this.ExcluirG.Width = 5;
+            this.lblGrupoID.AutoSize = true;
+            this.lblGrupoID.Location = new System.Drawing.Point(511, 513);
+            this.lblGrupoID.Name = "lblGrupoID";
+            this.lblGrupoID.Size = new System.Drawing.Size(71, 13);
+            this.lblGrupoID.TabIndex = 7;
+            this.lblGrupoID.Text = "idGrupoSelec";
+            this.lblGrupoID.Visible = false;
             // 
             // UsuariosDialog
             // 
@@ -470,6 +492,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(930, 538);
+            this.Controls.Add(this.lblGrupoID);
+            this.Controls.Add(this.lblUsuarioID);
             this.Controls.Add(this.dgvPermissoes);
             this.Controls.Add(this.txtGDescricao);
             this.Controls.Add(this.label9);
@@ -546,5 +570,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn GrupoCriado;
         private System.Windows.Forms.DataGridViewTextBoxColumn GrupoAlterado;
         private System.Windows.Forms.DataGridViewButtonColumn ExcluirG;
+        private System.Windows.Forms.Label lblUsuarioID;
+        private System.Windows.Forms.Label lblGrupoID;
     }
 }

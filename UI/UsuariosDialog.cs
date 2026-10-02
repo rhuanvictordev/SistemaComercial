@@ -31,6 +31,9 @@ namespace Sistema.UI
         private const int COLUMN_PERMISSAO_ATIVAR = 3;
         private const int COLUMN_PERMISSAO_COUNT = 4;
 
+        private bool isEditingUser = false;
+        private bool isEditingGroup = false;
+
         public UsuariosDialog()
         {
             InitializeComponent();
@@ -99,18 +102,29 @@ namespace Sistema.UI
             string email = txtEmail.Text.Trim();
             string senha = txtSenha.Text.Trim();
             string idGrupo = cboGrupo.Text.Split('-')[0].Trim();
+            long idUserSelected = String.IsNullOrEmpty(lblUsuarioID.Text) ? 0 : long.Parse(lblUsuarioID.Text);
 
             if (String.IsNullOrEmpty(nome) || String.IsNullOrEmpty(email) || String.IsNullOrEmpty(senha) || String.IsNullOrEmpty(idGrupo))
             {
                 MessageBox.Show("Informe todos os campos", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-
-            Usuario u = new Usuario() { Nome = nome, Email = email, Senha = senha, IdGrupo = long.Parse(idGrupo), Criado = DateTime.Now, Alterado = DateTime.Now };
+            Usuario u = new Usuario() { IdUsuario = idUserSelected, Nome = nome, Email = email, Senha = senha, IdGrupo = long.Parse(idGrupo), Criado = DateTime.Now, Alterado = DateTime.Now };
+            if (u.Load(idUserSelected))
+            { 
+                
+            }
+            
+            
             if (u.Save())
-                MessageBox.Show("Usuário cadastrado com sucesso", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {
+                if (isEditingUser)
+                    MessageBox.Show("Usuário editado com sucesso", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Usuário criado com sucesso", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             else
-                MessageBox.Show("Erro ao salvar o usuário\nTalvez já exista um usuário com esse email!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Erro ao criar/alterar o usuário\nTalvez já exista um usuário com esse email!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             LimpaCamposUsuario();
             DataShow();
@@ -177,6 +191,8 @@ namespace Sistema.UI
             txtEmail.Text = String.Empty;
             txtSenha.Text = String.Empty;
             cboGrupo.Text = String.Empty;
+            btnCriarUsuario.Text = "Criar usuário";
+            isEditingUser = false;
         }
 
         public void LimpaCamposGrupo()
@@ -194,6 +210,9 @@ namespace Sistema.UI
             txtNome.Text = row.Cells[COLUMN_USUARIO_NOME].Value.ToString();
             txtEmail.Text = row.Cells[COLUMN_USUARIO_EMAIL].Value.ToString();
             cboGrupo.Text = row.Cells[COLUMN_USUARIO_GRUPO].Value.ToString();
+            lblUsuarioID.Text = row.Cells[COLUMN_USUARIO_ID].Value.ToString();
+            btnCriarUsuario.Text = "Editar";
+            isEditingUser = true;
            
             if (e.ColumnIndex == COLUMN_USUARIO_EXCLUIR)
             {

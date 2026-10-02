@@ -67,6 +67,18 @@ namespace Sistema.Models
             });
         }
 
+        public bool Load(long id)
+        { 
+            DataRecord record = CreateDataRecord();
+            record.Filters[FIELD_IDUSUARIO] = new DataFilter(FIELD_IDUSUARIO, "IDUSUARIO", id);
+            record.Filters[FIELD_NOME] = new DataFilter(FIELD_NOME, "NOME", "SUPORTE");
+            object[] values = Database.Load(record);
+            if (values != null)
+                this.ExchangeValues = values;
+
+            return values != null;
+        }
+
         public override bool Save()
         {
             DataRecord record = CreateDataRecord();
