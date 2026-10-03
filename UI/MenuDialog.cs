@@ -84,7 +84,10 @@ namespace Sistema.UI
             }
             Form dialog = (Form)Activator.CreateInstance(tipo);
             dialog.MdiParent = this;
-            dialog.WindowState = FormWindowState.Maximized;
+            
+            if (dialog.FormBorderStyle == FormBorderStyle.Fixed3D)
+                dialog.WindowState = FormWindowState.Maximized;
+            
             dialog.Show();
         }
 
@@ -104,6 +107,11 @@ namespace Sistema.UI
         private void cLientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void formTesteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirMenu(typeof(ApenasTeste));
         }
     }
 }

@@ -10,11 +10,13 @@ namespace Sistema.Framework
     {
         public string Name { get; set; }
         public DataField[] Fields { get; set; }
+        public DataFilter[] Filters { get; set; }
 
         public DataRecord(string RecordName, DataField[] RecordFields)
         {
             Name = RecordName;
             Fields = RecordFields;
+            Filters = new DataFilter[Fields.Length];
         }
     }
 }
