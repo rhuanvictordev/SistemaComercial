@@ -118,7 +118,6 @@
     <Compile Include="Data\MigrationService.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\Migrations\CriaBanco.cs" />
-    <Compile Include="Data\Migrations\CriaTabelaPermissoes.cs" />
     <Compile Include="Framework\DataAccess.cs" />
     <Compile Include="Framework\DataField.cs" />
     <Compile Include="Framework\DataRecord.cs" />
