@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Sistema.Framework
 {
-    public class DataFilterEqual : IDataFilter
+    public class DataFilterLike : IDataFilter
     {
-        public DataFilterEqual(object value)
+        public DataFilterLike(object value)
         {
             this.Value = value;
         }
@@ -19,7 +19,7 @@ namespace Sistema.Framework
             for (int i = 0; i < record.Fields.Length; i++)
             {
                 if (record.Filters[i] != null)
-                    retorno = $" WHERE {record.Fields[i].Name} = {record.Filters[i].Value}";
+                    retorno = $" WHERE {record.Fields[i].Name} LIKE '%{record.Filters[i].Value}%'";
             }
             return retorno;
         }

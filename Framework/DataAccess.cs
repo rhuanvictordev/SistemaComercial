@@ -14,12 +14,6 @@ namespace Sistema.Framework
             return false;
         }
 
-
-        public virtual bool Load()
-        {
-            return false;
-        }
-
         public virtual List<T> Query<T>() where T : IDataExchange, new()
         {
             T model = new T();

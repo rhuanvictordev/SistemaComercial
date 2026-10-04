@@ -165,6 +165,35 @@ namespace Sistema.Data
                     sb.Append(", ");
             }
             sb.Append($" FROM {record.Name}");
+
+            for(int i = 0; i < record.Fields.Length; i++ )
+            {
+                if (record.Filters[i] != null)
+                {
+                    sb.Append(record.Filters[i].GetSQL(record));
+                }
+            }
+
+            string sql = sb.ToString();
+            string sql2 = sql;
+
+
+
+
+            return null;
+        }
+
+        /*public static object[] Load(DataRecord record)
+        {
+            StringBuilder sb = new StringBuilder("SELECT ");
+
+            for (int i = 0; i < record.Fields.Length; i++)
+            {
+                sb.Append(record.Fields[i].Name);
+                if (i < record.Fields.Length - 1)
+                    sb.Append(", ");
+            }
+            sb.Append($" FROM {record.Name}");
             bool firstFilter = true;
 
             foreach (var filter in record.Filters)
@@ -218,7 +247,7 @@ namespace Sistema.Data
             }
 
             return null;
-        }
+        }*/
 
 
         public static object[] Load(DataRecord record, long id)

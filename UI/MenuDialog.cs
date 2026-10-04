@@ -108,10 +108,5 @@ namespace Sistema.UI
         {
 
         }
-
-        private void formTesteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AbrirMenu(typeof(ApenasTeste));
-        }
     }
 }

@@ -120,11 +120,11 @@
     <Compile Include="Data\Migrations\CriaBanco.cs" />
     <Compile Include="Framework\DataAccess.cs" />
     <Compile Include="Framework\DataField.cs" />
-    <Compile Include="Framework\DataFilter.cs" />
     <Compile Include="Framework\DataFilterEqual.cs" />
+    <Compile Include="Framework\DataFilterLike.cs" />
     <Compile Include="Framework\DataRecord.cs" />
     <Compile Include="Framework\IDataExchange.cs" />
-    <Compile Include="Framework\IDataFilterType.cs" />
+    <Compile Include="Framework\IDataFilter.cs" />
     <Compile Include="Models\Grupo.cs" />
     <Compile Include="Models\InformacoesSistema.cs" />
     <Compile Include="Models\Permissao.cs" />
@@ -132,12 +132,6 @@
     <Compile Include="Services\ApiService.cs" />
     <Compile Include="Services\ClientConfigHandler.cs" />
     <Compile Include="Services\ClientConfigValues.cs" />
-    <Compile Include="UI\ApenasTeste.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\ApenasTeste.Designer.cs">
-      <DependentUpon>ApenasTeste.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\BaseDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,9 +181,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UI\ApenasTeste.resx">
-      <DependentUpon>ApenasTeste.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\BaseDialog.resx">
       <DependentUpon>BaseDialog.cs</DependentUpon>
     </EmbeddedResource>

@@ -67,11 +67,11 @@ namespace Sistema.Models
             });
         }
 
-        public bool Load(long id)
+        public bool Load(string id)
         { 
             DataRecord record = CreateDataRecord();
-            record.Filters[FIELD_IDUSUARIO] = new DataFilter(FIELD_IDUSUARIO, "IDUSUARIO", id);
-            record.Filters[FIELD_NOME] = new DataFilter(FIELD_NOME, "NOME", "SUPORTE");
+            //record.Filters[FIELD_IDUSUARIO] = new DataFilterEqual(id);
+            record.Filters[FIELD_NOME] = new DataFilterLike("nome");
             object[] values = Database.Load(record);
             if (values != null)
                 this.ExchangeValues = values;

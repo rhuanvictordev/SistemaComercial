@@ -53,5 +53,14 @@ namespace Sistema.UI
         {
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Usuario u = new Usuario();
+            if (u.Load("1"))
+            { 
+            
+            }
+        }
     }
 }

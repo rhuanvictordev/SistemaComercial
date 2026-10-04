@@ -37,7 +37,6 @@
             this.menuClientes = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEstoque = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formTesteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUsuarioNome = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -50,7 +49,6 @@
             this.menuStrip1.BackColor = System.Drawing.Color.White;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cadastroToolStripMenuItem,
-            this.formTesteToolStripMenuItem,
             this.sairToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -110,13 +108,6 @@
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
-            // formTesteToolStripMenuItem
-            // 
-            this.formTesteToolStripMenuItem.Name = "formTesteToolStripMenuItem";
-            this.formTesteToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-            this.formTesteToolStripMenuItem.Text = "FormTeste";
-            this.formTesteToolStripMenuItem.Click += new System.EventHandler(this.formTesteToolStripMenuItem_Click);
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -173,6 +164,5 @@
         private System.Windows.Forms.ToolStripMenuItem menuProdutos;
         private System.Windows.Forms.ToolStripMenuItem menuClientes;
         private System.Windows.Forms.ToolStripMenuItem menuEstoque;
-        private System.Windows.Forms.ToolStripMenuItem formTesteToolStripMenuItem;
     }
 }
