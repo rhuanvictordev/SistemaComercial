@@ -14,16 +14,18 @@ namespace Sistema.UI
         private const int COLUMN_USUARIO_GRUPO = 3;
         private const int COLUMN_USUARIO_CRIADO = 4;
         private const int COLUMN_USUARIO_ALTERADO = 5;
-        private const int COLUMN_USUARIO_EXCLUIR = 6;
-        private const int COLUMN_USUARIO_COUNT = 7;
+        private const int COLUMN_USUARIO_EDITAR = 6;
+        private const int COLUMN_USUARIO_EXCLUIR = 7;
+        private const int COLUMN_USUARIO_COUNT = 8;
 
         private const int COLUMN_GRUPO_ID = 0;
         private const int COLUMN_GRUPO_NOME = 1;
         private const int COLUMN_GRUPO_DESCRICAO = 2;
         private const int COLUMN_GRUPO_CRIADO = 3;
         private const int COLUMN_GRUPO_ALTERADO = 4;
-        private const int COLUMN_GRUPO_EXCLUIR = 5;
-        private const int COLUMN_GRUPO_COUNT = 6;
+        private const int COLUMN_GRUPO_EDITAR = 5;
+        private const int COLUMN_GRUPO_EXCLUIR = 6;
+        private const int COLUMN_GRUPO_COUNT = 7;
 
         private const int COLUMN_PERMISSAO_IDGRUPO = 0;
         private const int COLUMN_PERMISSAO_RECURSO = 1;
@@ -56,25 +58,21 @@ namespace Sistema.UI
             cboGrupo.Items.Clear();
             foreach (var g in grupos)
             {
-                /*if (g.Nome.ToUpper() == "SUPORTE")
-                    continue;*/
-
                 rowG[COLUMN_GRUPO_ID] = g.IdGrupo;
                 rowG[COLUMN_GRUPO_NOME] = g.Nome;
                 rowG[COLUMN_GRUPO_DESCRICAO] = g.Descricao;
                 rowG[COLUMN_GRUPO_CRIADO] = g.Criado;
                 rowG[COLUMN_GRUPO_ALTERADO] = g.Alterado;
+                rowG[COLUMN_GRUPO_EDITAR] = "Editar";
                 rowG[COLUMN_GRUPO_EXCLUIR] = "Excluir";
                 int index = dgvGrupos.Rows.Add(rowG);
+                dgvGrupos.Rows[index].Height = 30;
                 cboGrupo.Items.Add($"{g.IdGrupo}-{g.Nome}");
             }
 
             object[] row = new object[COLUMN_USUARIO_COUNT];
             foreach (var u in usuarios)
             {
-                /*if (u.Nome.ToUpper() == "SUPORTE")
-                    continue;*/
-
                 Grupo g = new Grupo();
                 row[COLUMN_USUARIO_ID] = u.IdUsuario;
                 row[COLUMN_USUARIO_NOME] = u.Nome;
@@ -86,6 +84,7 @@ namespace Sistema.UI
 
                 row[COLUMN_USUARIO_CRIADO] = u.Criado;
                 row[COLUMN_USUARIO_ALTERADO] = u.Alterado;
+                row[COLUMN_USUARIO_EDITAR] = "Editar";
                 row[COLUMN_USUARIO_EXCLUIR] = "Excluir";
                 int index = dgvUsuarios.Rows.Add(row);
                 dgvUsuarios.Rows[index].Height = 30;
@@ -143,6 +142,7 @@ namespace Sistema.UI
             Grupo grupo = new Grupo() { IdGrupo = long.Parse(idGrupo) };
             var permissoesDoGrupo = grupo.ObterPermissoes();
 
+            dgvGrupos.SuspendLayout();
             dgvPermissoes.Rows.Clear();
             foreach (var menu in this.Menus)
             {
@@ -153,6 +153,7 @@ namespace Sistema.UI
                 rowP[COLUMN_PERMISSAO_ATIVAR] = permissoesDoGrupo.Contains(menu.Split('-')[0].Trim());
                 dgvPermissoes.Rows.Add(rowP);
             }
+            dgvGrupos.ResumeLayout();
 
             if (e.ColumnIndex == COLUMN_GRUPO_EXCLUIR)
             {
@@ -203,7 +204,7 @@ namespace Sistema.UI
 
         private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
+            /*if (e.RowIndex < 0)
                 return;
 
             DataGridViewRow row = dgvUsuarios.Rows[e.RowIndex];
@@ -223,7 +224,7 @@ namespace Sistema.UI
                     u.Delete(id);
                     DataShow();
                 }
-            }
+            }*/
         }
 
         private void UsuariosDialog_Click(object sender, EventArgs e)

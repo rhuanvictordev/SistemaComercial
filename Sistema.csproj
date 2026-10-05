@@ -128,7 +128,7 @@
     <Compile Include="Framework\DataRecord.cs" />
     <Compile Include="Framework\DatFilterDateBetween.cs" />
     <Compile Include="Framework\IDataExchange.cs" />
-    <Compile Include="Framework\IDataFilter.cs" />
+    <Compile Include="Framework\DataFilter.cs" />
     <Compile Include="Models\Grupo.cs" />
     <Compile Include="Models\InformacoesSistema.cs" />
     <Compile Include="Models\Permissao.cs" />

@@ -55,8 +55,11 @@ namespace Sistema.Models
         public bool Load(long id)
         {
             DataRecord record = CreateDataRecord();
-            object[] values = Database.Load(record, id);
-            this.ExchangeValues = values;
+            record.Filters[FIELD_IDGRUPO] = new DataFilterEqual(id);
+            object[] values = Database.Load(record);
+            if (values != null)
+                this.ExchangeValues = values;
+
             return values != null;
         }
 

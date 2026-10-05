@@ -8,7 +8,7 @@ namespace Sistema.Framework
 {
     public class DataFilter
     {
-        public string Type { get; set; }   // EQUAL / LIKE / AVG
+        public string Type { get; set; }   // EQUAL / LIKE / BETWEEN
         public object Value { get; set; }
 
         public virtual string GetSQL(DataRecord record)

@@ -1,4 +1,5 @@
 ﻿using Sistema;
+using Sistema.Data;
 using Sistema.Models;
 using System;
 using System.Collections.Generic;
@@ -60,6 +61,12 @@ namespace Sistema.UI
             if (u.Load(1))
             {
                 MessageBox.Show("Usuario encontrado" + u.Nome + "\n" + u.Email);
+            }
+
+            var users = Database.Query<Usuario>();
+            foreach (var user in users) 
+            {
+                MessageBox.Show(user.Nome);
             }
         }
     }

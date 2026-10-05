@@ -71,10 +71,7 @@ namespace Sistema.Data
                             sets.Add($"{field.Name} = {parameterName}");
                         }
 
-                        cmd.Parameters.AddWithValue(
-                            parameterName,
-                            values.ExchangeValues[field.Index] ?? DBNull.Value
-                        );
+                        cmd.Parameters.AddWithValue( parameterName, values.ExchangeValues[field.Index] ?? DBNull.Value );
                     }
 
                     if (conditions.Count == 0)
@@ -100,7 +97,7 @@ namespace Sistema.Data
                 List<string> columns = new List<string>();
                 List<string> parameters = new List<string>();
 
-                using (var cmd = Database.Connect().CreateCommand())
+                using (var cmd = Connect().CreateCommand())
                 {
                     foreach (DataField field in record.Fields)
                     {
@@ -123,11 +120,12 @@ namespace Sistema.Data
             }
         }
 
+
         public static bool Exists(DataRecord record, IDataExchange values)
         {
             List<string> conditions = new List<string>();
 
-            using (var cmd = Database.Connect().CreateCommand())
+            using (var cmd = Connect().CreateCommand())
             {
                 foreach (DataField field in record.Fields)
                 {
@@ -138,10 +136,7 @@ namespace Sistema.Data
 
                     conditions.Add($"{field.Name} = {parameterName}");
 
-                    cmd.Parameters.AddWithValue(
-                        parameterName,
-                        values.ExchangeValues[field.Index] ?? DBNull.Value
-                    );
+                    cmd.Parameters.AddWithValue( parameterName, values.ExchangeValues[field.Index] ?? DBNull.Value );
                 }
 
                 if (conditions.Count == 0)
@@ -266,53 +261,6 @@ namespace Sistema.Data
             return null;
         }
 
-        
-
-        public static object[] Load(DataRecord record, long id)
-        {
-            object[] values = new object[record.Fields.Length];
-
-            StringBuilder sb = new StringBuilder("SELECT ");
-
-            for (int i = 0; i < record.Fields.Length; i++)
-            {
-                sb.Append(record.Fields[i].Name);
-
-                if (i < record.Fields.Length - 1)
-                    sb.Append(", ");
-            }
-
-            sb.Append($" FROM {record.Name}");
-
-            foreach (DataField field in record.Fields)
-            {
-                if (field.Key)
-                {
-                    sb.Append($" WHERE {field.Name} = @id");
-                    break;
-                }
-            }
-
-            using (var connection = Database.Connect())
-            using (var command = connection.CreateCommand())
-            {
-                command.CommandText = sb.ToString();
-                command.Parameters.AddWithValue("@id", id);
-
-                using (var reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        for (int i = 0; i < record.Fields.Length; i++)
-                        {
-                            values[i] = reader[i];
-                        }
-                    }
-                }
-            }
-
-            return values;
-        }
 
         public static List<T> Query<T>() where T : IDataExchange, new()
         {
