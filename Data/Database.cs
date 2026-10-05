@@ -161,7 +161,7 @@ namespace Sistema.Data
 
             string equalPart = "";
             string likePart = "";
-            string datePart = "";
+            string dateEqualPart = "";
             string dateBetweenPart = "";
             string betweenPart = "";
 
@@ -189,7 +189,7 @@ namespace Sistema.Data
                             break;
 
                         case "DATE_EQUAL":
-                            datePart = record.Filters[i].GetSQL(record);
+                            dateEqualPart = record.Filters[i].GetSQL(record);
                             break;
 
                         case "DATE_BETWEEN":
@@ -215,9 +215,9 @@ namespace Sistema.Data
                 finalSQL += (" WHERE " + equalPart + " AND " + likePart);
             }
 
-            if (datePart != "")
+            if (dateEqualPart != "")
             {
-                finalSQL += " AND " + datePart;
+                finalSQL += " AND " + dateEqualPart;
             }
 
             if (dateBetweenPart != "")
@@ -237,23 +237,30 @@ namespace Sistema.Data
                 }
             }
 
-            using (var command = Connect().CreateCommand())
-            { 
-                command.CommandText = finalSQL;
-                using (var reader = command.ExecuteReader())
+            try
+            {
+                using (var command = Connect().CreateCommand())
                 {
-                    if (reader.Read())
+                    command.CommandText = finalSQL;
+                    using (var reader = command.ExecuteReader())
                     {
-                        object[] values = new object[record.Fields.Length];
-
-                        for (int i = 0; i < record.Fields.Length; i++)
+                        if (reader.Read())
                         {
-                            values[i] = reader[i];
-                        }
+                            object[] values = new object[record.Fields.Length];
 
-                        return values;
+                            for (int i = 0; i < record.Fields.Length; i++)
+                            {
+                                values[i] = reader[i];
+                            }
+
+                            return values;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
             
             return null;
