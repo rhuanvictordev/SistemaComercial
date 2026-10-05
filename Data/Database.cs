@@ -157,6 +157,13 @@ namespace Sistema.Data
         public static object[] Load(DataRecord record)
         {
             StringBuilder sb = new StringBuilder("SELECT ");
+            string finalSQL = "";
+
+            string equalPart = "";
+            string likePart = "";
+            string datePart = "";
+            string dateBetweenPart = "";
+            string betweenPart = "";
 
             for (int i = 0; i < record.Fields.Length; i++)
             {
@@ -165,71 +172,74 @@ namespace Sistema.Data
                     sb.Append(", ");
             }
             sb.Append($" FROM {record.Name}");
+            finalSQL = sb.ToString();
 
-            for(int i = 0; i < record.Fields.Length; i++ )
+            for(int i = 0; i < record.Fields.Length; i++)
             {
                 if (record.Filters[i] != null)
                 {
-                    sb.Append(record.Filters[i].GetSQL(record));
+                    switch (record.Filters[i].Type)
+                    {
+                        case "EQUAL":
+                            equalPart = record.Filters[i].GetSQL(record);
+                            break;
+
+                        case "LIKE":
+                            likePart = record.Filters[i].GetSQL(record);
+                            break;
+
+                        case "DATE_EQUAL":
+                            datePart = record.Filters[i].GetSQL(record);
+                            break;
+
+                        case "DATE_BETWEEN":
+                            dateBetweenPart = record.Filters[i].GetSQL(record);
+                            break;
+
+                        case "BETWEEN":
+                            betweenPart = record.Filters[i].GetSQL(record);
+                            break;
+
+                        default:
+                            break;
+                    }
                 }
             }
 
-            string sql = sb.ToString();
-            string sql2 = sql;
-
-
-
-
-            return null;
-        }
-
-        /*public static object[] Load(DataRecord record)
-        {
-            StringBuilder sb = new StringBuilder("SELECT ");
-
-            for (int i = 0; i < record.Fields.Length; i++)
+            if (equalPart != "" && likePart == "")
             {
-                sb.Append(record.Fields[i].Name);
-                if (i < record.Fields.Length - 1)
-                    sb.Append(", ");
+                finalSQL += (" WHERE " + equalPart);
             }
-            sb.Append($" FROM {record.Name}");
-            bool firstFilter = true;
-
-            foreach (var filter in record.Filters)
+            else if (equalPart != "" && likePart != "")
             {
-                if (filter == null)
-                    continue;
+                finalSQL += (" WHERE " + equalPart + " AND " + likePart);
+            }
 
-                if (filter.FilterValue == null || filter.FilterValue.ToString() == String.Empty)
-                    continue;
+            if (datePart != "")
+            {
+                finalSQL += " AND " + datePart;
+            }
 
-                if (firstFilter)
+            if (dateBetweenPart != "")
+            {
+                finalSQL += " AND " + dateBetweenPart;
+            }
+
+            if (betweenPart != "")
+            {
+                if (equalPart == "")
                 {
-                    sb.Append(" WHERE ");
-                    firstFilter = false;
+                    finalSQL += " WHERE " + betweenPart;
                 }
                 else
                 {
-                    sb.Append(" AND ");
-                }
-
-                switch (filter.FilterValue)
-                {
-                    case string valor:
-                        sb.Append($"{filter.FilterName} = '{valor}'");
-                        break;
-
-                    default:
-                        sb.Append($"{filter.FilterName} = {filter.FilterValue}");
-                        break;
+                    finalSQL += " AND " + betweenPart;
                 }
             }
 
-            using (var command = Database.Connect().CreateCommand())
-            {
-                command.CommandText = sb.ToString();
-
+            using (var command = Connect().CreateCommand())
+            { 
+                command.CommandText = finalSQL;
                 using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -245,10 +255,11 @@ namespace Sistema.Data
                     }
                 }
             }
-
+            
             return null;
-        }*/
+        }
 
+        
 
         public static object[] Load(DataRecord record, long id)
         {

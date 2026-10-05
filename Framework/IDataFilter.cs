@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Sistema.Framework
 {
-    public class IDataFilter
+    public class DataFilter
     {
+        public string Type { get; set; }   // EQUAL / LIKE / AVG
         public object Value { get; set; }
 
         public virtual string GetSQL(DataRecord record)

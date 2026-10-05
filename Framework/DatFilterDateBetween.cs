@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace Sistema.Framework
 {
-    public class DataFilterLike : DataFilter
+    public class DataFilterDateBetween : DataFilter
     {
-        public DataFilterLike(object value)
+        private DateTime ValueInicial;
+        private DateTime ValueFinal;
+
+        public DataFilterDateBetween(DateTime dateInicial, DateTime dateFinal)
         {
-            this.Value = value;
-            this.Type = "LIKE";
+            this.ValueInicial = dateInicial;
+            this.ValueFinal = dateFinal;
+            this.Type = "DATE_BETWEEN";
         }
 
         public override string GetSQL(DataRecord record)
@@ -25,18 +29,17 @@ namespace Sistema.Framework
                 {
                     if (first)
                     {
-                        sb.Append($" {record.Fields[i].Name} LIKE '%{record.Filters[i].Value}%' ");
+                        sb.Append($" {record.Fields[i].Name} BETWEEN '{ValueInicial:yyyy-MM-dd HH:mm:ss}' AND '{ValueFinal:yyyy-MM-dd HH:mm:ss}'");
                         first = false;
                     }
                     else
                     {
-                        sb.Append($" AND {record.Fields[i].Name} LIKE '%{record.Filters[i].Value}%' ");
+                        sb.Append($" AND {record.Fields[i].Name} BETWEEN '{ValueInicial:yyyy-MM-dd HH:mm:ss}' AND '{ValueFinal:yyyy-MM-dd HH:mm:ss}'");
                     }
                 }
             }
 
             return sb.ToString();
         }
-
     }
 }

@@ -110,7 +110,7 @@ namespace Sistema.UI
                 return;
             }
             Usuario u = new Usuario() { IdUsuario = idUserSelected, Nome = nome, Email = email, Senha = senha, IdGrupo = long.Parse(idGrupo), Criado = DateTime.Now, Alterado = DateTime.Now };
-            if (u.Load(""))
+            if (u.Load(2))
             { 
                 
             }

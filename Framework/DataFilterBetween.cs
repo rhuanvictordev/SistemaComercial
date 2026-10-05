@@ -6,37 +6,40 @@ using System.Threading.Tasks;
 
 namespace Sistema.Framework
 {
-    public class DataFilterLike : DataFilter
+    public class DataFilterBetween : DataFilter
     {
-        public DataFilterLike(object value)
+        private double StartValue { get; set; }
+        private double EndValue { get; set; }
+
+        public DataFilterBetween(double startValue, double endValue)
         {
-            this.Value = value;
-            this.Type = "LIKE";
+            this.Type = "BETWEEN";
+            this.StartValue = startValue;
+            this.EndValue = endValue;
         }
 
         public override string GetSQL(DataRecord record)
         {
             StringBuilder sb = new StringBuilder();
-
             bool first = true;
+
             for (int i = 0; i < record.Fields.Length; i++)
             {
                 if (record.Filters[i] != null && record.Filters[i].Type == this.Type)
                 {
                     if (first)
                     {
-                        sb.Append($" {record.Fields[i].Name} LIKE '%{record.Filters[i].Value}%' ");
+                        sb.Append($"{record.Fields[i].Name} >= {this.StartValue} AND {record.Fields[i].Name} <= {this.EndValue}");
                         first = false;
                     }
                     else
                     {
-                        sb.Append($" AND {record.Fields[i].Name} LIKE '%{record.Filters[i].Value}%' ");
+                        sb.Append($" AND {record.Fields[i].Name} >= {this.StartValue} AND {record.Fields[i].Name} <= {this.EndValue}");
                     }
                 }
             }
 
             return sb.ToString();
         }
-
     }
 }
