@@ -11,8 +11,24 @@ namespace Sistema.Framework
     {
         public virtual bool Save()
         {
-            return false;
+            // deve implementar o codigo na classe que herdar
+            throw new NotImplementedException();
         }
+
+
+        public virtual bool Load(long id)
+        {
+            // deve implementar o codigo na classe que herdar
+            throw new NotImplementedException();
+        }
+
+
+        public virtual bool Delete(long id)
+        {
+            // deve implementar o codigo na classe que herdar
+            throw new NotImplementedException();
+        }
+
 
         public virtual List<T> Query<T>() where T : IDataExchange, new()
         {
@@ -37,8 +53,7 @@ namespace Sistema.Framework
 
                         foreach (DataField field in record.Fields)
                         {
-                            exchangeValues[field.Index] =
-                                reader[field.Name] == DBNull.Value ? null : reader[field.Name];
+                            exchangeValues[field.Index] = reader[field.Name] == DBNull.Value ? null : reader[field.Name];
                         }
 
                         item.ExchangeValues = exchangeValues;
@@ -49,11 +64,6 @@ namespace Sistema.Framework
             }
 
             return result;
-        }
-
-        public virtual void Delete(IDataExchange values)
-        {
-            
         }
     }
 }

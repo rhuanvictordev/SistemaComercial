@@ -45,8 +45,10 @@ namespace Sistema.UI
 
             if (Debugger.IsAttached)
             {
+                button3.Visible = true;
                 txtEmail.Text = "suporte@email.com";
                 txtSenha.Text = "123";
+                button1.Focus();
             }
         }
 

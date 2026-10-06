@@ -52,7 +52,7 @@ namespace Sistema.Models
             } 
         }
 
-        public bool Load(long id)
+        public override bool Load(long id)
         {
             DataRecord record = CreateDataRecord();
             record.Filters[FIELD_IDGRUPO] = new DataFilterEqual(id);
@@ -72,11 +72,18 @@ namespace Sistema.Models
 
         public bool Delete()
         {
-            using (var command = Database.Connect().CreateCommand())
+            try
             {
-                command.CommandText = "DELETE FROM GRUPO_USUARIO WHERE IDGRUPO = @id";
-                command.Parameters.AddWithValue("@id", this.IdGrupo);
-                return command.ExecuteNonQuery() > 0;
+                using (var command = Database.Connect().CreateCommand())
+                {
+                    command.CommandText = "DELETE FROM GRUPO_USUARIO WHERE IDGRUPO = @id";
+                    command.Parameters.AddWithValue("@id", this.IdGrupo);
+                    return command.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 

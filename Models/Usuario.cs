@@ -67,15 +67,10 @@ namespace Sistema.Models
             });
         }
 
-        public bool Load(int id)
+        public override bool Load(long id)
         { 
             DataRecord record = CreateDataRecord();
-            record.Filters[FIELD_IDUSUARIO] = new DataFilterBetween(0,3);
-            record.Filters[FIELD_NOME] = new DataFilterEqual("Suporte");
-            record.Filters[FIELD_EMAIL] = new DataFilterEqual("suporte@email.com");
-            record.Filters[FIELD_CRIADO] = new DataFilterDateBetween(DateTime.Now.AddDays(- 10), DateTime.Now.AddDays(-5));
-            record.Filters[FIELD_ALTERADO] = new DataFilterDateEqual(DateTime.Now);
-
+            record.Filters[FIELD_IDUSUARIO] = new DataFilterEqual(id);
             object[] values = Database.Load(record);
             if (values != null)
                 this.ExchangeValues = values;
@@ -89,7 +84,7 @@ namespace Sistema.Models
             return Database.Save(record, this);
         }
 
-        public bool Delete(string id)
+        public override bool Delete(long id)
         {
             using (var command = Database.Connect().CreateCommand())
             {

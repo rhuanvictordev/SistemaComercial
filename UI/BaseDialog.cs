@@ -16,19 +16,18 @@ namespace Sistema.UI
     {
         public InformacoesSistema Info;
         public ClientConfigValues ParametrosLocais;
-        public List<string> Menus;
+        public Dictionary<string, string> MenusDoSistema;
 
         public BaseDialog()
         {
             InitializeComponent();
-            Menus = new List<string>()
-            {
-                "menuUGP - Usuários Grupos e Permissões",
-                "menuClientes - Clientes cadastrados",
-                "menuEstoque - Itens no estoque",
-                "menuProdutos - Produtos de venda",
-                "menuParametros - Parâmetros do cliente"
-            };
+
+            MenusDoSistema = new Dictionary<string, string>();
+            MenusDoSistema.Add("menuUGP", "Usuários Grupos e Permissões");
+            MenusDoSistema.Add("menuClientes", "Clientes cadastrados");
+            MenusDoSistema.Add("menuEstoque", "Itens no estoque");
+            MenusDoSistema.Add("menuProdutos", "Produtos de venda");
+            MenusDoSistema.Add("menuParametros", "Parâmetros do cliente");
         }
 
         public BaseDialog(InformacoesSistema i, ClientConfigValues p)

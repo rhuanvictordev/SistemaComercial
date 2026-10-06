@@ -37,7 +37,7 @@ namespace Sistema.UI
             {
                 var permissoes = g.ObterPermissoes();
 
-                menuUGP.Enabled = (permissoes.Contains("menuUGP") || g.IdGrupo == 1);
+                menuUGP.Enabled = (permissoes.Contains("menuUGP") || this.Info.UsuarioLogado.Nome.ToUpper().Trim() == "SUPORTE");
                 menuClientes.Enabled = permissoes.Contains("menuClientes");
                 menuEstoque.Enabled = permissoes.Contains("menuEstoque");
                 menuProdutos.Enabled = permissoes.Contains("menuProdutos");
