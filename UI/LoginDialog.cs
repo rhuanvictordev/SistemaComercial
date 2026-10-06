@@ -1,5 +1,6 @@
 ﻿using Sistema;
 using Sistema.Data;
+using Sistema.Framework;
 using Sistema.Models;
 using System;
 using System.Collections.Generic;
@@ -59,16 +60,10 @@ namespace Sistema.UI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Usuario u = new Usuario();
-            if (u.Load(1))
+            var usuarios = Database.Query<Usuario>();
+            foreach (Usuario u in usuarios)
             {
-                MessageBox.Show("Usuario encontrado" + u.Nome + "\n" + u.Email);
-            }
-
-            var users = Database.Query<Usuario>();
-            foreach (var user in users) 
-            {
-                MessageBox.Show(user.Nome);
+                MessageBox.Show(u.Nome);
             }
         }
     }
