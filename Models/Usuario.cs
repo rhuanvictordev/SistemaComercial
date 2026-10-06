@@ -86,7 +86,8 @@ namespace Sistema.Models
 
         public override bool Delete(long id)
         {
-            using (var command = Database.Connect().CreateCommand())
+            using (var connection = Database.Connect())
+            using (var command = connection.CreateCommand())
             {
                 command.CommandText = "DELETE FROM USUARIOS WHERE IDUSUARIO = @id";
                 command.Parameters.AddWithValue("@id", id);

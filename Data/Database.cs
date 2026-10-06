@@ -3,6 +3,8 @@ using Mysqlx.Crud;
 using Sistema.Framework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,26 +13,19 @@ namespace Sistema.Data
 {
     public static class Database
     {
-        public static string CONNECTION_STRING_WITHOUT_SCHEMA = "Server=localhost;Port=3306;User ID=root;Password=root;";
-        public static string CONNECTION_STRING = "Server=localhost;Port=3306;Database=sistema;User ID=root;Password=root;";
+        public static string connectionStringWithoutSchema = "Server=localhost;Port=3306;User ID=root;Password=root;";
+        public static string connectionString = "Server=localhost;Port=3306;Database=sistema;User ID=root;Password=root;";
 
         public static MySqlConnection Connect()
         {
-            try
-            {
-                MySqlConnection conn = new MySqlConnection(CONNECTION_STRING);
-                conn.Open();
-                return conn;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            return conn;
         }
 
         public static void CreateSchema()
         {
-            using (var connection = new MySqlConnection(CONNECTION_STRING_WITHOUT_SCHEMA))
+            using (var connection = new MySqlConnection(connectionStringWithoutSchema))
             {
                 connection.Open();
                 using (var command = connection.CreateCommand())
@@ -56,7 +51,8 @@ namespace Sistema.Data
                 List<string> sets = new List<string>();
                 List<string> conditions = new List<string>();
 
-                using (var cmd = Database.Connect().CreateCommand())
+                using (var connection = Connect())
+                using (var command = connection.CreateCommand())
                 {
                     foreach (DataField field in record.Fields)
                     {
@@ -71,21 +67,23 @@ namespace Sistema.Data
                             sets.Add($"{field.Name} = {parameterName}");
                         }
 
-                        cmd.Parameters.AddWithValue( parameterName, values.ExchangeValues[field.Index] ?? DBNull.Value );
+                        command.Parameters.AddWithValue( parameterName, values.ExchangeValues[field.Index] ?? DBNull.Value );
                     }
 
                     if (conditions.Count == 0)
                         throw new Exception("Nenhuma chave foi definida no DataRecord.");
 
-                    cmd.CommandText =
+                    command.CommandText =
                         $"UPDATE {record.Name} SET {string.Join(", ", sets)} " +
                         $"WHERE {string.Join(" AND ", conditions)}";
 
-                    return cmd.ExecuteNonQuery() > 0;
+                    command.ExecuteNonQuery();
+                    return true;
                 }
             }
             catch (Exception ex) 
             {
+                Debug.WriteLine(ex);
                 return false;
             }
         }
@@ -97,7 +95,8 @@ namespace Sistema.Data
                 List<string> columns = new List<string>();
                 List<string> parameters = new List<string>();
 
-                using (var cmd = Connect().CreateCommand())
+                using (var connection = Connect())
+                using (var command = connection.CreateCommand())
                 {
                     foreach (DataField field in record.Fields)
                     {
@@ -107,15 +106,16 @@ namespace Sistema.Data
                         string parameterName = $"@p{field.Index}";
                         columns.Add(field.Name);
                         parameters.Add(parameterName);
-                        cmd.Parameters.AddWithValue(parameterName, values.ExchangeValues[field.Index] ?? DBNull.Value);
+                        command.Parameters.AddWithValue(parameterName, values.ExchangeValues[field.Index] ?? DBNull.Value);
                     }
                     string sql = $"INSERT INTO {record.Name} ({string.Join(", ", columns)}) VALUES ({string.Join(", ", parameters)})";
-                    cmd.CommandText = sql;
-                    return cmd.ExecuteNonQuery() > 0;
+                    command.CommandText = sql;
+                    return command.ExecuteNonQuery() > 0;
                 }
             }
             catch (Exception ex) 
             {
+                Debug.WriteLine(ex);
                 return false;
             }
         }
@@ -125,7 +125,8 @@ namespace Sistema.Data
         {
             List<string> conditions = new List<string>();
 
-            using (var cmd = Connect().CreateCommand())
+            using (var connection = Connect())
+            using (var command = connection.CreateCommand())
             {
                 foreach (DataField field in record.Fields)
                 {
@@ -136,15 +137,15 @@ namespace Sistema.Data
 
                     conditions.Add($"{field.Name} = {parameterName}");
 
-                    cmd.Parameters.AddWithValue( parameterName, values.ExchangeValues[field.Index] ?? DBNull.Value );
+                    command.Parameters.AddWithValue( parameterName, values.ExchangeValues[field.Index] ?? DBNull.Value );
                 }
 
                 if (conditions.Count == 0)
-                    return false;
+                    throw new InvalidOperationException("Nenhuma chave foi definida no DataRecord.");
 
-                cmd.CommandText = $"SELECT 1 FROM {record.Name} WHERE {string.Join(" AND ", conditions)} LIMIT 1";
+                command.CommandText = $"SELECT 1 FROM {record.Name} WHERE {string.Join(" AND ", conditions)} LIMIT 1";
 
-                return cmd.ExecuteScalar() != null;
+                return command.ExecuteScalar() != null;
             }
         }
 
@@ -153,12 +154,6 @@ namespace Sistema.Data
         {
             StringBuilder sb = new StringBuilder("SELECT ");
             string finalSQL = "";
-
-            string equalPart = "";
-            string likePart = "";
-            string dateEqualPart = "";
-            string dateBetweenPart = "";
-            string betweenPart = "";
 
             for (int i = 0; i < record.Fields.Length; i++)
             {
@@ -169,72 +164,25 @@ namespace Sistema.Data
             sb.Append($" FROM {record.Name}");
             finalSQL = sb.ToString();
 
-            for(int i = 0; i < record.Fields.Length; i++)
+            List<string> conditions = new List<string>();
+
+            for (int i = 0; i < record.Fields.Length; i++)
             {
                 if (record.Filters[i] != null)
                 {
-                    switch (record.Filters[i].Type)
-                    {
-                        case "EQUAL":
-                            equalPart = record.Filters[i].GetSQL(record);
-                            break;
-
-                        case "LIKE":
-                            likePart = record.Filters[i].GetSQL(record);
-                            break;
-
-                        case "DATE_EQUAL":
-                            dateEqualPart = record.Filters[i].GetSQL(record);
-                            break;
-
-                        case "DATE_BETWEEN":
-                            dateBetweenPart = record.Filters[i].GetSQL(record);
-                            break;
-
-                        case "BETWEEN":
-                            betweenPart = record.Filters[i].GetSQL(record);
-                            break;
-
-                        default:
-                            break;
-                    }
+                    conditions.Add(record.Filters[i].GetSQL(record));
                 }
             }
 
-            if (equalPart != "" && likePart == "")
+            if (conditions.Count > 0)
             {
-                finalSQL += (" WHERE " + equalPart);
-            }
-            else if (equalPart != "" && likePart != "")
-            {
-                finalSQL += (" WHERE " + equalPart + " AND " + likePart);
-            }
-
-            if (dateEqualPart != "")
-            {
-                finalSQL += " AND " + dateEqualPart;
-            }
-
-            if (dateBetweenPart != "")
-            {
-                finalSQL += " AND " + dateBetweenPart;
-            }
-
-            if (betweenPart != "")
-            {
-                if (equalPart == "")
-                {
-                    finalSQL += " WHERE " + betweenPart;
-                }
-                else
-                {
-                    finalSQL += " AND " + betweenPart;
-                }
+                finalSQL += " WHERE " + string.Join(" AND ", conditions);
             }
 
             try
             {
-                using (var command = Connect().CreateCommand())
+                using (var connection = Connect())
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = finalSQL;
                     using (var reader = command.ExecuteReader())
@@ -245,7 +193,7 @@ namespace Sistema.Data
 
                             for (int i = 0; i < record.Fields.Length; i++)
                             {
-                                values[i] = reader[i];
+                                values[i] = reader[i] == DBNull.Value ? null : reader[i];
                             }
 
                             return values;
@@ -296,7 +244,7 @@ namespace Sistema.Data
 
                         for (int i = 0; i < record.Fields.Length; i++)
                         {
-                            values[i] = reader[i];
+                            values[i] = reader[i] == DBNull.Value ? null : reader[i];
                         }
 
                         item.ExchangeValues = values;

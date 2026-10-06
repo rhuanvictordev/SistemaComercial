@@ -9,25 +9,16 @@ namespace Sistema.Framework
 {
     public abstract class DataAccess // abstract porque DataAccess não pode ser instanciada, apenas herdada
     {
-        public virtual bool Save()
+        public abstract bool Save(); //abstract: apenas declaro a assinatura na classe pai, a implementação virá obrigatoriamente na classe filha
+
+
+        public abstract bool Load(long id); //abstract: apenas declaro a assinatura na classe pai, a implementação virá obrigatoriamente na classe filha
+
+
+        public virtual bool Delete(long id) //virtual: passo um comportamento padrão na classe pai mas uma classe filha pode sobrescrever
         {
-            // deve implementar o codigo na classe que herdar
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
+            return false;
         }
-
-
-        public virtual bool Load(long id)
-        {
-            // deve implementar o codigo na classe que herdar
-            throw new NotImplementedException();
-        }
-
-
-        public virtual bool Delete(long id)
-        {
-            // deve implementar o codigo na classe que herdar
-            throw new NotImplementedException();
-        }
-
     }
 }

@@ -60,11 +60,18 @@ namespace Sistema.UI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var usuarios = Database.Query<Usuario>();
-            foreach (Usuario u in usuarios)
+            Usuario u = new Usuario();
+            if (u.Load(2))
             {
                 MessageBox.Show(u.Nome);
             }
+
+
+            /*var usuarios = Database.Query<Usuario>();
+            foreach (Usuario u in usuarios)
+            {
+                MessageBox.Show(u.Nome);
+            }*/
         }
     }
 }

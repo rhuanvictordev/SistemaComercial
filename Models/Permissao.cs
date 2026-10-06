@@ -49,6 +49,11 @@ namespace Sistema.Models
             return Database.Save(record, this);
         }
 
+        public override bool Load(long id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeletePermissoesDoGrupo(string idGrupo)
         {
             using (var command = Database.Connect().CreateCommand())
@@ -57,5 +62,7 @@ namespace Sistema.Models
                 command.ExecuteNonQuery();
             }
         }
+
+        
     }
 }
