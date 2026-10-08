@@ -64,6 +64,9 @@ namespace Sistema.UI
             cboGrupo.Items.Clear();
             foreach (var g in grupos)
             {
+                if (g.Nome.ToUpper().Trim() == "SUPORTE")
+                    continue;
+
                 rowG[COLUMN_GRUPO_ID] = g.IdGrupo;
                 rowG[COLUMN_GRUPO_NOME] = g.Nome;
                 rowG[COLUMN_GRUPO_DESCRICAO] = g.Descricao;
@@ -79,6 +82,9 @@ namespace Sistema.UI
             object[] row = new object[COLUMN_USUARIO_COUNT];
             foreach (var u in usuarios)
             {
+                if (u.Nome.ToUpper().Trim() == "SUPORTE")
+                    continue;
+
                 Grupo g = new Grupo();
                 row[COLUMN_USUARIO_ID] = u.IdUsuario;
                 row[COLUMN_USUARIO_NOME] = u.Nome;

@@ -168,6 +168,12 @@
     <Compile Include="UI\ParametrosDialog.Designer.cs">
       <DependentUpon>ParametrosDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProdutosDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ProdutosDialog.Designer.cs">
+      <DependentUpon>ProdutosDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UsuariosDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ParametrosDialog.resx">
       <DependentUpon>ParametrosDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ProdutosDialog.resx">
+      <DependentUpon>ProdutosDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UsuariosDialog.resx">
       <DependentUpon>UsuariosDialog.cs</DependentUpon>

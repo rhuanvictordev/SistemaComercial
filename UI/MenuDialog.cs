@@ -3,6 +3,7 @@ using Sistema.Models;
 using Sistema.Services;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -28,9 +29,15 @@ namespace Sistema.UI
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblUsuarioNome.Text = "Login: " + this.Info.UsuarioLogado.Nome + "  -  " + DateTime.Now.ToString("dd/MM/yyyy /  HH:mm:ss");
+            if (!this.Info.ClienteAtualizado)
+            {
+                lblUsuarioNome.Text += "     [Cliente Desatualizado]        Existe uma nova versão do sistema diponível, reinicie para atualizar ";
+                statusStrip1.BackColor = Color.Black;
+                statusStrip1.ForeColor = Color.Yellow;
+            }
         }
 
-        private void MenuForm_Load(object sender, EventArgs e)
+        private void MenuForm_Load(object sender, EventArgs e) 
         {
             Grupo g = new Grupo();
             if (g.Load(this.Info.UsuarioLogado.IdGrupo))
@@ -107,6 +114,11 @@ namespace Sistema.UI
         private void cLientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void menuProdutos_Click(object sender, EventArgs e)
+        {
+            AbrirMenu(typeof(ProdutosDialog));
         }
     }
 }

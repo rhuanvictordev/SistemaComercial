@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuDialog));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cadastroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUGP = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuParametros = new System.Windows.Forms.ToolStripMenuItem();
             this.menuProdutos = new System.Windows.Forms.ToolStripMenuItem();
             this.menuClientes = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEstoque = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuParametros = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUsuarioNome = new System.Windows.Forms.ToolStripStatusLabel();
@@ -60,10 +61,10 @@
             // 
             this.cadastroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuUGP,
-            this.menuParametros,
             this.menuProdutos,
             this.menuClientes,
-            this.menuEstoque});
+            this.menuEstoque,
+            this.menuParametros});
             this.cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
             this.cadastroToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.cadastroToolStripMenuItem.Text = "Cadastro";
@@ -75,18 +76,12 @@
             this.menuUGP.Text = "Usuários Grupos e Permissões";
             this.menuUGP.Click += new System.EventHandler(this.cadUsuariosMenuItem_Click);
             // 
-            // menuParametros
-            // 
-            this.menuParametros.Name = "menuParametros";
-            this.menuParametros.Size = new System.Drawing.Size(231, 22);
-            this.menuParametros.Text = "Parâmetros";
-            this.menuParametros.Click += new System.EventHandler(this.parâmetrosToolStripMenuItem_Click);
-            // 
             // menuProdutos
             // 
             this.menuProdutos.Name = "menuProdutos";
             this.menuProdutos.Size = new System.Drawing.Size(231, 22);
             this.menuProdutos.Text = "Produtos";
+            this.menuProdutos.Click += new System.EventHandler(this.menuProdutos_Click);
             // 
             // menuClientes
             // 
@@ -100,6 +95,13 @@
             this.menuEstoque.Name = "menuEstoque";
             this.menuEstoque.Size = new System.Drawing.Size(231, 22);
             this.menuEstoque.Text = "Estoque";
+            // 
+            // menuParametros
+            // 
+            this.menuParametros.Name = "menuParametros";
+            this.menuParametros.Size = new System.Drawing.Size(231, 22);
+            this.menuParametros.Text = "Parâmetros";
+            this.menuParametros.Click += new System.EventHandler(this.parâmetrosToolStripMenuItem_Click);
             // 
             // sairToolStripMenuItem
             // 
@@ -136,10 +138,12 @@
             this.ClientSize = new System.Drawing.Size(836, 528);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MenuDialog";
+            this.ShowIcon = true;
             this.Text = "MenuForm";
             this.Load += new System.EventHandler(this.MenuForm_Load);
             this.menuStrip1.ResumeLayout(false);
