@@ -33,8 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -220,6 +219,7 @@
   <ItemGroup>
     <Content Include="Arquivos\Gerar Zip automatico.txt" />
     <Content Include="Arquivos\InnoSetup Script.txt" />
+    <Content Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GerarZipRelease" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
