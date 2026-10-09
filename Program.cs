@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,18 +26,17 @@ namespace Sistema
         private static ArquivoConfig config;
 
         [STAThread]
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            MainAsync(args).GetAwaiter().GetResult();
+        }
 
-            InformacoesSistema i = new InformacoesSistema();
+        static async Task MainAsync(string[] args)
+        {
+            InformacoesSistema i = new InformacoesSistema() { NomeSistema = "Sistema Comercial", VersaoAtual = "Desenvolvimento", ClienteAtualizado = true };
             ClientConfigValues p = new ClientConfigValues();
-
-            i.NomeSistema = "Sistema Comercial";
-            i.VersaoAtual = "Desenvolvimento";
-            i.ClienteAtualizado = true;
-
             try
             {
                 p = ClientConfigHandler.LerArquivo();
