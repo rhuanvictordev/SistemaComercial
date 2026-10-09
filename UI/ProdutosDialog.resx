@@ -141,10 +141,56 @@
   <metadata name="Alterado.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Editar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Ativo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Excluir.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="Nome.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Descricao.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Preco.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Peso.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Imagem.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Criado.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Alterado.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Ativo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAdCAYAAAC9pNwMAAAABGdBTUEAALGPC/xhBQAAA5hJREFUSEvt
+        lktMU1kYxw+0PhZudBY+Eq1Vl+4mk9EoGlDj1te1FIeJwwjlKQvFojyiMfEVkD4QBGpb6uh0Tum1EqQ8
+        opAoom0Vi1KjUQQ0LMTE4INEN39z2t5SjkpmtN2Y+Sf/NPf2+84v33fP+e4l5H/9S3UBcmb+ftx0IdCj
+        OOZvSfKPj6i9Y8/UB285d1T0uX/h42KqK4MBxcTEROqWzhoDadgjkrMZ4urLx/4Zfvtqb/2j7vjB6VPf
+        2hKfS08MKiSacyCz5IIY1djaUfu34f61bXx8zARASG6toqQuA3JrHmZY8kBMWVhiP9QEQAUgkc/5bgFI
+        ALAzxV0F0vAnZljzgybnNFDSUgBIBSDj82IiVrEEllvzIW9k4Cwsc5QxsBrx2uVBcJsuBG6UwJr4giOt
+        btODmPZMgs0aKEPg3wDM4vP+k2yPe381Pri2vdgnCkW3RaHIJwpNg/d2Aqja3GEEMUVVbNZgeVM5Axud
+        Q31pLJaZ5Vb2dwgNgRur+PW/qPK7zds9YyMVh73N9iKvk2q9rrBFh9bj6l3qKEWiJTsCTrTmYu7F/djn
+        cXq0PlGMiqeHvC7a9mKgMv/6BYHnTFHBLfuqSyP3KhJMmcOkNh2kbvfntuRAZgtBJ+F5n8cxn/0dpDZ9
+        5GR/R+VJf+vXK996tU5Y6TpKSX1GcEHZNI4GR5uPY7t+zvlCcdrNt7rllLCIFlMWzC8gLcqDePN5rEPE
+        nCs+Gx/7OrjsTktSTo/dQKpTg5uGWLJBzNlTfllb5bb8YLullocA4RjJwWsNSLUayW2n64/0XdnE8yJq
+        HvIr3334kJbZ85dhsV1L54e9IGQwzz5fCFljXgTMoDNtBZgf/l8yu15o1zZt66ypGX03nn5moGsFz5si
+        OuRXlt1xJf18+biwwF4ssOfOBgeAXa8/vjeuaz3tZec40kqzBgpailHAWuh1agAwq16GZrfqzIPuZNPA
+        zemh0wnAzBP9nWkb2g2X2DmeBGdB6QjO6uyHb978NDD+fB57WUjm1/kmpbh1QnK7jkoDRAKzs826wsfH
+        TOvdOiElDI5udRjMJlsCnxMTsYrXu6smwbYQeAktiW/Fu6/bhI3tBkoa/ojsanIuE0sdZTSuYOuT3jWW
+        Jzd1pGZX8A3FoKRahQMel/7iU99aPj5muvt6UMG+NPSBLt1KZzldQUtoscelZ/eujgYUfHxM1TM6qHAO
+        960Jn22BVRp36A+hT5yA+ICERs9nAAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

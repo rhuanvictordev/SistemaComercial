@@ -79,10 +79,11 @@ namespace Sistema.Data.Migrations
             PESO_KG DECIMAL(8,3) NOT NULL,
             IMAGEM VARCHAR(50),
             CRIADO DATETIME NOT NULL,
-            ALTERADO DATETIME NOT NULL
+            ALTERADO DATETIME NOT NULL,
+            ATIVO CHAR(1) NOT NULL
             );
-            INSERT INTO PRODUTOS (NOME, DESCRICAO, PRECO, PESO_KG, IMAGEM, CRIADO, ALTERADO) VALUES ('Hambúrguer Artesanal de 170G','Hambúrguer Artesanal feito na chapa com carne de primeira qualidade 100% aprovada pelo pessoal do MasterChef e aprovada cientificamente pelos melhores gastronômicos do planeta, o negócio é bão.', 37.42, 0.170, '/CLIENTE1/UPLOADS/1.PNG',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-            INSERT INTO PRODUTOS (NOME, DESCRICAO, PRECO, PESO_KG, IMAGEM, CRIADO, ALTERADO) VALUES ('Coca Cola 1L', null, 37.42, 0.250, '/CLIENTE1/UPLOADS/2.PNG',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+            INSERT INTO PRODUTOS (NOME, DESCRICAO, PRECO, PESO_KG, IMAGEM, CRIADO, ALTERADO, ATIVO) VALUES ('Hambúrguer Artesanal de 170G','Hambúrguer Artesanal feito na chapa com carne de primeira qualidade 100% aprovada pelo pessoal do MasterChef e aprovada cientificamente pelos melhores gastronômicos do planeta, o negócio é bão.', 37.42, 0.170, '/CLIENTE1/UPLOADS/1.PNG',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'S');
+            INSERT INTO PRODUTOS (NOME, DESCRICAO, PRECO, PESO_KG, IMAGEM, CRIADO, ALTERADO, ATIVO) VALUES ('Coca Cola 1L', null, 37.42, 0.250, '/CLIENTE1/UPLOADS/2.PNG',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'S');
             
             CREATE TABLE IF NOT EXISTS LISTA_TECNICA(
             IDPRODUTO INT NOT NULL,

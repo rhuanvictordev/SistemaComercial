@@ -36,6 +36,19 @@ namespace Sistema.Data
             }
         }
 
+        public static void DeleteSchema()
+        {
+            using (var connection = new MySqlConnection(connectionStringWithoutSchema))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "DROP database sistema;";
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
         public static bool Save(DataRecord record, IDataExchange values)
         {
             if (Exists(record, values))

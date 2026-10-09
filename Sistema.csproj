@@ -131,7 +131,13 @@
     <Compile Include="Models\Grupo.cs" />
     <Compile Include="Models\InformacoesSistema.cs" />
     <Compile Include="Models\Permissao.cs" />
+    <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\ApiService.cs" />
     <Compile Include="Services\ClientConfigHandler.cs" />
     <Compile Include="Services\ClientConfigValues.cs" />
@@ -174,6 +180,12 @@
     <Compile Include="UI\ProdutosDialog.Designer.cs">
       <DependentUpon>ProdutosDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProdutosInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ProdutosInput.Designer.cs">
+      <DependentUpon>ProdutosInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UsuariosDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,14 +194,9 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="UI\BaseDialog.resx">
       <DependentUpon>BaseDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ProdutosDialog.resx">
       <DependentUpon>ProdutosDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ProdutosInput.resx">
+      <DependentUpon>ProdutosInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UsuariosDialog.resx">
       <DependentUpon>UsuariosDialog.cs</DependentUpon>

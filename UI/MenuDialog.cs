@@ -1,4 +1,5 @@
 ﻿
+using Sistema.Data;
 using Sistema.Models;
 using Sistema.Services;
 using System;
@@ -39,16 +40,19 @@ namespace Sistema.UI
 
         private void MenuForm_Load(object sender, EventArgs e) 
         {
-            Grupo g = new Grupo();
-            if (g.Load(this.Info.UsuarioLogado.IdGrupo))
+            if (this.Info.UsuarioLogado.Nome.ToUpper().Trim() != "SUPORTE")
             {
-                var permissoes = g.ObterPermissoes();
+                Grupo g = new Grupo();
+                if (g.Load(this.Info.UsuarioLogado.IdGrupo))
+                {
+                    var permissoes = g.ObterPermissoes();
 
-                menuUGP.Enabled = (permissoes.Contains("menuUGP") || this.Info.UsuarioLogado.Nome.ToUpper().Trim() == "SUPORTE");
-                menuClientes.Enabled = permissoes.Contains("menuClientes");
-                menuEstoque.Enabled = permissoes.Contains("menuEstoque");
-                menuProdutos.Enabled = permissoes.Contains("menuProdutos");
-                menuParametros.Enabled = permissoes.Contains("menuParametros");
+                    menuUGP.Enabled = permissoes.Contains("menuUGP");
+                    menuClientes.Enabled = permissoes.Contains("menuClientes");
+                    menuEstoque.Enabled = permissoes.Contains("menuEstoque");
+                    menuProdutos.Enabled = permissoes.Contains("menuProdutos");
+                    menuParametros.Enabled = permissoes.Contains("menuParametros");
+                }
             }
         }
 
@@ -92,7 +96,7 @@ namespace Sistema.UI
             Form dialog = (Form)Activator.CreateInstance(tipo);
             dialog.MdiParent = this;
             
-            if (dialog.FormBorderStyle == FormBorderStyle.Fixed3D)
+            if (dialog.FormBorderStyle == FormBorderStyle.Sizable)
                 dialog.WindowState = FormWindowState.Maximized;
             
             dialog.Show();
@@ -119,6 +123,28 @@ namespace Sistema.UI
         private void menuProdutos_Click(object sender, EventArgs e)
         {
             AbrirMenu(typeof(ProdutosDialog));
+        }
+
+        private void recriarBancoDeDadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("TODO O BANCO DE DADOS salvo até aqui será perdido e não será possível restaurar", "PRESTE ATENÇÃO - Você tem certeza?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                string senha = InputDialog.Show("Informe o texto abaixo: 'estou ciente' ");
+                if (senha != "estou ciente")
+                    return;
+
+                try
+                {
+                    Database.DeleteSchema();
+                    MessageBox.Show("Dados apagados, reinicie o sistema", "Sucesso");
+                    Application.Exit();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+
         }
     }
 }

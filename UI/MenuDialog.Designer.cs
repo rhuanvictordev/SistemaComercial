@@ -41,6 +41,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUsuarioNome = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.recriarBancoDeDadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -98,9 +99,11 @@
             // 
             // menuParametros
             // 
+            this.menuParametros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.recriarBancoDeDadosToolStripMenuItem});
             this.menuParametros.Name = "menuParametros";
             this.menuParametros.Size = new System.Drawing.Size(231, 22);
-            this.menuParametros.Text = "Parâmetros";
+            this.menuParametros.Text = "Segurança";
             this.menuParametros.Click += new System.EventHandler(this.parâmetrosToolStripMenuItem_Click);
             // 
             // sairToolStripMenuItem
@@ -130,6 +133,13 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // recriarBancoDeDadosToolStripMenuItem
+            // 
+            this.recriarBancoDeDadosToolStripMenuItem.Name = "recriarBancoDeDadosToolStripMenuItem";
+            this.recriarBancoDeDadosToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.recriarBancoDeDadosToolStripMenuItem.Text = "Recriar banco de dados";
+            this.recriarBancoDeDadosToolStripMenuItem.Click += new System.EventHandler(this.recriarBancoDeDadosToolStripMenuItem_Click);
             // 
             // MenuDialog
             // 
@@ -168,5 +178,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuProdutos;
         private System.Windows.Forms.ToolStripMenuItem menuClientes;
         private System.Windows.Forms.ToolStripMenuItem menuEstoque;
+        private System.Windows.Forms.ToolStripMenuItem recriarBancoDeDadosToolStripMenuItem;
     }
 }

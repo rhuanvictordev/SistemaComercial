@@ -96,7 +96,7 @@
             this.dgvUsuarios.Name = "dgvUsuarios";
             this.dgvUsuarios.ReadOnly = true;
             this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsuarios.Size = new System.Drawing.Size(575, 150);
+            this.dgvUsuarios.Size = new System.Drawing.Size(456, 62);
             this.dgvUsuarios.TabIndex = 0;
             this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
             // 
@@ -179,7 +179,7 @@
             this.btnCriarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCriarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCriarUsuario.ForeColor = System.Drawing.Color.White;
-            this.btnCriarUsuario.Location = new System.Drawing.Point(355, 227);
+            this.btnCriarUsuario.Location = new System.Drawing.Point(355, 139);
             this.btnCriarUsuario.Name = "btnCriarUsuario";
             this.btnCriarUsuario.Size = new System.Drawing.Size(110, 23);
             this.btnCriarUsuario.TabIndex = 1;
@@ -191,7 +191,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(262, 203);
+            this.label4.Location = new System.Drawing.Point(262, 115);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(36, 13);
             this.label4.TabIndex = 5;
@@ -200,7 +200,7 @@
             // txtSenha
             // 
             this.txtSenha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtSenha.Location = new System.Drawing.Point(50, 252);
+            this.txtSenha.Location = new System.Drawing.Point(50, 164);
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.Size = new System.Drawing.Size(206, 20);
             this.txtSenha.TabIndex = 4;
@@ -209,7 +209,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 252);
+            this.label3.Location = new System.Drawing.Point(9, 164);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 13);
             this.label3.TabIndex = 3;
@@ -218,7 +218,7 @@
             // txtEmail
             // 
             this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtEmail.Location = new System.Drawing.Point(50, 224);
+            this.txtEmail.Location = new System.Drawing.Point(50, 136);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(206, 20);
             this.txtEmail.TabIndex = 4;
@@ -227,7 +227,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 227);
+            this.label2.Location = new System.Drawing.Point(13, 139);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 3;
@@ -236,7 +236,7 @@
             // txtNome
             // 
             this.txtNome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtNome.Location = new System.Drawing.Point(50, 200);
+            this.txtNome.Location = new System.Drawing.Point(50, 112);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(206, 20);
             this.txtNome.TabIndex = 4;
@@ -245,7 +245,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 200);
+            this.label1.Location = new System.Drawing.Point(10, 112);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 3;
@@ -255,7 +255,7 @@
             // 
             this.cboGrupo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cboGrupo.FormattingEnabled = true;
-            this.cboGrupo.Location = new System.Drawing.Point(304, 200);
+            this.cboGrupo.Location = new System.Drawing.Point(304, 112);
             this.cboGrupo.Name = "cboGrupo";
             this.cboGrupo.Size = new System.Drawing.Size(161, 21);
             this.cboGrupo.TabIndex = 2;
@@ -276,11 +276,11 @@
             this.GrupoAlterado,
             this.EditarG,
             this.ExcluirG});
-            this.dgvGrupos.Location = new System.Drawing.Point(9, 319);
+            this.dgvGrupos.Location = new System.Drawing.Point(9, 231);
             this.dgvGrupos.Name = "dgvGrupos";
             this.dgvGrupos.ReadOnly = true;
             this.dgvGrupos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGrupos.Size = new System.Drawing.Size(575, 182);
+            this.dgvGrupos.Size = new System.Drawing.Size(456, 182);
             this.dgvGrupos.TabIndex = 3;
             this.dgvGrupos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGrupos_CellClick);
             // 
@@ -344,7 +344,7 @@
             // txtGDescricao
             // 
             this.txtGDescricao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtGDescricao.Location = new System.Drawing.Point(238, 510);
+            this.txtGDescricao.Location = new System.Drawing.Point(238, 422);
             this.txtGDescricao.Name = "txtGDescricao";
             this.txtGDescricao.Size = new System.Drawing.Size(198, 20);
             this.txtGDescricao.TabIndex = 4;
@@ -353,7 +353,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(177, 513);
+            this.label6.Location = new System.Drawing.Point(177, 425);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 13);
             this.label6.TabIndex = 3;
@@ -362,7 +362,7 @@
             // txtGNome
             // 
             this.txtGNome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtGNome.Location = new System.Drawing.Point(50, 510);
+            this.txtGNome.Location = new System.Drawing.Point(50, 422);
             this.txtGNome.Name = "txtGNome";
             this.txtGNome.Size = new System.Drawing.Size(121, 20);
             this.txtGNome.TabIndex = 4;
@@ -371,7 +371,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 513);
+            this.label5.Location = new System.Drawing.Point(10, 425);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 3;
@@ -384,7 +384,7 @@
             this.btnCriarGrupo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCriarGrupo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCriarGrupo.ForeColor = System.Drawing.Color.White;
-            this.btnCriarGrupo.Location = new System.Drawing.Point(442, 510);
+            this.btnCriarGrupo.Location = new System.Drawing.Point(442, 422);
             this.btnCriarGrupo.Name = "btnCriarGrupo";
             this.btnCriarGrupo.Size = new System.Drawing.Size(110, 23);
             this.btnCriarGrupo.TabIndex = 1;
@@ -405,12 +405,12 @@
             this.RecursoCodigo,
             this.RecursoDescricao,
             this.GrupoPermissao});
-            this.dgvPermissoes.Location = new System.Drawing.Point(590, 42);
+            this.dgvPermissoes.Location = new System.Drawing.Point(470, 42);
             this.dgvPermissoes.Margin = new System.Windows.Forms.Padding(2);
             this.dgvPermissoes.Name = "dgvPermissoes";
             this.dgvPermissoes.RowTemplate.Height = 24;
             this.dgvPermissoes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPermissoes.Size = new System.Drawing.Size(331, 459);
+            this.dgvPermissoes.Size = new System.Drawing.Size(321, 371);
             this.dgvPermissoes.TabIndex = 6;
             // 
             // IdGrp
@@ -447,9 +447,9 @@
             this.label7.BackColor = System.Drawing.Color.SteelBlue;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(590, 10);
+            this.label7.Location = new System.Drawing.Point(470, 10);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(331, 30);
+            this.label7.Size = new System.Drawing.Size(321, 30);
             this.label7.TabIndex = 5;
             this.label7.Text = "Permissões";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -463,7 +463,7 @@
             this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(10, 10);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(574, 30);
+            this.label8.Size = new System.Drawing.Size(455, 30);
             this.label8.TabIndex = 5;
             this.label8.Text = "Usuários";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -475,9 +475,9 @@
             this.label9.BackColor = System.Drawing.Color.SteelBlue;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(10, 284);
+            this.label9.Location = new System.Drawing.Point(10, 196);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(574, 30);
+            this.label9.Size = new System.Drawing.Size(455, 30);
             this.label9.TabIndex = 5;
             this.label9.Text = "Grupos";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -489,7 +489,7 @@
             this.btnSalvarPermissoes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalvarPermissoes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalvarPermissoes.ForeColor = System.Drawing.Color.White;
-            this.btnSalvarPermissoes.Location = new System.Drawing.Point(772, 507);
+            this.btnSalvarPermissoes.Location = new System.Drawing.Point(642, 419);
             this.btnSalvarPermissoes.Name = "btnSalvarPermissoes";
             this.btnSalvarPermissoes.Size = new System.Drawing.Size(148, 23);
             this.btnSalvarPermissoes.TabIndex = 1;
@@ -502,7 +502,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(930, 538);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dgvPermissoes);
             this.Controls.Add(this.txtGDescricao);
             this.Controls.Add(this.label9);
@@ -524,10 +524,8 @@
             this.Controls.Add(this.btnCriarUsuario);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboGrupo);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UsuariosDialog";
-            this.ShowIcon = false;
             this.Text = "Usuários Grupos e Permissões";
             this.Load += new System.EventHandler(this.UsuariosDialog_Load);
             this.Click += new System.EventHandler(this.UsuariosDialog_Click);
