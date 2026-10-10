@@ -44,7 +44,7 @@ namespace Sistema.Models
                 values[FIELD_IMAGEM] = this.Imagem;
                 values[FIELD_CRIADO] = this.Criado;
                 values[FIELD_ALTERADO] = this.Alterado;
-                values[FIELD_ATIVO] = this.Ativo;
+                values[FIELD_ATIVO] = this.Ativo ? "S" : "N";
                 return values;
             }
             set
@@ -57,7 +57,7 @@ namespace Sistema.Models
                 this.Peso = double.Parse(values[FIELD_PESO].ToString());
                 this.Criado = Convert.ToDateTime(values[FIELD_CRIADO].ToString());
                 this.Alterado = Convert.ToDateTime(values[FIELD_ALTERADO].ToString());
-                this.Imagem = values[FIELD_IMAGEM].ToString();
+                this.Imagem = values[FIELD_IMAGEM] == null ? "" : values[FIELD_IMAGEM].ToString();
                 this.Ativo = values[FIELD_ATIVO].ToString() == "S" ? true : false;
             }
         }
@@ -89,7 +89,7 @@ namespace Sistema.Models
             return values != null;   
         }
 
-        public override bool Save()
+        public override DbResult Save()
         {
             DataRecord record = CreateDataRecord();
             return Database.Save(record, this);

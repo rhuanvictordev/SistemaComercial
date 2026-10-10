@@ -113,6 +113,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\DbResult.cs" />
     <Compile Include="Data\Migration.cs" />
     <Compile Include="Data\MigrationService.cs" />
     <Compile Include="Data\Database.cs" />

@@ -182,7 +182,7 @@
             this.btnCriarUsuario.Location = new System.Drawing.Point(355, 139);
             this.btnCriarUsuario.Name = "btnCriarUsuario";
             this.btnCriarUsuario.Size = new System.Drawing.Size(110, 23);
-            this.btnCriarUsuario.TabIndex = 1;
+            this.btnCriarUsuario.TabIndex = 4;
             this.btnCriarUsuario.Text = "Criar usuário";
             this.btnCriarUsuario.UseVisualStyleBackColor = false;
             this.btnCriarUsuario.Click += new System.EventHandler(this.btnNovoUsuario_Click);
@@ -203,7 +203,7 @@
             this.txtSenha.Location = new System.Drawing.Point(50, 164);
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.Size = new System.Drawing.Size(206, 20);
-            this.txtSenha.TabIndex = 4;
+            this.txtSenha.TabIndex = 2;
             // 
             // label3
             // 
@@ -221,7 +221,7 @@
             this.txtEmail.Location = new System.Drawing.Point(50, 136);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(206, 20);
-            this.txtEmail.TabIndex = 4;
+            this.txtEmail.TabIndex = 1;
             // 
             // label2
             // 
@@ -239,7 +239,7 @@
             this.txtNome.Location = new System.Drawing.Point(50, 112);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(206, 20);
-            this.txtNome.TabIndex = 4;
+            this.txtNome.TabIndex = 0;
             // 
             // label1
             // 
@@ -258,7 +258,7 @@
             this.cboGrupo.Location = new System.Drawing.Point(304, 112);
             this.cboGrupo.Name = "cboGrupo";
             this.cboGrupo.Size = new System.Drawing.Size(161, 21);
-            this.cboGrupo.TabIndex = 2;
+            this.cboGrupo.TabIndex = 3;
             // 
             // dgvGrupos
             // 
@@ -347,7 +347,7 @@
             this.txtGDescricao.Location = new System.Drawing.Point(238, 422);
             this.txtGDescricao.Name = "txtGDescricao";
             this.txtGDescricao.Size = new System.Drawing.Size(198, 20);
-            this.txtGDescricao.TabIndex = 4;
+            this.txtGDescricao.TabIndex = 6;
             // 
             // label6
             // 
@@ -365,7 +365,7 @@
             this.txtGNome.Location = new System.Drawing.Point(50, 422);
             this.txtGNome.Name = "txtGNome";
             this.txtGNome.Size = new System.Drawing.Size(121, 20);
-            this.txtGNome.TabIndex = 4;
+            this.txtGNome.TabIndex = 5;
             // 
             // label5
             // 
@@ -387,7 +387,7 @@
             this.btnCriarGrupo.Location = new System.Drawing.Point(442, 422);
             this.btnCriarGrupo.Name = "btnCriarGrupo";
             this.btnCriarGrupo.Size = new System.Drawing.Size(110, 23);
-            this.btnCriarGrupo.TabIndex = 1;
+            this.btnCriarGrupo.TabIndex = 7;
             this.btnCriarGrupo.Text = "Criar grupo";
             this.btnCriarGrupo.UseVisualStyleBackColor = false;
             this.btnCriarGrupo.Click += new System.EventHandler(this.btnCriarGrupo_Click);
@@ -492,7 +492,7 @@
             this.btnSalvarPermissoes.Location = new System.Drawing.Point(642, 419);
             this.btnSalvarPermissoes.Name = "btnSalvarPermissoes";
             this.btnSalvarPermissoes.Size = new System.Drawing.Size(148, 23);
-            this.btnSalvarPermissoes.TabIndex = 1;
+            this.btnSalvarPermissoes.TabIndex = 8;
             this.btnSalvarPermissoes.Text = "Salvar Permissões";
             this.btnSalvarPermissoes.UseVisualStyleBackColor = false;
             this.btnSalvarPermissoes.Click += new System.EventHandler(this.btnSalvarPermissoes_Click);

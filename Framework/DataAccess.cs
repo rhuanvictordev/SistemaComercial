@@ -9,7 +9,7 @@ namespace Sistema.Framework
 {
     public abstract class DataAccess // abstract porque DataAccess não pode ser instanciada, apenas herdada
     {
-        public abstract bool Save(); //abstract: apenas declaro a assinatura na classe pai, a implementação virá obrigatoriamente na classe filha
+        public abstract DbResult Save(); //abstract: apenas declaro a assinatura na classe pai, a implementação virá obrigatoriamente na classe filha
 
 
         public abstract bool Load(long id); //abstract: apenas declaro a assinatura na classe pai, a implementação virá obrigatoriamente na classe filha

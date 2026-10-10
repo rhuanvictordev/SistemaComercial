@@ -63,7 +63,7 @@ namespace Sistema.Models
             return values != null;
         }
 
-        public override bool Save()
+        public override DbResult Save()
         {
             DataRecord record = CreateDataRecord();
             return Database.Save(record, this);

@@ -32,7 +32,7 @@ namespace Sistema.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ProdutosInput p = new ProdutosInput();
+            ProdutosInput p = new ProdutosInput(null);
             p.ShowDialog();
             DataShow();
         }
@@ -77,6 +77,47 @@ namespace Sistema.UI
         private void button3_Click(object sender, EventArgs e)
         {
             DataShow();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dgvProdutos.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecione um produto!");
+                return;
+            }
+
+            DataGridViewRow row = dgvProdutos.SelectedRows[0];
+
+            if (row.Index < 0)
+              return;
+
+            string id = row.Cells[COLUMN_ID].Value.ToString();
+            Produto p = new Produto();
+            if (p.Load(long.Parse(id)))
+            {
+                ProdutosInput dialog = new ProdutosInput(p);
+                dialog.ShowDialog();
+            }
+            DataShow();
+        }
+
+        private void dgvProdutos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            if (e.ColumnIndex == COLUMN_ATIVO)
+            {
+                Produto p = new Produto();
+                string id = dgvProdutos.Rows[e.RowIndex].Cells[COLUMN_ID].Value.ToString();
+                if (p.Load(long.Parse(id)))
+                { 
+                   p.Ativo = !p.Ativo;
+                   p.Save();
+                    DataShow();
+                }
+            }
         }
     }
 }

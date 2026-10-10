@@ -171,19 +171,21 @@ namespace Sistema.UI
                 g.Nome = nome;
                 g.Descricao = descricao;
                 g.Alterado = DateTime.Now;
-                if (g.Save()) ;
+                if (g.Save().Success) ;
                 MessageBox.Show("Grupo editado com sucesso", "Informação");
+                DataShow();
             }
             else
-            { 
-                if (g.Save())
+            {
+                DbResult result = g.Save();
+                if (result.Success)
+                {
                     MessageBox.Show("Grupo criado com sucesso", "Informação");
+                    DataShow();
+                }
                 else
-                    MessageBox.Show("Já existe um grupo com esse nome", "Informação");
+                    MessageBox.Show(result.ErrorMessage, "Informação", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
-            
-            LimpaCamposGrupo();
-            DataShow();
         }
 
         public void LimpaCamposUsuario()
@@ -237,8 +239,8 @@ namespace Sistema.UI
             dgvUsuarios.ClearSelection();
             dgvGrupos.ClearSelection();
             dgvPermissoes.Rows.Clear();
-            LimpaCamposUsuario();
-            LimpaCamposGrupo();
+            //LimpaCamposUsuario();
+            //LimpaCamposGrupo();
         }
 
         private void btnSalvarPermissoes_Click(object sender, EventArgs e)
@@ -297,19 +299,26 @@ namespace Sistema.UI
                 u.IdGrupo = long.Parse(idGrupo);
                 u.Alterado = DateTime.Now;
 
-                if (u.Save())
+                if (u.Save().Success)
+                {
                     MessageBox.Show("Usuário editado com sucesso", "Informação");
+                    DataShow();
+                }
+
+                
+                DataShow();
             } 
             else
             {
-                if (u.Save())
+                DbResult result = u.Save();
+                if (result.Success)
+                {
                     MessageBox.Show("Usuário criado com sucesso", "Informação");
+                    DataShow();
+                }
                 else
-                    MessageBox.Show("Já existe um usuário com esse email", "Informação");
+                    MessageBox.Show(result.ErrorMessage, "Informação", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
-
-            LimpaCamposUsuario();
-            DataShow();
         }
     }
 }

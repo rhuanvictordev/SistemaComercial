@@ -13,6 +13,7 @@ namespace Sistema.Services
     public abstract class ClientConfigHandler
     {
         private static string PARAMS_PATH = Path.Combine(AppContext.BaseDirectory, "params.json");
+        private static string UPLOADS_PATH = Path.Combine(AppContext.BaseDirectory, "uploads");
 
         public static ClientConfigValues LerArquivo()
         {
@@ -55,6 +56,17 @@ namespace Sistema.Services
             }
 
             return false;
+        }
+
+
+        public void SalvarImagem()
+        {
+            if (!File.Exists(UPLOADS_PATH))
+            {
+                File.Create(UPLOADS_PATH);
+
+
+            }
         }
     }
 }

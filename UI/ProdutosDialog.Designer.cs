@@ -41,13 +41,13 @@
             this.Alterado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ativo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtNome = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.txtNome = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -70,7 +70,6 @@
             // 
             this.dgvProdutos.AllowUserToAddRows = false;
             this.dgvProdutos.AllowUserToDeleteRows = false;
-            this.dgvProdutos.AllowUserToOrderColumns = true;
             this.dgvProdutos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -87,24 +86,21 @@
             this.Ativo});
             this.dgvProdutos.Location = new System.Drawing.Point(12, 108);
             this.dgvProdutos.Name = "dgvProdutos";
-            this.dgvProdutos.ReadOnly = true;
             this.dgvProdutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProdutos.Size = new System.Drawing.Size(776, 330);
             this.dgvProdutos.TabIndex = 7;
+            this.dgvProdutos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProdutos_CellClick);
             // 
             // ID
             // 
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
             // 
             // Nome
             // 
             this.Nome.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Nome.HeaderText = "Nome";
             this.Nome.Name = "Nome";
-            this.Nome.ReadOnly = true;
             this.Nome.Width = 60;
             // 
             // Descricao
@@ -112,14 +108,12 @@
             this.Descricao.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Descricao.HeaderText = "Descrição";
             this.Descricao.Name = "Descricao";
-            this.Descricao.ReadOnly = true;
             // 
             // Preco
             // 
             this.Preco.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Preco.HeaderText = "Preço";
             this.Preco.Name = "Preco";
-            this.Preco.ReadOnly = true;
             this.Preco.Width = 60;
             // 
             // Peso
@@ -127,14 +121,12 @@
             this.Peso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Peso.HeaderText = "Peso (KG)";
             this.Peso.Name = "Peso";
-            this.Peso.ReadOnly = true;
             this.Peso.Width = 80;
             // 
             // Imagem
             // 
             this.Imagem.HeaderText = "Imagem";
             this.Imagem.Name = "Imagem";
-            this.Imagem.ReadOnly = true;
             this.Imagem.Visible = false;
             // 
             // Criado
@@ -142,7 +134,6 @@
             this.Criado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Criado.HeaderText = "Criado";
             this.Criado.Name = "Criado";
-            this.Criado.ReadOnly = true;
             this.Criado.Width = 62;
             // 
             // Alterado
@@ -150,7 +141,6 @@
             this.Alterado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Alterado.HeaderText = "Alterado";
             this.Alterado.Name = "Alterado";
-            this.Alterado.ReadOnly = true;
             this.Alterado.Width = 71;
             // 
             // Ativo
@@ -158,7 +148,6 @@
             this.Ativo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Ativo.HeaderText = "Ativo";
             this.Ativo.Name = "Ativo";
-            this.Ativo.ReadOnly = true;
             this.Ativo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Ativo.Width = 37;
             // 
@@ -179,6 +168,31 @@
             this.panel1.Size = new System.Drawing.Size(776, 60);
             this.panel1.TabIndex = 8;
             this.panel1.Click += new System.EventHandler(this.panel1_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Filtros";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Nome";
+            // 
+            // txtNome
+            // 
+            this.txtNome.Location = new System.Drawing.Point(44, 33);
+            this.txtNome.Name = "txtNome";
+            this.txtNome.Size = new System.Drawing.Size(211, 20);
+            this.txtNome.TabIndex = 1;
             // 
             // button5
             // 
@@ -217,6 +231,7 @@
             this.button2.Text = "Editar";
             this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -230,31 +245,6 @@
             this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // txtNome
-            // 
-            this.txtNome.Location = new System.Drawing.Point(44, 33);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(211, 20);
-            this.txtNome.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Nome";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Filtros";
             // 
             // ProdutosDialog
             // 
@@ -283,6 +273,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtNome;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descricao;
@@ -292,8 +285,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Criado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Alterado;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Ativo;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtNome;
-        private System.Windows.Forms.Label label2;
     }
 }

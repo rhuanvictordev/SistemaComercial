@@ -48,8 +48,8 @@ namespace Sistema.UI
                     var permissoes = g.ObterPermissoes();
 
                     menuUGP.Enabled = permissoes.Contains("menuUGP");
-                    menuClientes.Enabled = permissoes.Contains("menuClientes");
-                    menuEstoque.Enabled = permissoes.Contains("menuEstoque");
+                    //menuClientes.Enabled = permissoes.Contains("menuClientes");
+                    //menuEstoque.Enabled = permissoes.Contains("menuEstoque");
                     menuProdutos.Enabled = permissoes.Contains("menuProdutos");
                     menuParametros.Enabled = permissoes.Contains("menuParametros");
                 }
@@ -129,9 +129,9 @@ namespace Sistema.UI
         {
             if (MessageBox.Show("TODO O BANCO DE DADOS salvo até aqui será perdido e não será possível restaurar", "PRESTE ATENÇÃO - Você tem certeza?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                string senha = InputDialog.Show("Informe o texto abaixo: 'estou ciente' ");
-                if (senha != "estou ciente")
-                    return;
+                //string senha = InputDialog.Show("Informe o texto abaixo: 'estou ciente' ");
+                //if (senha != "estou ciente")
+                    //return;
 
                 try
                 {

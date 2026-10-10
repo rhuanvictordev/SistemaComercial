@@ -49,7 +49,7 @@ namespace Sistema.Data
             }
         }
 
-        public static bool Save(DataRecord record, IDataExchange values)
+        public static DbResult Save(DataRecord record, IDataExchange values)
         {
             if (Exists(record, values))
                 return Update(record, values);
@@ -57,8 +57,9 @@ namespace Sistema.Data
                 return Insert(record, values);
         }
 
-        public static bool Update(DataRecord record, IDataExchange values)
+        public static DbResult Update(DataRecord record, IDataExchange values)
         {
+            DbResult result = new DbResult();
             try
             {
                 List<string> sets = new List<string>();
@@ -90,19 +91,24 @@ namespace Sistema.Data
                         $"UPDATE {record.Name} SET {string.Join(", ", sets)} " +
                         $"WHERE {string.Join(" AND ", conditions)}";
 
-                    command.ExecuteNonQuery();
-                    return true;
+                    if (command.ExecuteNonQuery() > 0)
+                    {
+                        result.Success = true; result.IdGenerated = 0; result.Value = null; result.ErrorMessage = null;
+                        return result;
+                    }
                 }
             }
             catch (Exception ex) 
             {
-                Debug.WriteLine(ex);
-                return false;
+                result.Success = false; result.IdGenerated = 0; result.Value = null; result.ErrorMessage = ex.Message;
             }
+            result.Success = false; result.IdGenerated = 0; result.Value = null; result.ErrorMessage = null;
+            return result;
         }
 
-        public static bool Insert(DataRecord record, IDataExchange values)
+        public static DbResult Insert(DataRecord record, IDataExchange values)
         {
+            DbResult result = new DbResult();
             try
             {
                 List<string> columns = new List<string>();
@@ -123,14 +129,28 @@ namespace Sistema.Data
                     }
                     string sql = $"INSERT INTO {record.Name} ({string.Join(", ", columns)}) VALUES ({string.Join(", ", parameters)})";
                     command.CommandText = sql;
-                    return command.ExecuteNonQuery() > 0;
+                    if (command.ExecuteNonQuery() > 0)
+                    {
+                        long id = command.LastInsertedId;
+                        result.Success = true; result.IdGenerated = id; result.Value = null; result.ErrorMessage = null;
+                        return result;
+                    }
                 }
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.Number == 1062)
+                result.Success = false; result.IdGenerated = 0; result.Value = null; result.ErrorMessage = "Já existe um registro com esses dados!";
+                return result;
             }
             catch (Exception ex) 
             {
-                Debug.WriteLine(ex);
-                return false;
+                result.Success = false; result.IdGenerated = 0; result.Value = null; result.ErrorMessage = ex.Message;
+                return result;
             }
+
+            result.Success = false; result.IdGenerated = 0; result.Value = null; result.ErrorMessage = null;
+            return result;
         }
 
 

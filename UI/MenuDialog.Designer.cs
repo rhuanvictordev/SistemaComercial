@@ -34,14 +34,12 @@
             this.cadastroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUGP = new System.Windows.Forms.ToolStripMenuItem();
             this.menuProdutos = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuClientes = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuEstoque = new System.Windows.Forms.ToolStripMenuItem();
             this.menuParametros = new System.Windows.Forms.ToolStripMenuItem();
+            this.recriarBancoDeDadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUsuarioNome = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.recriarBancoDeDadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -63,8 +61,6 @@
             this.cadastroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuUGP,
             this.menuProdutos,
-            this.menuClientes,
-            this.menuEstoque,
             this.menuParametros});
             this.cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
             this.cadastroToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
@@ -84,19 +80,6 @@
             this.menuProdutos.Text = "Produtos";
             this.menuProdutos.Click += new System.EventHandler(this.menuProdutos_Click);
             // 
-            // menuClientes
-            // 
-            this.menuClientes.Name = "menuClientes";
-            this.menuClientes.Size = new System.Drawing.Size(231, 22);
-            this.menuClientes.Text = "Clientes";
-            this.menuClientes.Click += new System.EventHandler(this.cLientesToolStripMenuItem_Click);
-            // 
-            // menuEstoque
-            // 
-            this.menuEstoque.Name = "menuEstoque";
-            this.menuEstoque.Size = new System.Drawing.Size(231, 22);
-            this.menuEstoque.Text = "Estoque";
-            // 
             // menuParametros
             // 
             this.menuParametros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -105,6 +88,13 @@
             this.menuParametros.Size = new System.Drawing.Size(231, 22);
             this.menuParametros.Text = "Segurança";
             this.menuParametros.Click += new System.EventHandler(this.parâmetrosToolStripMenuItem_Click);
+            // 
+            // recriarBancoDeDadosToolStripMenuItem
+            // 
+            this.recriarBancoDeDadosToolStripMenuItem.Name = "recriarBancoDeDadosToolStripMenuItem";
+            this.recriarBancoDeDadosToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.recriarBancoDeDadosToolStripMenuItem.Text = "Recriar banco de dados";
+            this.recriarBancoDeDadosToolStripMenuItem.Click += new System.EventHandler(this.recriarBancoDeDadosToolStripMenuItem_Click);
             // 
             // sairToolStripMenuItem
             // 
@@ -133,13 +123,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // recriarBancoDeDadosToolStripMenuItem
-            // 
-            this.recriarBancoDeDadosToolStripMenuItem.Name = "recriarBancoDeDadosToolStripMenuItem";
-            this.recriarBancoDeDadosToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.recriarBancoDeDadosToolStripMenuItem.Text = "Recriar banco de dados";
-            this.recriarBancoDeDadosToolStripMenuItem.Click += new System.EventHandler(this.recriarBancoDeDadosToolStripMenuItem_Click);
             // 
             // MenuDialog
             // 
@@ -176,8 +159,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem menuParametros;
         private System.Windows.Forms.ToolStripMenuItem menuProdutos;
-        private System.Windows.Forms.ToolStripMenuItem menuClientes;
-        private System.Windows.Forms.ToolStripMenuItem menuEstoque;
         private System.Windows.Forms.ToolStripMenuItem recriarBancoDeDadosToolStripMenuItem;
     }
 }
