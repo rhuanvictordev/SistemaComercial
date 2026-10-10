@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,7 +65,7 @@ namespace Sistema.UI
                 row[COLUMN_ALTERADO] = produto.Alterado;
                 row[COLUMN_ATIVO] = produto.Ativo;
                 int index = dgvProdutos.Rows.Add(row);
-                dgvProdutos.Rows[index].Height = 30;
+                //dgvProdutos.Rows[index].Height = 20;
             }
             dgvProdutos.ResumeLayout();
         }
@@ -117,6 +118,35 @@ namespace Sistema.UI
                    p.Save();
                     DataShow();
                 }
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            StreamWriter writer = null;
+
+            try
+            {
+                string fileName = Path.GetTempFileName() + ".csv";
+                writer = new StreamWriter(fileName, true);
+                for (int i = 0; i < dgvProdutos.Rows.Count - 1; i++)
+                {
+                    for (int j = 2; j < dgvProdutos.Columns.Count; j++)
+                    {
+                        writer.Write(dgvProdutos.Rows[i].Cells[j].Value.ToString());
+                        writer.Write(";");
+                    }
+                    writer.WriteLine();
+                    writer.Flush();
+                }
+
+                writer.Dispose();
+
+                System.Diagnostics.Process.Start(fileName);
+            }
+            finally
+            {
+                if (writer != null) writer.Dispose();
             }
         }
     }
