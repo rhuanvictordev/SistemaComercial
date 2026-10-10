@@ -146,5 +146,10 @@ namespace Sistema.UI
             }
 
         }
+
+        private void estoqueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirMenu(typeof(EstoqueDialog));
+        }
     }
 }

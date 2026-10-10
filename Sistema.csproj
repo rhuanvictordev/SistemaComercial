@@ -128,6 +128,7 @@
     <Compile Include="Framework\DatFilterDateBetween.cs" />
     <Compile Include="Framework\IDataExchange.cs" />
     <Compile Include="Framework\DataFilter.cs" />
+    <Compile Include="Models\Estoque.cs" />
     <Compile Include="Models\Grupo.cs" />
     <Compile Include="Models\InformacoesSistema.cs" />
     <Compile Include="Models\Permissao.cs" />
@@ -150,6 +151,12 @@
     <Compile Include="Models\ArquivoConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\EstoqueDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\EstoqueDialog.Designer.cs">
+      <DependentUpon>EstoqueDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\InputDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\BaseDialog.resx">
       <DependentUpon>BaseDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\EstoqueDialog.resx">
+      <DependentUpon>EstoqueDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\InputDialog.resx">
       <DependentUpon>InputDialog.cs</DependentUpon>
