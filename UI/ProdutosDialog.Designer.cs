@@ -85,6 +85,7 @@
             this.Alterado,
             this.Ativo});
             this.dgvProdutos.Location = new System.Drawing.Point(12, 108);
+            this.dgvProdutos.MultiSelect = false;
             this.dgvProdutos.Name = "dgvProdutos";
             this.dgvProdutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProdutos.Size = new System.Drawing.Size(776, 330);

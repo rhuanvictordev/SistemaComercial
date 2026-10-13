@@ -57,6 +57,16 @@ namespace Sistema.Data
                 return Insert(record, values);
         }
 
+        public static string PrintObject(DataRecord record, IDataExchange values)
+        {
+            StringBuilder sb = new StringBuilder("[PRINT OBJETO]\n");
+            for (int i = 0; i < record.Fields.Count(); i++)
+            { 
+                sb.Append($" {record.Fields[i].Name}: {values.ExchangeValues[i].ToString()}\n");
+            }
+            return sb.ToString();
+        }
+
         public static DbResult Update(DataRecord record, IDataExchange values)
         {
             DbResult result = new DbResult();

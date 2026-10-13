@@ -129,6 +129,7 @@
     <Compile Include="Framework\IDataExchange.cs" />
     <Compile Include="Framework\DataFilter.cs" />
     <Compile Include="Models\Estoque.cs" />
+    <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\Grupo.cs" />
     <Compile Include="Models\InformacoesSistema.cs" />
     <Compile Include="Models\Permissao.cs" />
@@ -168,6 +169,12 @@
     </Compile>
     <Compile Include="UI\EstoqueInput.Designer.cs">
       <DependentUpon>EstoqueInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FornecedorInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FornecedorInput.Designer.cs">
+      <DependentUpon>FornecedorInput.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\InputDialog.cs">
       <SubType>Form</SubType>
@@ -227,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\EstoqueInput.resx">
       <DependentUpon>EstoqueInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FornecedorInput.resx">
+      <DependentUpon>FornecedorInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\InputDialog.resx">
       <DependentUpon>InputDialog.cs</DependentUpon>

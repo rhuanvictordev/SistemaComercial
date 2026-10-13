@@ -24,7 +24,7 @@ namespace Sistema.UI
 
         private void EstoqueInput_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

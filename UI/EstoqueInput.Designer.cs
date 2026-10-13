@@ -48,8 +48,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lblAlterado = new System.Windows.Forms.Label();
+            this.lblCriado = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -243,25 +243,25 @@
             this.comboBox1.Size = new System.Drawing.Size(497, 28);
             this.comboBox1.TabIndex = 0;
             // 
-            // label12
+            // lblAlterado
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(518, 301);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(89, 20);
-            this.label12.TabIndex = 25;
-            this.label12.Text = "00/00/0000";
+            this.lblAlterado.AutoSize = true;
+            this.lblAlterado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAlterado.Location = new System.Drawing.Point(518, 301);
+            this.lblAlterado.Name = "lblAlterado";
+            this.lblAlterado.Size = new System.Drawing.Size(89, 20);
+            this.lblAlterado.TabIndex = 25;
+            this.lblAlterado.Text = "00/00/0000";
             // 
-            // label13
+            // lblCriado
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(313, 301);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(89, 20);
-            this.label13.TabIndex = 25;
-            this.label13.Text = "00/00/0000";
+            this.lblCriado.AutoSize = true;
+            this.lblCriado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCriado.Location = new System.Drawing.Point(313, 301);
+            this.lblCriado.Name = "lblCriado";
+            this.lblCriado.Size = new System.Drawing.Size(89, 20);
+            this.lblCriado.TabIndex = 25;
+            this.lblCriado.Text = "00/00/0000";
             // 
             // checkBox1
             // 
@@ -283,8 +283,8 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
+            this.Controls.Add(this.lblCriado);
+            this.Controls.Add(this.lblAlterado);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label10);
@@ -337,8 +337,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblAlterado;
+        private System.Windows.Forms.Label lblCriado;
         private System.Windows.Forms.CheckBox checkBox1;
     }
 }
