@@ -12,8 +12,6 @@ namespace Sistema.UI
 {
     public partial class MenuDialog : BaseDialog
     {
-        
-        
         public MenuDialog() : base()
         {
             InitializeComponent();
@@ -64,7 +62,40 @@ namespace Sistema.UI
             }
         }
 
+        private void AbrirMenu(Type tipo)
+        {
+            foreach (Form f in this.MdiChildren)
+            {
+                if (f.GetType() == tipo)
+                {
+                    f.BringToFront();
+                    f.WindowState = FormWindowState.Maximized;
+                    return;
+                }
+            }
+            Form dialog = (Form)Activator.CreateInstance(tipo);
+            dialog.MdiParent = this;
+
+            if (dialog.FormBorderStyle == FormBorderStyle.Sizable)
+                dialog.WindowState = FormWindowState.Maximized;
+
+            dialog.Show();
+        }
+
         private void menuParametros_Click(object sender, EventArgs e)
+        {
+            string senha = InputDialog.Show("Informe a senha");
+
+            if (senha == "123")
+            {
+                ParametrosDialog f = new ParametrosDialog();
+                f.MdiParent = this;
+                f.WindowState = FormWindowState.Normal;
+                f.Show();
+            }
+        }
+
+        private void parâmetrosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string senha = InputDialog.Show("Informe a senha");
 
@@ -82,42 +113,14 @@ namespace Sistema.UI
             AbrirMenu(typeof(UsuariosDialog));
         }
 
-        private void AbrirMenu(Type tipo)
+        private void estoqueToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Form f in this.MdiChildren)
-            {
-                if (f.GetType() == tipo)
-                {
-                    f.BringToFront();
-                    f.WindowState = FormWindowState.Maximized;
-                    return;
-                }
-            }
-            Form dialog = (Form)Activator.CreateInstance(tipo);
-            dialog.MdiParent = this;
-            
-            if (dialog.FormBorderStyle == FormBorderStyle.Sizable)
-                dialog.WindowState = FormWindowState.Maximized;
-            
-            dialog.Show();
+            AbrirMenu(typeof(EstoqueDialog));
         }
 
-        private void parâmetrosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void fornecedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string senha = InputDialog.Show("Informe a senha");
-
-            if (senha == "123")
-            {
-                ParametrosDialog f = new ParametrosDialog();
-                f.MdiParent = this;
-                f.WindowState = FormWindowState.Normal;
-                f.Show();
-            }
-        }
-
-        private void cLientesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            AbrirMenu(typeof(FornecedoresDialog));
         }
 
         private void menuProdutos_Click(object sender, EventArgs e)
@@ -131,7 +134,7 @@ namespace Sistema.UI
             {
                 //string senha = InputDialog.Show("Informe o texto abaixo: 'estou ciente' ");
                 //if (senha != "estou ciente")
-                    //return;
+                //return;
 
                 try
                 {
@@ -145,11 +148,6 @@ namespace Sistema.UI
                 }
             }
 
-        }
-
-        private void estoqueToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AbrirMenu(typeof(EstoqueDialog));
         }
     }
 }

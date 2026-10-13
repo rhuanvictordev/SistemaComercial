@@ -51,13 +51,20 @@ namespace Sistema.UI
                 row[COLUMN_PRECO_REVENDA] = item.PrecoRevenda;
                 row[COLUMN_CRIADO] = item.Criado;
                 row[COLUMN_ALTERADO] = item.Alterado;
-                dgvEstoque.Rows.Add(row);
+                int index = dgvEstoque.Rows.Add(row);
+                dgvEstoque.Rows[index].Height = 30;
             }
         }
 
         private void EstoqueDialog_Load(object sender, EventArgs e)
         {
             DataShow();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            EstoqueInput dialog = new EstoqueInput();
+            dialog.ShowDialog();
         }
     }
 }
